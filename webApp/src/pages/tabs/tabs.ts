@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import { EventPage } from '../event-page/event-page.component';
+import { AddSpending } from '../add-spending/add-spending.component';
 import {DashboardComponent} from "../dashboard/dashboard.component";
 
 @Component({
@@ -11,7 +11,7 @@ import {DashboardComponent} from "../dashboard/dashboard.component";
 export class TabsPage {
 
   tab1Root = EventPage;
-  tab2Root = AboutPage;
+  tab2Root = AddSpending;
   tab3Root = ContactPage;
   tab4Root = DashboardComponent;
 
