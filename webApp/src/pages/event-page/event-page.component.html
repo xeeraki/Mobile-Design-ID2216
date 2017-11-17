@@ -6,27 +6,66 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-list-header>
-      Oct 2, Mon
-    </ion-list-header>
-    <ion-item class="ion-item">
-      <div text-left class="text-item">Gas</div>
-      <div item-end class="text-item">$27.00</div>
-    </ion-item>
-    <ion-item class="ion-item">
-      <div text-left class="text-item">Hostel</div>
-      <div item-end class="text-item">$62.00</div>
-    </ion-item>
-    <ion-list-header>
-      Sept 29, Fri
-    </ion-list-header>
-    <ion-item class="ion-item">
-      <div text-left class="text-item">Food</div>
-      <div item-end class="text-item">$15.00</div>
-    </ion-item>
-  </ion-list>
-  <button ion-button icon-start (click)=addSpendingPrompt()>
-    <ion-icon name="add"></ion-icon>
-  </button>
+  <label margin-left="8px">Oct 2, Mon</label>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row justify-content-between>
+        <ion-col col-3>
+          <label>Gas</label>
+        </ion-col>
+        <ion-col col-lg-1>
+          <label>$27.00</label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row justify-content-between>
+        <ion-col col-3>
+          <label>Hostel</label>
+        </ion-col>
+        <ion-col col-lg-1>
+          <label>$62.00</label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <label margin-left="8px">Sept 29, Fri</label>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row justify-content-between>
+        <ion-col col-3>
+          <label>Food</label>
+        </ion-col>
+        <ion-col col-lg-1>
+          <label>$15.00</label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+  <label margin-left="8px">Jan 19, Fri</label>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row justify-content-between>
+        <ion-col col-3>
+          <label>Food</label>
+        </ion-col>
+        <ion-col col-lg-1>
+          <label>$15.00</label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab bottom center (click)=addSpendingPrompt()>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
