@@ -9,7 +9,7 @@
 <!--TODO: Margin right???-->
 <!--TODO: Padding between the cards, top bottom etc...-->
 <ion-content>
-  <ion-card>
+  <ion-card (click)=goEventPage()>
     <ion-card-content>
       <ion-card-title class="card-title">
         Friends' Trip NYC
@@ -126,4 +126,8 @@
       </p>
     </ion-card-content>
   </ion-card>
+
+  <ion-fab bottom center>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

@@ -10,10 +10,9 @@ import {DashboardComponent} from "../dashboard/dashboard.component";
 })
 export class TabsPage {
 
-  tab1Root = EventPage;
+  tab1Root = DashboardComponent;
   tab2Root = AddSpending;
   tab3Root = ContactPage;
-  tab4Root = DashboardComponent;
 
   constructor() {
 
