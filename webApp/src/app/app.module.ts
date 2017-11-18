@@ -8,6 +8,8 @@ import { ContactPage } from '../pages/contact/contact';
 import { EventPage } from '../pages/event-page/event-page.component';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AddSpending } from '../pages/add-spending/add-spending.component';
+import { AddEvent } from '../pages/add-event/add-event.component';
+
 import {DashboardComponent} from "../pages/dashboard/dashboard.component";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -21,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EventPage,
     TabsPage,
     DashboardComponent,
-    AddSpending
+    AddSpending,
+    AddEvent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EventPage,
     TabsPage,
     DashboardComponent,
-    AddSpending
+    AddSpending,
+    AddEvent
   ],
   providers: [
     StatusBar,

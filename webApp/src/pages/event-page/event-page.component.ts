@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
-
+import { NavController } from 'ionic-angular';
+import { AddSpending } from "../add-spending/add-spending.component";
 
 @Component({
   selector: 'event-page',
@@ -8,45 +8,9 @@ import { AlertController } from 'ionic-angular';
 })
 export class EventPage {
 
-constructor(private alertCtrl: AlertController) {}
+constructor(public navCtrl: NavController) {}
 
-addSpendingPrompt() {
-  let alert = this.alertCtrl.create({
-    title: 'Add spending',
-    inputs: [
-      {
-        name: 'title',
-        placeholder: 'Title'
-      },
-      {
-        name: 'money',
-        placeholder: 'Money'
-      },
-      {
-        name: 'date',
-        placeholder: 'Date'
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Confirm',
-        handler: data => {
-          this.addSpending(data.title, data.money, data.date)
-        }
-      }
-    ]
-  });
-  alert.present();
-}
-
-addSpending(title: string, money: number, date: string) {
-
-}
+  goAddSpending(){
+    this.navCtrl.push(AddSpending)
+  }
 }
