@@ -9,4 +9,10 @@ export class HistoryDetails {
 
 constructor(public navCtrl: NavController) {}
 
+  boolExpand: boolean = false;
+
+  collapseOrExpand() {
+    this.boolExpand = !this.boolExpand;
+  }
+
 }

@@ -3,3 +3,37 @@
     <ion-title>History</ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header (click)=collapseOrExpand()>
+      <ion-icon name="arrow-down"></ion-icon>
+        Friends' trip NYC
+    </ion-card-header>
+    <ion-card-content *ngIf=boolExpand>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Gas</label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$27.00</label>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Hostel</label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$62.00</label>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="arrow-down"></ion-icon>
+      School Project
+    </ion-card-header>
+  </ion-card>
+</ion-content>
