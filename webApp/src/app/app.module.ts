@@ -12,6 +12,11 @@ import { AddEvent } from '../pages/add-event/add-event.component';
 import { Activity } from '../pages/activity/activity.component';
 import { Account } from '../pages/account/account.component';
 
+import { AccountDetails } from '../pages/account-details/account-details.component';
+import { HistoryDetails } from '../pages/history/history.component';
+import { PaymentInfo } from '../pages/payment-info/payment-info.component';
+import { Feedback } from '../pages/feedback/feedback.component';
+
 
 import {DashboardComponent} from "../pages/dashboard/dashboard.component";
 
@@ -29,7 +34,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AddSpending,
     AddEvent,
     Activity,
-    Account
+    Account,
+    AccountDetails,
+    PaymentInfo,
+    HistoryDetails,
+    Feedback
   ],
   imports: [
     BrowserModule,
@@ -46,7 +55,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AddSpending,
     AddEvent,
     Activity,
-    Account
+    Account,
+    AccountDetails,
+    PaymentInfo,
+    HistoryDetails,
+    Feedback
   ],
   providers: [
     StatusBar,

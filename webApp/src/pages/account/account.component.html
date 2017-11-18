@@ -3,3 +3,24 @@
     <ion-title>Account</ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-content>
+  <ion-list>
+  <ion-item (click)=goAccountDetails()>
+    <ion-icon name="person" item-left></ion-icon>
+      Account Details
+  </ion-item>
+  <ion-item (click)=goPaymentInfo()>
+    <ion-icon name="card" item-left></ion-icon>
+      Payment Info
+  </ion-item>
+  <ion-item (click)=goHistory()>
+    <ion-icon name="clock" item-left></ion-icon>
+      History
+  </ion-item>
+  <ion-item (click)=goFeedback()> 
+    <ion-icon name="mail" item-left></ion-icon>
+      Feedback
+  </ion-item>
+  </ion-list>
+</ion-content>
