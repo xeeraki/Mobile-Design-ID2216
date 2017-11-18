@@ -9,11 +9,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+//object
+    Database database ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        database = new Database(this);
 
         View cardView = findViewById(R.id.cardView2);
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        database.insertData(title.getText().toString(),
+                                amount.getText().toString());
                         if(!title.getText().toString().isEmpty()&&!amount.getText().toString().isEmpty()){
                             Toast.makeText(MainActivity.this,"submitted",Toast.LENGTH_SHORT).show();
                         }
