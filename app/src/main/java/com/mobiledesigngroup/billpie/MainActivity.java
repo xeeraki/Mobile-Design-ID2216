@@ -1,5 +1,6 @@
 package com.mobiledesigngroup.billpie;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         database = new Database(this);
 
         View cardView = findViewById(R.id.cardView2);
-
+        View cardView1 = findViewById(R.id.cardView1);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //when submit clicked call insert method from database
                         database.insertData(title.getText().toString(),
                                 amount.getText().toString());
                         if(!title.getText().toString().isEmpty()&&!amount.getText().toString().isEmpty()){
@@ -41,7 +43,13 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(MainActivity.this,"add title and amount",Toast.LENGTH_SHORT).show();
                         }
+
+
+                        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
+
                 });
 
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -58,4 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-    }}
+
+        cardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ListBills.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+}

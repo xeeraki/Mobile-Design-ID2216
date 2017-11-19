@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity{
     public Login(){
 
         users = new ArrayList<>();
-        users.add(new User("jiyayao","0000"));
+        users.add(new User("jiayao","0000"));
         users.add(new User("eric","0000"));
         users.add(new User("cassius","0000"));
         users.add(new User("adam","0000"));

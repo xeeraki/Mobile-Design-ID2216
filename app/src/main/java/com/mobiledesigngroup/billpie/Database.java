@@ -2,6 +2,7 @@ package com.mobiledesigngroup.billpie;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -35,7 +36,7 @@ public class Database extends SQLiteOpenHelper{
 
     }
 
-
+//insert data to the data base
     public boolean insertData(String title, String amount){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -47,5 +48,11 @@ public class Database extends SQLiteOpenHelper{
             return false;
         }
         return true;
+    }
+// retrieve data from the data base
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery(" select * from " + TABLE_NAME,null);
+        return res;
     }
 }
