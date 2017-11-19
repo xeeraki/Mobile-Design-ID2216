@@ -9,6 +9,7 @@ import { AddSpending } from '../pages/add-spending/add-spending.component';
 import { AddEvent } from '../pages/add-event/add-event.component';
 import { Activity } from '../pages/activity/activity.component';
 import { Account } from '../pages/account/account.component';
+import { Checkout } from '../pages/checkout/checkout.component';
 
 import { AccountDetails } from '../pages/account-details/account-details.component';
 import { HistoryDetails } from '../pages/history/history.component';
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AccountDetails,
     PaymentInfo,
     HistoryDetails,
-    Feedback
+    Feedback,
+    Checkout
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AccountDetails,
     PaymentInfo,
     HistoryDetails,
-    Feedback
+    Feedback,
+    Checkout
   ],
   providers: [
     StatusBar,
