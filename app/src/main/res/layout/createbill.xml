@@ -8,30 +8,30 @@
 
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/titleText"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Enter title"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/amountText"
         android:layout_width="229dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="356dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Enter amount"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <Button
         android:id="@+id/btn_submit"

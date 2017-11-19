@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ListBills extends AppCompatActivity {
 
-    Database database;
+    private Database database;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

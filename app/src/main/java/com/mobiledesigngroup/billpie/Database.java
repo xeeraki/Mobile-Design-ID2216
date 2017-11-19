@@ -13,9 +13,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Database extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "Bill.db";
     public static final String TABLE_NAME = "Bill_table";
-    public static final String col_0 = "ID";
-    public static final String col_1 = "TITLE";
-    public static final String col_2= "AMOUNT";
+    public static final String COLUMN_ID_ = "ID";
+    public static final String COLUMN_TITLE = "TITLE";
+    public static final String COLUMN_AMOUNT= "AMOUNT";
     public static final int VERSION =1;
 
 
@@ -26,13 +26,17 @@ public class Database extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT , " + "TITLE TEXT, AMOUNT TEXT )");
+       String table = "CREATE TABLE " + TABLE_NAME + " ( "
+        + COLUMN_ID_ + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+               + COLUMN_TITLE + " TEXT, "
+               + COLUMN_AMOUNT + " INTEGER)";
+       db.execSQL(table);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 
     }
@@ -42,8 +46,9 @@ public class Database extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(col_1,title);
-        contentValues.put(col_2, amount);
+        contentValues.put(COLUMN_TITLE,title);
+        contentValues.put(COLUMN_AMOUNT, amount);
+
         long result = db.insert(TABLE_NAME,null, contentValues);
         if(result == -1){
             return false;
@@ -53,7 +58,7 @@ public class Database extends SQLiteOpenHelper{
 // retrieve data from the data base
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery(" select * from " + TABLE_NAME,null);
-        return res;
+        Cursor data = db.rawQuery(" SELECT * FROM " + TABLE_NAME,null);
+        return data;
     }
 }

@@ -19,6 +19,7 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".ListBills"></activity>
+        <activity android:name=".CreateBills"></activity>
     </application>
 
 </manifest>
