@@ -7,11 +7,13 @@
 <ion-content>
   <ion-card>
     <ion-card-header (click)=collapseOrExpand()>
-      <ion-icon name="arrow-down"></ion-icon>
+      <ion-icon name="arrow-down" *ngIf=!boolExpand></ion-icon>
+      <ion-icon name="arrow-up" *ngIf=boolExpand></ion-icon>
         Friends' trip NYC
     </ion-card-header>
     <ion-card-content *ngIf=boolExpand>
     <ion-row justify-content-between>
+      <ion-icon name="download"></ion-icon>
       <ion-col col-3>
         <label>Gas</label>
       </ion-col>
@@ -20,6 +22,7 @@
       </ion-col>
     </ion-row>
     <ion-row justify-content-between>
+      <ion-icon name="download"></ion-icon>
       <ion-col col-3>
         <label>Hostel</label>
       </ion-col>
