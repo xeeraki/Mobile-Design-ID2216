@@ -12,6 +12,10 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 //object
     Database database ;
+    EditText amount;
+    EditText title;
+    Button btnSubmit;
+    Button  btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +30,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.customdilog,null);
-                final EditText title = (EditText) mView.findViewById(R.id.title);
-                final EditText amount = (EditText)mView.findViewById(R.id.amount);
-                Button btnSubmit = (Button)mView.findViewById(R.id.btn_submit);
-                Button btnCancel = (Button)mView.findViewById(R.id.btn_cancel);
+                title = (EditText) mView.findViewById(R.id.titleText);
+                amount = (EditText)mView.findViewById(R.id.amountText);
+                btnSubmit = (Button)mView.findViewById(R.id.btn_submit);
+                btnCancel = (Button)mView.findViewById(R.id.btn_cancel);
 
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //when submit clicked call insert method from database
-                        database.insertData(title.getText().toString(),
+                       boolean isInserted =  database.insertData(title.getText().toString(),
                                 amount.getText().toString());
-                        if(!title.getText().toString().isEmpty()&&!amount.getText().toString().isEmpty()){
+
+                        if(isInserted==true){
                             Toast.makeText(MainActivity.this,"submitted",Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(MainActivity.this,"add title and amount",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,"Not inserted",Toast.LENGTH_SHORT).show();
                         }
 
 
