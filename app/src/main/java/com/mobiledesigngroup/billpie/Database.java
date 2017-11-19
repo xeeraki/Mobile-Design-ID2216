@@ -16,16 +16,17 @@ public class Database extends SQLiteOpenHelper{
     public static final String col_0 = "ID";
     public static final String col_1 = "TITLE";
     public static final String col_2= "AMOUNT";
+    public static final int VERSION =1;
 
 
 
     public Database(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, TEXT , DOUBLE ) ");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT , " + "TITLE TEXT, AMOUNT TEXT )");
 
     }
 
