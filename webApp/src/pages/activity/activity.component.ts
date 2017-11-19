@@ -9,4 +9,14 @@ export class Activity {
 
   constructor(public navCtrl: NavController) {}
 
+  boolExpandOwe : boolean = false;
+  boolExpandOwed : boolean = false;
+
+  collapseOrExpandOwe() {
+    this.boolExpandOwe = !this.boolExpandOwe;
+  }
+
+  collapseOrExpandOwed() {
+    this.boolExpandOwed = !this.boolExpandOwed;
+  }
 }

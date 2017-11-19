@@ -3,3 +3,57 @@
     <ion-title>Activity</ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header (click)=collapseOrExpandOwe()>
+      <ion-icon name="arrow-down" *ngIf=!boolExpandOwe></ion-icon>
+      <ion-icon name="arrow-up" *ngIf=boolExpandOwe></ion-icon>
+        What you owe
+    </ion-card-header>
+    <ion-card-content *ngIf=boolExpandOwe>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Rent for December</label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$380.00 by December 5th</label>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Lunch at Franky's Burger </label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$22.00 by November 23th</label>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header (click)=collapseOrExpandOwed()>
+      <ion-icon name="arrow-down" *ngIf=!boolExpandOwed></ion-icon>
+      <ion-icon name="arrow-up" *ngIf=boolExpandOwed></ion-icon>
+      What you are owed
+    </ion-card-header>
+    <ion-card-content *ngIf=boolExpandOwed>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Gas for Friends' trip to NYC</label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$120.00 by December 10th</label>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-between>
+      <ion-col col-3>
+        <label>Material for School Project</label>
+      </ion-col>
+      <ion-col col-lg-1>
+        <label>$62.00 by November 28th</label>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+  </ion-card>
+</ion-content>
