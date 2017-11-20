@@ -3,12 +3,14 @@
     <ion-title>Friends' Trip NYC</ion-title>
     <ion-buttons end>
     <button ion-button (click)=goCheckOut()>
-      <ion-icon name="open"></ion-icon>
+      <label padding-right="10px">Check Out</label>
+      <ion-icon name="arrow-round-forward"></ion-icon>
     </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
+<!--TODO: In green the participation: add % of each speading and names???-->
 <ion-content padding>
   <ion-scroll scrollX="true" style="width:100vw; height:100px" >
     <ion-row nowrap class="headerChip">
@@ -24,59 +26,90 @@
   <label margin-left="8px">Oct 2, Mon</label>
 
   <ion-card>
-    <ion-card-content>
-      <ion-row justify-content-between>
-        <ion-col col-3>
-          <label>Gas</label>
-        </ion-col>
-        <ion-col col-lg-1>
-          <label>$27.00</label>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+    <ion-list>
+      <button ion-item class="my-part">
+        <label item-start>Gas</label>
+        <label item-end>$27.00</label>
+      </button>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-row justify-content-between>
-        <ion-col col-3>
-          <label>Hostel</label>
-        </ion-col>
-        <ion-col col-lg-1>
-          <label>$62.00</label>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
+      <button ion-item>
+        <label item-start>Hostel</label>
+        <label item-end>$62.00</label>
+      </button>
+    </ion-list>
   </ion-card>
 
   <label margin-left="8px">Sept 29, Fri</label>
 
   <ion-card>
-    <ion-card-content>
-      <ion-row justify-content-between>
-        <ion-col col-3>
-          <label>Food</label>
-        </ion-col>
-        <ion-col col-lg-1>
-          <label>$15.00</label>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
+    <button ion-item class="my-part">
+      <label item-start>Food</label>
+      <label item-end>$15.00</label>
+    </button>
   </ion-card>
 
 
   <label margin-left="8px">Jan 19, Fri</label>
 
   <ion-card>
-    <ion-card-content>
-      <ion-row justify-content-between>
-        <ion-col col-3>
-          <label>Food</label>
-        </ion-col>
-        <ion-col col-lg-1>
-          <label>$15.00</label>
-        </ion-col>
-      </ion-row>
+    <button ion-item>
+      <label item-start>Food</label>
+      <label item-end>$15.00</label>
+    </button>
+  </ion-card>
+
+  <label margin-left="8px">Jan 7, Sat</label>
+
+  <ion-card>
+    <ion-list>
+      <button ion-item>
+        <label item-start>Food</label>
+        <label item-end>$102.00</label>
+      </button>
+
+      <button ion-item class="my-part">
+        <label item-start>Food</label>
+        <label item-end>$111.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$322.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$265.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$105.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$10.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$116.00</label>
+      </button>
+
+      <button ion-item>
+        <label item-start>Other</label>
+        <label item-end>$1060.00</label>
+      </button>
+    </ion-list>
+
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-content ion-item class="total-event">
+      <label class="text-total" item-start>Total of the event</label>
+      <label class="text-total" item-end>$2210.00</label>
     </ion-card-content>
   </ion-card>
 

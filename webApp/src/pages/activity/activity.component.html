@@ -12,22 +12,15 @@
         What you owe
     </ion-card-header>
     <ion-card-content *ngIf=boolExpandOwe>
-    <ion-row justify-content-between>
-      <ion-col col-3>
-        <label>Rent for December</label>
-      </ion-col>
-      <ion-col col-lg-1>
-        <label>$380.00 by December 5th</label>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-between>
-      <ion-col col-3>
-        <label>Lunch at Franky's Burger </label>
-      </ion-col>
-      <ion-col col-lg-1>
-        <label>$22.00 by November 23th</label>
-      </ion-col>
-    </ion-row>
+      <ion-row ion-item>
+        <label item-start>Rent for December</label>
+        <label item-end>$380.00 by December 5th</label>
+      </ion-row>
+
+      <ion-row ion-item>
+        <label item-start>Lunch at Franky's Burger</label>
+        <label item-end>$22.00 by November 23th</label>
+      </ion-row>
   </ion-card-content>
   </ion-card>
 
@@ -38,22 +31,15 @@
       What you are owed
     </ion-card-header>
     <ion-card-content *ngIf=boolExpandOwed>
-    <ion-row justify-content-between>
-      <ion-col col-3>
-        <label>Gas for Friends' trip to NYC</label>
-      </ion-col>
-      <ion-col col-lg-1>
-        <label>$120.00 by December 10th</label>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-between>
-      <ion-col col-3>
-        <label>Material for School Project</label>
-      </ion-col>
-      <ion-col col-lg-1>
-        <label>$62.00 by November 28th</label>
-      </ion-col>
-    </ion-row>
+      <ion-row ion-item>
+        <label item-start>Gas for Friends' trip to NYC</label>
+        <label item-end>$120.00 by December 10th</label>
+      </ion-row>
+
+      <ion-row ion-item>
+        <label item-start>Material for School Project</label>
+        <label item-end>$62.00 by November 28th</label>
+      </ion-row>
   </ion-card-content>
   </ion-card>
 </ion-content>
