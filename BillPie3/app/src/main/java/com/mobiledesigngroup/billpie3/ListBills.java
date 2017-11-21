@@ -21,15 +21,9 @@ import java.util.ArrayList;
  */
 
 public class ListBills extends Fragment {
-
+    private static final String TAG = "ListBills";
     private BillBaseHelper mDatabase;
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 

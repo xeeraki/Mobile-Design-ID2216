@@ -16,6 +16,7 @@ import android.widget.EditText;
  */
 
 public class CreateBills extends Fragment{
+    private static final String TAG = "CreateBills";
     private EditText amount , title;
     private Button btnSubmit , btnCancel;
 
@@ -29,8 +30,26 @@ public class CreateBills extends Fragment{
         amount = (EditText)view.findViewById(R.id.amountText);
         btnSubmit = (Button)view.findViewById(R.id.btn_submit);
         btnCancel = (Button)view.findViewById(R.id.btn_cancel);
+
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
+
+
     }
+
 
 
 
