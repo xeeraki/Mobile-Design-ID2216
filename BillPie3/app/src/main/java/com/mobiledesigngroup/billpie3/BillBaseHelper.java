@@ -47,7 +47,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE,title);
-        contentValues.put(COLUMN_AMOUNT, amount);
+        contentValues.put(COLUMN_AMOUNT, amount);  
 
         long result = db.insert(TABLE_NAME,null, contentValues);
         if(result == -1){

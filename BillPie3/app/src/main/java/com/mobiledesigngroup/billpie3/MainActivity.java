@@ -37,12 +37,8 @@ private static final String TAG = "MainActivity";
         mViewPager = (ViewPager)findViewById(R.id.container);
         SetUpViewPager(mViewPager);
 
-
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
-
     }
 
     private void SetUpViewPager(ViewPager viewPager){
