@@ -27,7 +27,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
        String table = "CREATE TABLE " + TABLE_NAME + " ( "
         + COLUMN_ID_ + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                + COLUMN_TITLE + " TEXT, "
-               + COLUMN_AMOUNT + " INTEGER)";
+               + COLUMN_AMOUNT + " TEXT)";
        db.execSQL(table);
 
     }

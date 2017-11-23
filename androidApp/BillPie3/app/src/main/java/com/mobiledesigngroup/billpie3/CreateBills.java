@@ -20,7 +20,7 @@ public class CreateBills extends Fragment {
     BillBaseHelper mDatabase;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.createbill, container, false);
 
         title = (EditText) view.findViewById(R.id.titleText);
