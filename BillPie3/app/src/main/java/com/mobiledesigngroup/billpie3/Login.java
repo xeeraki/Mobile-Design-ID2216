@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 
 
@@ -19,7 +18,7 @@ public class Login extends AppCompatActivity{
     public Login(){
 
         users = new ArrayList<>();
-        users.add(new User("jiayao","0000"));
+        users.add(new User("Jiayao","0000"));
         users.add(new User("eric","0000"));
         users.add(new User("cassius","0000"));
         users.add(new User("adam","0000"));

@@ -1,5 +1,4 @@
 package com.mobiledesigngroup.billpie3;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,7 +16,6 @@ public class BillBaseHelper extends SQLiteOpenHelper{
     public static final String COLUMN_TITLE = "TITLE";
     public static final String COLUMN_AMOUNT= "AMOUNT";
     public static final int VERSION =1;
-
 
 
     public BillBaseHelper(Context context) {
@@ -47,7 +45,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE,title);
-        contentValues.put(COLUMN_AMOUNT, amount);  
+        contentValues.put(COLUMN_AMOUNT, amount);
 
         long result = db.insert(TABLE_NAME,null, contentValues);
         if(result == -1){

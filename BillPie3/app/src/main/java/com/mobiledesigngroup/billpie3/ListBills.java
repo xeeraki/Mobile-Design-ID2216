@@ -21,7 +21,6 @@ import java.util.ArrayList;
  */
 
 public class ListBills extends Fragment {
-    private static final String TAG = "ListBills";
     private BillBaseHelper mDatabase;
 
     @Override
@@ -29,20 +28,19 @@ public class ListBills extends Fragment {
         View view = inflater.inflate(R.layout.listbills, container, false);
         ListView listView = (ListView) view.findViewById(R.id.list_view);
 
-        mDatabase = new BillBaseHelper(getContext());
+        mDatabase = new BillBaseHelper(getActivity());
         ArrayList<String> list = new ArrayList<>();
         Cursor data = mDatabase.getAllData();
 
         if (data.getCount() == 0) {
-            Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
         } else {
             while (data.moveToNext()) {
                 list.add(data.getString(0));
                 list.add(data.getString(1));
                 list.add(data.getString(2));
-
-                ArrayAdapter<String> Adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
-                listView.setAdapter(Adapter);
+                ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
+                listView.setAdapter(mAdapter);
             }
         }
                 return view;
