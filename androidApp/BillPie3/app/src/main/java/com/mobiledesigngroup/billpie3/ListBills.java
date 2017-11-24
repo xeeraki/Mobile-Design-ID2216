@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by adam on 2017-11-19.
  */
 
-public class ListBills extends Fragment {
+public class ListBills extends Fragment{
     private BillBaseHelper mDatabase;
 
     @Override
@@ -36,10 +36,10 @@ public class ListBills extends Fragment {
             Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
         } else {
             while (data.moveToNext()) {
+                list.add(data.getString(0));
                 list.add(data.getString(1));
                 list.add(data.getString(2));
-                list.add(data.getString(3));
-                ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
+                ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
                 listView.setAdapter(mAdapter);
             }
         }

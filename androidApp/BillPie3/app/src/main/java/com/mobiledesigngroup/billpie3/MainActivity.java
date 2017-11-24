@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void SetUpViewPager(ViewPager viewPager){
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new CreateBills(),"Dashboard");
-        mAdapter.addFragment(new ListBills(),"Add Spending");
+        mAdapter.addFragment(new ListBills(),"Dashboard");
+        mAdapter.addFragment(new CreateBills(),"Add Spending");
         mAdapter.addFragment(new addPeople(),"Activity");
         viewPager.setAdapter(mAdapter);
     }
