@@ -46,8 +46,6 @@ public class CreateBills extends Fragment{
                 } else {
                     Toast.makeText(getActivity(), "Not inserted", Toast.LENGTH_LONG).show();
                 }
-                //Intent intent = new Intent(getActivity(), ListBills.class);
-                //startActivity(intent);
 
             }
         });
