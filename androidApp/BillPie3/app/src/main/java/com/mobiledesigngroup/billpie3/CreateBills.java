@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 
 public class CreateBills extends Fragment{
-    private EditText amount, title;
+    private EditText amount, title, date;
     private Button btnSubmit, btnCancel;
     BillBaseHelper mDatabase;
     SQLiteDatabase sDatabase;
@@ -27,6 +27,7 @@ public class CreateBills extends Fragment{
 
         title = (EditText) view.findViewById(R.id.titleText);
         amount = (EditText) view.findViewById(R.id.amountText);
+        date = (EditText) view.findViewById(R.id.dateText);
         btnSubmit = (Button) view.findViewById(R.id.btn_submit);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
         addData();
@@ -38,9 +39,10 @@ public class CreateBills extends Fragment{
             public void onClick(View v) {
                 String Title = title.getText().toString();
                 String Amount = amount.getText().toString();
+                String Date = date.getText().toString();
                 mDatabase = new BillBaseHelper(getContext());
                 sDatabase = mDatabase.getWritableDatabase();
-                boolean isInserted = mDatabase.insertData(Title, Amount);
+                boolean isInserted = mDatabase.insertSpending(Title, Amount, Date);
                 if (isInserted == true) {
                     Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                 } else {

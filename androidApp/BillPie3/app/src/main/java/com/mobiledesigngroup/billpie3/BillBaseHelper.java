@@ -15,6 +15,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_TITLE = "TITLE";
     public static final String COLUMN_AMOUNT= "AMOUNT";
+    public static final String COLUMN_DATE= "DATE";
     public static final int VERSION =1;
 
 
@@ -27,7 +28,8 @@ public class BillBaseHelper extends SQLiteOpenHelper{
        db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                + COLUMN_TITLE + " TEXT NOT NULL, "
-               + COLUMN_AMOUNT + " TEXT NOT NULL);");
+               + COLUMN_AMOUNT + " TEXT NOT NULL, "
+               + COLUMN_DATE + " TEXT NOT NULL);");
 
 
     }
@@ -47,6 +49,22 @@ public class BillBaseHelper extends SQLiteOpenHelper{
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE,title);
         contentValues.put(COLUMN_AMOUNT, amount);
+        long result = db.insert(TABLE_NAME,null, contentValues);
+        if(result == -1){
+            return false;
+        }
+        return true;
+    }
+
+    // Insert a new spending
+    public boolean insertSpending(String title, String amount, String date){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_TITLE,title);
+        contentValues.put(COLUMN_AMOUNT, amount);
+        contentValues.put(COLUMN_DATE, date);
         long result = db.insert(TABLE_NAME,null, contentValues);
         if(result == -1){
             return false;
