@@ -10,12 +10,32 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class BillBaseHelper extends SQLiteOpenHelper{
+
     public static final String DATABASE_NAME = "Bill.db";
-    public static final String TABLE_NAME = "Bill_table";
+
+    public static final String TABLE_BILL = "Bill_table";
+    public static final String TABLE_FRIEND = "Friend_table";
+
     public static final String COLUMN_ID = "ID";
-    public static final String COLUMN_TITLE = "TITLE";
-    public static final String COLUMN_AMOUNT= "AMOUNT";
-    public static final String COLUMN_DATE= "DATE";
+
+    public static final String COLUMN_BILL_TITLE = "TITLE";
+    public static final String COLUMN_BILL_AMOUNT= "AMOUNT";
+    public static final String COLUMN_BILL_DATE= "DATE";
+
+    public static final String COLUMN_FRIEND_NAME = "NAME";
+    public static final String COLUMN_FRIEND_PHONE= "PHONE";
+
+    public static final String CREATE_TABLE_BILL = "CREATE TABLE " + TABLE_BILL + " ("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+            + COLUMN_BILL_TITLE + " TEXT NOT NULL, "
+            + COLUMN_BILL_AMOUNT + " TEXT NOT NULL, "
+            + COLUMN_BILL_DATE + " TEXT NOT NULL);";
+
+    public static final String CREATE_TABLE_FRIEND = "CREATE TABLE " + TABLE_FRIEND + " ("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+            + COLUMN_FRIEND_NAME + " TEXT NOT NULL, "
+            + COLUMN_FRIEND_PHONE + " TEXT NOT NULL);";
+
     public static final int VERSION =1;
 
 
@@ -25,35 +45,17 @@ public class BillBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-       db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
-               + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-               + COLUMN_TITLE + " TEXT NOT NULL, "
-               + COLUMN_AMOUNT + " TEXT NOT NULL, "
-               + COLUMN_DATE + " TEXT NOT NULL);");
-
+       db.execSQL(CREATE_TABLE_BILL);
+       db.execSQL(CREATE_TABLE_FRIEND);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BILL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIEND);
         onCreate(db);
 
-    }
-
-//insert data to the data base
-    public boolean insertData(String title, String amount){
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TITLE,title);
-        contentValues.put(COLUMN_AMOUNT, amount);
-        long result = db.insert(TABLE_NAME,null, contentValues);
-        if(result == -1){
-            return false;
-        }
-        return true;
     }
 
     // Insert a new spending
@@ -62,19 +64,35 @@ public class BillBaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TITLE,title);
-        contentValues.put(COLUMN_AMOUNT, amount);
-        contentValues.put(COLUMN_DATE, date);
-        long result = db.insert(TABLE_NAME,null, contentValues);
+        contentValues.put(COLUMN_BILL_TITLE,title);
+        contentValues.put(COLUMN_BILL_AMOUNT, amount);
+        contentValues.put(COLUMN_BILL_DATE, date);
+        long result = db.insert(TABLE_BILL,null, contentValues);
         if(result == -1){
             return false;
         }
         return true;
     }
+
+    // Insert a new friend
+    public boolean insertFriend(String name, String phone){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_FRIEND_NAME,name);
+        contentValues.put(COLUMN_FRIEND_PHONE, phone);
+        long result = db.insert(TABLE_FRIEND,null, contentValues);
+        if(result == -1){
+            return false;
+        }
+        return true;
+    }
+
 // retrieve data from the data base
-    public Cursor getAllData(){
+    public Cursor getBills(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor data = db.rawQuery(" SELECT * FROM " + TABLE_NAME,null);
+        Cursor data = db.rawQuery(" SELECT * FROM " + TABLE_BILL,null);
         return data;
     }
 }

@@ -30,7 +30,7 @@ public class ListBills extends Fragment{
 
         mDatabase = new BillBaseHelper(getActivity());
         ArrayList<String> list = new ArrayList<>();
-        Cursor data = mDatabase.getAllData();
+        Cursor data = mDatabase.getBills();
 
         if (data.getCount() == 0) {
             Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
