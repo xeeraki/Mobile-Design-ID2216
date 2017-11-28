@@ -9,4 +9,6 @@
     <string name="amount">Amount</string>
     <string name="submit">SUBMIT</string>
     <string name="cancel">Cancel</string>
+    <string name="total_due">Total Due:</string>
+    <string name="you_will_pay_to">You will pay to:</string>
 </resources>

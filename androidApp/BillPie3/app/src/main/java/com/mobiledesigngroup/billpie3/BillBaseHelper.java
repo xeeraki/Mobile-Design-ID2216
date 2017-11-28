@@ -15,6 +15,8 @@ public class BillBaseHelper extends SQLiteOpenHelper{
 
     public static final String TABLE_BILL = "Bill_table";
     public static final String TABLE_FRIEND = "Friend_table";
+    // USER_ID EVENT_ID DUE_TO AMOUNT
+    public static final String TABLE_EVENT_USER_DUE = "Event_User_Due_table";
 
     public static final String COLUMN_ID = "ID";
 
@@ -24,6 +26,11 @@ public class BillBaseHelper extends SQLiteOpenHelper{
 
     public static final String COLUMN_FRIEND_NAME = "NAME";
     public static final String COLUMN_FRIEND_PHONE= "PHONE";
+
+    public static final String COLUMN_EUD_USER_ID = "USER_ID";
+    public static final String COLUMN_EUD_DUE_TO= "DUE_TO";
+    public static final String COLUMN_EUD_AMOUNT = "AMOUNT";
+    public static final String COLUMN_EUD_EVENT_ID= "EVENT_ID";
 
     public static final String CREATE_TABLE_BILL = "CREATE TABLE " + TABLE_BILL + " ("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
@@ -36,6 +43,13 @@ public class BillBaseHelper extends SQLiteOpenHelper{
             + COLUMN_FRIEND_NAME + " TEXT NOT NULL, "
             + COLUMN_FRIEND_PHONE + " TEXT NOT NULL);";
 
+    public static final String CREATE_TABLE_EVENT_USER_DUE = "CREATE TABLE " + TABLE_EVENT_USER_DUE + " ("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+            + COLUMN_EUD_USER_ID + " INTEGER NOT NULL, "
+            + COLUMN_EUD_EVENT_ID + " INTEGER NOT NULL, "
+            + COLUMN_EUD_DUE_TO + " TEXT NOT NULL, "
+            + COLUMN_EUD_AMOUNT + " TEXT NOT NULL);";
+
     public static final int VERSION =1;
 
 
@@ -47,6 +61,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
        db.execSQL(CREATE_TABLE_BILL);
        db.execSQL(CREATE_TABLE_FRIEND);
+       db.execSQL(CREATE_TABLE_EVENT_USER_DUE);
 
     }
 
@@ -54,6 +69,7 @@ public class BillBaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BILL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIEND);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENT_USER_DUE);
         onCreate(db);
 
     }
@@ -89,10 +105,18 @@ public class BillBaseHelper extends SQLiteOpenHelper{
         return true;
     }
 
-// retrieve data from the data base
+    // retrieve bills from the data base
     public Cursor getBills(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor data = db.rawQuery(" SELECT * FROM " + TABLE_BILL,null);
+        return data;
+    }
+
+    // retrieve data from the data base
+    public Cursor getDueByUserIdEventId(int userId, int eventId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor data = db.rawQuery(" SELECT * FROM " + TABLE_EVENT_USER_DUE +
+                "WHERE USER_ID=" + userId + " AND EVENT_ID=" + eventId,null);
         return data;
     }
 }
