@@ -28,7 +28,7 @@ public class CheckOutPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.checkout_page, container, false);
-        /*ListView listView = (ListView) view.findViewById(R.id.EventPageListView);
+        ListView listView = (ListView) view.findViewById(R.id.EventPageListView);
 
         mDatabase = new BillBaseHelper(getActivity());
         ArrayList<String> list = new ArrayList<>();
@@ -43,7 +43,7 @@ public class CheckOutPage extends Fragment {
                 ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
                 listView.setAdapter(mAdapter);
             }
-        }*/
+        }
         return view;
     }
 }

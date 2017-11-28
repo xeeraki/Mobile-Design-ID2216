@@ -17,7 +17,8 @@ import android.widget.Toast;
  */
 
 public class AddFriend extends Fragment {
-    private EditText name, phone;
+    private EditText friendName, phone;
+    private int userId;
     private Button btnSubmit, btnCancel;
     BillBaseHelper mDatabase;
     SQLiteDatabase sDatabase;
@@ -27,7 +28,7 @@ public class AddFriend extends Fragment {
         View view = inflater.inflate(R.layout.addfriend, container, false);
 
 
-        name = (EditText) view.findViewById(R.id.nameText);
+        friendName = (EditText) view.findViewById(R.id.nameText);
         phone = (EditText) view.findViewById(R.id.phoneText);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmitFriend);
         btnCancel = (Button) view.findViewById(R.id.btnCancelFriend);
@@ -38,11 +39,11 @@ public class AddFriend extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Name = name.getText().toString();
+                String FriendName = friendName.getText().toString();
                 String Phone = phone.getText().toString();
                 mDatabase = new BillBaseHelper(getContext());
                 sDatabase = mDatabase.getWritableDatabase();
-                boolean isInserted = mDatabase.insertFriend(Name, Phone);
+                boolean isInserted = mDatabase.insertFriend(userId, FriendName, Phone);
                 if (isInserted == true) {
                     Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                 } else {
