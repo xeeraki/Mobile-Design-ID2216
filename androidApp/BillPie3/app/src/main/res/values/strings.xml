@@ -1,14 +1,19 @@
 <resources>
-    <string name="app_name">BillPie</string>
+    <string name="app_name">Billpie</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="tab_text_1">DashBoard</string>
     <string name="tab_text_2">Add Spending</string>
     <string name="tab_text_3">Activity</string>
     <string name="create_bill">Create</string>
-    <string name="action_settings">Settings</string>
     <string name="title">Title</string>
     <string name="amount">Amount</string>
     <string name="submit">SUBMIT</string>
     <string name="cancel">Cancel</string>
     <string name="total_due">Total Due:</string>
     <string name="you_will_pay_to">You will pay to:</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
