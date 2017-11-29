@@ -1,9 +1,8 @@
 *.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
+androidApp/**/.gradle
+androidApp/BillPie3/app/build.gradle
+androidApp/**/.idea/workspace.xml
+androidApp/**/.idea/libraries
+androidApp/**/.DS_Store
+androidApp/**/build
+androidApp/**/captures
