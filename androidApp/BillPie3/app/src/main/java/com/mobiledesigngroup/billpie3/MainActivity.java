@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         mAdapter.addFragment(new Dashboard(),"Dashboard");
         mAdapter.addFragment(new CreateEvent(),"Create Event");
         mAdapter.addFragment(new AddFriend(),"Add Friend");
-        mAdapter.addFragment(new Account(), "Account");
+//        mAdapter.addFragment(new Account(), "Account");
         viewPager.setAdapter(mAdapter);
     }
 
