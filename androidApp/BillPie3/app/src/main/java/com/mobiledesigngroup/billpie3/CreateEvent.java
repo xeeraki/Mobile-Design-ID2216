@@ -1,11 +1,8 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class CreateBills extends Fragment{
+public class CreateEvent extends Fragment{
     private EditText amount, title, date;
     private Button btnSubmit, btnCancel;
     BillBaseHelper mDatabase;
@@ -22,7 +19,7 @@ public class CreateBills extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.createbill, container, false);
+        View view = inflater.inflate(R.layout.create_event, container, false);
 
 
         title = (EditText) view.findViewById(R.id.titleText);

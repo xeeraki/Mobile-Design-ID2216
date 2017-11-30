@@ -24,8 +24,8 @@ public class Login extends AppCompatActivity{
         users.add(new User("adam","0000"));
 
     }
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Button btnLogin = findViewById(R.id.button);
@@ -33,19 +33,17 @@ protected void onCreate(Bundle savedInstanceState) {
         final EditText pass = findViewById(R.id.password);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-    String username = user.getText().toString();
-    String password = pass.getText().toString();
+    @Override
+    public void onClick(View view) {
+            String username = user.getText().toString();
+            String password = pass.getText().toString();
 
-    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-    login(username,password);
-    startActivity(intent);
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            login(username,password);
+            startActivity(intent);
         }
         });
-
-
-        }
+    }
 
     public User login(String username,String password){
         for(User user: users){
