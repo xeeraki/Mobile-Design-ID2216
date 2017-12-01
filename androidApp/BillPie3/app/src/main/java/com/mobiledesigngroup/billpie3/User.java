@@ -12,6 +12,7 @@ public class User {
     private String username, password, full_name, phoneNumber, email;
     private ArrayList<User> friends;
     private ArrayList<Event> events;
+    private ArrayList<Payback> paybacks;
 
     // Default constructor (required)
     public User() {
