@@ -5,3 +5,4 @@ androidApp/**/.idea
 androidApp/**/.DS_Store
 androidApp/**/build
 androidApp/**/captures
+androidApp/**/local.properties
