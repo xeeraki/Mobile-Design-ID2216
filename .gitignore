@@ -1,8 +1,7 @@
 *.iml
 androidApp/**/.gradle
-androidApp/BillPie3/app/build.gradle
-androidApp/**/.idea/workspace.xml
-androidApp/**/.idea/libraries
+androidApp/**/build.gradle
+androidApp/**/.idea
 androidApp/**/.DS_Store
 androidApp/**/build
 androidApp/**/captures
