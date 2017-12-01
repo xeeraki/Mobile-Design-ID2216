@@ -5,13 +5,17 @@ package com.mobiledesigngroup.billpie3;
  */
 
 public class User {
-    private String username;
-    private String password;
+    private String username, password, phoneNumber, email;
 
-    public User(String username, String password){
+    // Default constructor (required)
+    public User() {
+    }
+
+    public User(String username, String password, String phoneNumber, String email){
         this.username=username;
         this.password=password;
-
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public String getUsername() {
