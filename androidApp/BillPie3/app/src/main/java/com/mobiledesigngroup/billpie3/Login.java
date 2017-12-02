@@ -18,10 +18,10 @@ public class Login extends AppCompatActivity{
     public Login(){
 
         users = new ArrayList<>();
-        users.add(new User("Jiayao","0000", "nb", "email"));
-        users.add(new User("eric","0000", "nb", "email"));
-        users.add(new User("cassius","0000", "nb", "email"));
-        users.add(new User("adam","0000", "nb", "email"));
+        users.add(new User("Jiayao","0000", "nb", "email", "Jiayao Yu"));
+        users.add(new User("eric","0000", "nb", "email", "Eric Ren"));
+        users.add(new User("cassius","0000", "nb", "email", "Cassius Garat"));
+        users.add(new User("adam","0000", "nb", "email", "Adam Shafai"));
 
     }
     @Override
