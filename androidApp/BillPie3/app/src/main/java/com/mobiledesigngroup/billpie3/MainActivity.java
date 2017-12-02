@@ -65,8 +65,9 @@ public class MainActivity extends AppCompatActivity
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new Dashboard(),"Dashboard");
         mAdapter.addFragment(new CreateEvent(),"Create Event");
-        mAdapter.addFragment(new AddFriend(),"Add Friend");
         mAdapter.addFragment(new History(),"History");
+        //mAdapter.addFragment(new AddFriend(),"Add Friend");
+        mAdapter.addFragment(new EventPage(),"Event Page");
         viewPager.setAdapter(mAdapter);
     }
 

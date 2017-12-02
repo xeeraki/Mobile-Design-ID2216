@@ -2,6 +2,7 @@ package com.mobiledesigngroup.billpie3;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by adam on 2017-11-13.
@@ -9,10 +10,14 @@ import java.util.ArrayList;
 
 @IgnoreExtraProperties
 public class User {
-    private String username, password, full_name, phoneNumber, email;
-    private ArrayList<User> friends;
-    private ArrayList<Event> events;
-    private ArrayList<Payback> paybacks;
+    public String username;
+    public String password;
+    public String full_name;
+    public String phoneNumber;
+    public String email;
+    public Map<String, String> friends;
+    public Map<String, String> events;
+    public ArrayList<Payback> paybacks;
 
     // Default constructor (required)
     public User() {
