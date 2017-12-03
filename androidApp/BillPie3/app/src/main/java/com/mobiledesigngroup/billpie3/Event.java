@@ -18,6 +18,12 @@ public class Event {
     public Event(){
     }
 
+    public Event(String title, Map<String, Spending> spendings, Map<String, Boolean> members){
+        this.title = title;
+        this.spendings = spendings;
+        this.members = members;
+    }
+
     public String getTitle() {
         return title;
     }
