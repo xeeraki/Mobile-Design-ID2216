@@ -8,6 +8,7 @@
 
     <dimen name="seekbar_label_length">70dp</dimen>
 
+    <dimen name="margin_tinys">2dp</dimen>
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
