@@ -1,5 +1,6 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -106,20 +107,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_dashboard) {
-
-        } else if (id == R.id.nav_activity) {
-
-        } else if (id == R.id.nav_profile) {
-
-        } else if (id == R.id.nav_pay_info) {
-
-        } else if (id == R.id.nav_history) {
-
-        } else if (id == R.id.nav_feedback) {
+        if (id == R.id.nav_payment) {
 
         }
+//        else if (id == R.id.nav_activity) {
+//            Intent activityIntent = new Intent(this, Activity.class);
+//            startActivity(activityIntent);
+//        }
+        else if (id == R.id.nav_friends) {
 
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_help_feedback) {
+
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
