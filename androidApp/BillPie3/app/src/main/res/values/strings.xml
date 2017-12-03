@@ -16,4 +16,8 @@
     <string name="you_will_pay_to">You will pay to:</string>
 
     <string name="action_settings">Settings</string>
+    <string name="members">Members:</string>
+    <string name="adam">Adam</string>
+    <string name="cassius">Cassius</string>
+    <string name="adamid2">Adam</string>
 </resources>

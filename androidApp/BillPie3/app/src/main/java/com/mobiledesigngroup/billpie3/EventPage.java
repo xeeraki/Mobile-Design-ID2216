@@ -1,10 +1,12 @@
 package com.mobiledesigngroup.billpie3;
 
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Typeface;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -44,7 +49,8 @@ public class EventPage extends Fragment {
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
-        final ArrayList<String> spendings = new ArrayList<>();
+        final ArrayList<String> spendingTitle = new ArrayList<>();
+        final ArrayList<String> spendingAmount = new ArrayList<>();
 
         DatabaseReference spendingReference = mDatabase.child("events").child(eventId).child("spendings");
 
@@ -53,9 +59,25 @@ public class EventPage extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot spendingSnapshot: dataSnapshot.getChildren()) {
                     Spending retrievedSpending = spendingSnapshot.getValue(Spending.class);
-                    spendings.add(retrievedSpending.getTitle());
-                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, spendings);
-                    listView.setAdapter(mAdapter);
+                    final String retrievedTitle = retrievedSpending.getTitle();
+                    final String retrievedAmount = retrievedSpending.getAmount();
+                    spendingTitle.add(retrievedTitle);
+                    spendingAmount.add(retrievedAmount);
+
+                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, spendingAmount) {
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            View view = super.getView(position, convertView, parent);
+                            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                            text1.setTypeface(null, Typeface.BOLD);
+                            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                            text1.setText(spendingTitle.get(position));
+                            text2.setText("$"+spendingAmount.get(position));
+                            return view;
+                        }
+                    };
+                    listView.setAdapter(adapter);
                 }
             }
 
