@@ -44,7 +44,7 @@ public class CreateEvent extends Fragment{
         // TODO : retrieve the selected friends and put them into a HashMap<String, String>
         btnSubmit = (Button) view.findViewById(R.id.btn_submit);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
-        addEvent();
+        //addEvent();
         return view;
     }
     public void addEvent(){
