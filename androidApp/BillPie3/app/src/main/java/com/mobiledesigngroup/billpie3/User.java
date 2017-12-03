@@ -15,9 +15,9 @@ public class User {
     public String full_name;
     public String phoneNumber;
     public String email;
-    public Map<String, String> friends;
-    public Map<String, String> events;
-    public ArrayList<Payback> paybacks;
+    public Map<String, Boolean> friends;
+    public Map<String, Boolean> events;
+    public Map<String, Payback> paybacks;
 
     // Default constructor (required)
     public User() {
@@ -37,5 +37,13 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        if (paybacks != null) {
+            return username + password + full_name + phoneNumber + email + friends.toString() + events.toString() + paybacks.toString();
+        }
+        return username + password + full_name + phoneNumber + email + friends.toString() + events.toString();
     }
 }

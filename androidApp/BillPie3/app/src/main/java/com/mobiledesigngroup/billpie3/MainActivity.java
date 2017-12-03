@@ -1,5 +1,6 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -109,7 +110,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_dashboard) {
 
         } else if (id == R.id.nav_activity) {
-
+            Intent activityIntent = new Intent(this, Activity.class);
+            startActivity(activityIntent);
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_pay_info) {
