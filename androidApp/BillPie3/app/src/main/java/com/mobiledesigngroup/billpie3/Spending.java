@@ -14,7 +14,6 @@ public class Spending {
     public String title;
     public String due_date;
     public String amount;
-    public String event;
     public Map<String, String> payers;
 
     public Spending(){
@@ -28,8 +27,12 @@ public class Spending {
         return amount;
     }
 
+    public Map<String, String> getPayers() {
+        return payers;
+    }
+
     @Override
     public String toString() {
-        return "title: " + title + ", amount: " + amount + ", due_date" + due_date + ", event: " + event + ", payers " + payers;
+        return "title: " + title + ", amount: " + amount + ", due_date" + due_date + ", payers " + payers;
     }
 }
