@@ -21,7 +21,7 @@
 
         </activity>
         <activity android:name=".Login"></activity>
-        <activity android:name=".history.History"></activity>
+        <activity android:name=".History"></activity>
 
     </application>
 

@@ -1,6 +1,5 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,8 +15,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
-import com.mobiledesigngroup.billpie3.history.History;
 
 
 public class MainActivity extends AppCompatActivity

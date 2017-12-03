@@ -1,4 +1,4 @@
-package com.mobiledesigngroup.billpie3.history;
+package com.mobiledesigngroup.billpie3;
 
 
 import android.graphics.Color;
