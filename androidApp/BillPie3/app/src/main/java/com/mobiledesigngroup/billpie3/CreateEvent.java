@@ -1,20 +1,25 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +33,8 @@ public class CreateEvent extends AppCompatActivity{
     private String eventId;
     private String userId = "user1";
 
+    private String[] friendList = {"Cassius", "Jiayao", "Adam"};
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +43,39 @@ public class CreateEvent extends AppCompatActivity{
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
+        // Dialog friend choice
+        final MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                .title(R.string.titlef)
+                .items(friendList)
+                .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                        /**
+                         * If you use alwaysCallMultiChoiceCallback(), which is discussed below,
+                         * returning false here won't allow the newly selected check box to actually be selected
+                         * (or the newly unselected check box to be unchecked).
+                         * See the limited multi choice dialog example in the sample project for details.
+                         **/
+                        return true;
+                    }
+                })
+                .positiveText("Ok");
+
+        FloatingActionButton fab = findViewById(R.id.fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                builder.show();
+            }
+        });
+
+
         //getFriends();
 
         title = (EditText) findViewById(R.id.titleText);
         // TODO : retrieve the selected friends and put them into a HashMap<String, String>
-        btnSubmit = (Button) findViewById(R.id.btn_submit);
-        btnCancel = (Button) findViewById(R.id.btn_cancel);
+//        btnSubmit = (Button) findViewById(R.id.btn_submit);
+//        btnCancel = (Button) findViewById(R.id.btn_cancel);
     }
 
 
