@@ -1,9 +1,13 @@
 package com.mobiledesigngroup.billpie3;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,14 +25,15 @@ import static android.content.ContentValues.TAG;
 /**
  * Created by eric.
  */
-
-public class Activity extends AppCompatActivity{
+// TODO: Add later the possibility to click and view for each user per event the amount
+public class Pay extends Fragment {
     private Map<String, User> userMap;
     private ProgressBar progBar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.pay, container, false);
+
         this.userMap = new HashMap<>();
 
 
@@ -50,5 +55,7 @@ public class Activity extends AppCompatActivity{
                 Log.w(TAG, "History: error while retrieving events", databaseError.toException());
             }
         });
+
+        return view;
     }
 }

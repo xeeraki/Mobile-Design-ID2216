@@ -61,11 +61,12 @@ public class MainActivity extends AppCompatActivity
 
     private void SetUpViewPager(ViewPager viewPager){
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new Dashboard(),"Dashboard");
-        mAdapter.addFragment(new CreateEvent(),"Create Event");
+        mAdapter.addFragment(new Events(),"Events");
+        mAdapter.addFragment(new Pay(),"Pay");
         mAdapter.addFragment(new History(),"History");
+        //mAdapter.addFragment(new CreateEvent(),"Create Event");
         //mAdapter.addFragment(new AddFriend(),"Add Friend");
-        mAdapter.addFragment(new EventPage(),"Event Page");
+        //mAdapter.addFragment(new EventPage(),"Event Page");
         viewPager.setAdapter(mAdapter);
     }
 
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent pay in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -109,12 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_payment) {
 
-        }
-//        else if (id == R.id.nav_activity) {
-//            Intent activityIntent = new Intent(this, Activity.class);
-//            startActivity(activityIntent);
-//        }
-        else if (id == R.id.nav_friends) {
+        } else if (id == R.id.nav_friends) {
 
         } else if (id == R.id.nav_settings) {
 
