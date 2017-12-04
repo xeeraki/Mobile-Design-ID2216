@@ -19,9 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mobiledesigngroup.billpie3.Event;
-import com.mobiledesigngroup.billpie3.R;
-import com.mobiledesigngroup.billpie3.Spending;
 
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
