@@ -10,14 +10,21 @@
     <!--content-->
     <string name="app_name">BillPie</string>
     <string name="user_name">Eric</string>
+    <string name="adam">Adam</string>
+    <string name="cassius">Cassius</string>
+    <string name="jiayao">Jiayao</string>
+
     <!--events-->
     <string name="eventTitle_schoolProject">School project</string>
     <string name="date_schoolProject">Oct 2017</string>
     <string name="eventTitle_trip">Trip to Paris</string>
     <string name="date_trip">Apr 2017</string>
 
-    <string name="adam">Adam</string>
-    <string name="cassius">Cassius</string>
+    <!--pay-->
+    <string name="oweAdam">€127</string>
+    <string name="oweCassius">€109</string>
+    <string name="oweJiayao">€92</string>
+
     <string name="adamid2">Adam</string>
     <string name="create_bill">Create</string>
     <string name="title">Title</string>
