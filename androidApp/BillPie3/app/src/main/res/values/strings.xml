@@ -17,8 +17,16 @@
     <!--events-->
     <string name="eventTitle_schoolProject">School project</string>
     <string name="date_schoolProject">Oct 2017</string>
-    <string name="eventTitle_trip">Trip to Paris</string>
+    <string name="eventTitle_trip">Trip to NYC</string>
     <string name="date_trip">Apr 2017</string>
+    <string name="date0_trip">24 April</string>
+    <string name="date1_trip">17 April</string>
+    <string name="spending0_trip">Gas</string>
+    <string name="spending0demo_trip">in Philadelphia</string>
+    <string name="spending1_trip">Fine</string>
+    <string name="spending1demo_trip">Due to drunk driving lol</string>
+    <string name="spending2_trip">Vodka</string>
+    <string name="spending2demo_trip">Going mad when my pc freezes</string>
 
     <!--pay-->
     <string name="oweAdam">€127</string>
