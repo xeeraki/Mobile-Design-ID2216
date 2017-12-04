@@ -121,7 +121,7 @@ public class History extends Fragment {
 
     // TODO: Change user when the login will be implemented
     private void filterHistory(Event event, Map.Entry<String, Spending> spending, Map.Entry<String, String> payer) {
-        if (payer.getKey().equals("user4")) {
+        if (payer.getKey().equals("user")) {
             if (!this.histData.containsKey(event.getTitle())) {
                 this.histData.put(event.getTitle(),
                         new ArrayList<>(Collections.singletonList(new historyData(spending.getValue().getTitle(), payer.getValue()))));
