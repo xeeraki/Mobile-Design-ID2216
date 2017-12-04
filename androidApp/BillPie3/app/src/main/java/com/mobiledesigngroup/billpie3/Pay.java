@@ -114,7 +114,7 @@ public class Pay extends Fragment {
         } else {
             // Get his debt before balancing
             this.userDebt = userMap.get("user1");
-            for (Map.Entry<String, Map<String, String>> userM: userMap>) {
+            for (Map.Entry<String, Map<String, String>> userM: userMap.entrySet()) {
                 if (this.userDebt.containsKey(userM.getKey())) {
                     for (Map.Entry<String, String> subUser: userM.getValue().entrySet()) {
                         if (subUser.getKey().equals("user1")) {
