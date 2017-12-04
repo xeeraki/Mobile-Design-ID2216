@@ -64,7 +64,8 @@ public class EventPage extends Fragment {
                     spendingTitle.add(retrievedTitle);
                     spendingAmount.add(retrievedAmount);
 
-                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, spendingAmount) {
+                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_2,
+                            android.R.id.text1, spendingAmount) {
                         @Override
                         public View getView(int position, View convertView, ViewGroup parent) {
                             View view = super.getView(position, convertView, parent);
@@ -80,12 +81,10 @@ public class EventPage extends Fragment {
                     listView.setAdapter(adapter);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "EventPage:error while retrieving spendings", databaseError.toException());
             }
-
         };
 
         spendingReference.addValueEventListener(spendingListener);
