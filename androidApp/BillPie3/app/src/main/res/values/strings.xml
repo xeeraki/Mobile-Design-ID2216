@@ -1,12 +1,24 @@
 <resources>
-    <string name="app_name">BillPie</string>
-
+    <!--menu-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="tab_text_1">DashBoard</string>
+    <string name="tab_text_1">Events</string>
     <string name="tab_text_2">Pay</string>
     <string name="tab_text_3">History</string>
+
+    <!--content-->
+    <string name="app_name">BillPie</string>
+    <string name="user_name">Eric</string>
+    <!--events-->
+    <string name="eventTitle_schoolProject">School project</string>
+    <string name="date_schoolProject">Oct 2017</string>
+    <string name="eventTitle_trip">Trip to Paris</string>
+    <string name="date_trip">Apr 2017</string>
+
+    <string name="adam">Adam</string>
+    <string name="cassius">Cassius</string>
+    <string name="adamid2">Adam</string>
     <string name="create_bill">Create</string>
     <string name="title">Title</string>
     <string name="amount">Amount</string>
@@ -17,8 +29,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="members">Members:</string>
-    <string name="adam">Adam</string>
-    <string name="cassius">Cassius</string>
-    <string name="adamid2">Adam</string>
-    <string name="user_name">Eric</string>
+
+
+
 </resources>
