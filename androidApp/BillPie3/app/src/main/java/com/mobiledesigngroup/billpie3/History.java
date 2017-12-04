@@ -93,9 +93,9 @@ public class History extends Fragment {
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
-                Log.w(TAG, "LAAAAAAAAAAAAAAAAAAAAAAA: " + eventList.toString());
+//                Log.w(TAG, "LAAAAAAAAAAAAAAAAAAAAAAA: " + eventList.toString());
                 displayData();
-                Log.w(TAG, "LAAAAAAAAAAAAAAAAAAAAAAA_HIST: " + histData.toString());
+//                Log.w(TAG, "LAAAAAAAAAAAAAAAAAAAAAAA_HIST: " + histData.toString());
             }
 
             @Override
