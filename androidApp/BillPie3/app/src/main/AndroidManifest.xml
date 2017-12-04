@@ -21,6 +21,8 @@
 
         </activity>
         <activity android:name=".Login"></activity>
+        <activity android:name=".CreateEvent"></activity>
+
 
         <meta-data
             android:name="preloaded_fonts"

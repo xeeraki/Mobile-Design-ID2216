@@ -2,7 +2,10 @@ package com.mobiledesigngroup.billpie3;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,7 @@ import java.util.Map;
 import static android.content.ContentValues.TAG;
 
 
-public class CreateEvent extends Fragment{
+public class CreateEvent extends AppCompatActivity{
     private EditText amount, title, date;
     private Button btnSubmit, btnCancel;
     DatabaseReference mDatabase;
@@ -33,10 +36,27 @@ public class CreateEvent extends Fragment{
     private String userId = "user1";
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.create_event);
+
+
+        mDatabase =  FirebaseDatabase.getInstance().getReference();
+
+        //getFriends();
+
+        title = (EditText) findViewById(R.id.titleText);
+        // TODO : retrieve the selected friends and put them into a HashMap<String, String>
+        btnSubmit = (Button) findViewById(R.id.btn_submit);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
+    }
+
+
+/*    @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_event, container, false);
 
-        mDatabase =  FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //getFriends();
 
@@ -46,7 +66,7 @@ public class CreateEvent extends Fragment{
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
         //addEvent();
         return view;
-    }
+    }*/
     public void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
         eventId = mDatabase.push().getKey();
@@ -66,7 +86,7 @@ public class CreateEvent extends Fragment{
                 for (DataSnapshot friendSnapshot: dataSnapshot.getChildren()) {
                     String retrievedFriend = friendSnapshot.getValue(String.class);
                     friendList.add(retrievedFriend);
-                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, friendList);
+                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(CreateEvent.this, android.R.layout.simple_list_item_1, friendList);
                     // TODO : display the friends with a checkbox for each
                     //listView.setAdapter(mAdapter);
                 }
