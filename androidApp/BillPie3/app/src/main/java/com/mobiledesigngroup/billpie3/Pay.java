@@ -16,9 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +27,7 @@ import static android.content.ContentValues.TAG;
 // TODO: Add later the possibility to click and view for each user per event the amount
 public class Pay extends Fragment {
 
+    private Map<String, String> userDebt;
     private Map<String, Map<String, String>> userMap;
     private Map<String, User> receivedUserMap;
     private ProgressBar progBar;
@@ -46,6 +44,7 @@ public class Pay extends Fragment {
 
         this.receivedUserMap = new HashMap<>();
         this.userMap = new HashMap<>();
+        this.userDebt = new HashMap<>();
 
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -103,15 +102,31 @@ public class Pay extends Fragment {
                             newPayback.put(payB.getValue().getUser(), payB.getValue().getAmount());
                             this.userMap.put(user.getKey(), newPayback);
                         }
-
                     }
-
                 }
             }
         }
     }
 
-    private void filterDataUser() {}
+    private void filterDataUser() {
+        if (!userMap.containsKey("user1"))  {
+            // The user doesn't have debt
+        } else {
+            // Get his debt before balancing
+            this.userDebt = userMap.get("user1");
+            for (Map.Entry<String, Map<String, String>> userM: userMap>) {
+                if (this.userDebt.containsKey(userM.getKey())) {
+                    for (Map.Entry<String, String> subUser: userM.getValue().entrySet()) {
+                        if (subUser.getKey().equals("user1")) {
+                            this.userDebt.put(userM.getKey(),
+                                    Float.toString(Float.parseFloat(this.userDebt.get(userM.getKey()))
+                                            - Float.parseFloat(subUser.getValue())));
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private void displayDyna(){}
 }
