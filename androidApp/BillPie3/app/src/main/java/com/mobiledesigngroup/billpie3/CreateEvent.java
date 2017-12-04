@@ -40,6 +40,7 @@ public class CreateEvent extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
 
+        setTitle("Add Event");
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
