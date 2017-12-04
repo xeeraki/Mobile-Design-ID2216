@@ -6,9 +6,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
+    <ProgressBar
+        android:id="@+id/indeterminateBarPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
     <ScrollView
-        android:id="@+id/scroll_card"
+        android:id="@+id/scroll_card_pay"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         >
@@ -59,7 +65,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_small"
-                            android:text="User"
+                            android:text="Adam"
                             android:textColor="#000000"
                             android:gravity="start"
                             android:layout_weight="0.20"
@@ -68,7 +74,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_small"
-                            android:text="Amount"
+                            android:text="70$"
+                            android:textColor="#000000"
+                            android:gravity="end"
+                            android:layout_weight="0.80"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="Jiayao"
+                            android:textColor="#000000"
+                            android:gravity="start"
+                            android:layout_weight="0.20"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="20$"
                             android:textColor="#000000"
                             android:gravity="end"
                             android:layout_weight="0.80"
@@ -115,16 +145,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_small"
-                            android:text="User"
+                            android:text="Cassius"
                             android:textColor="#000000"
                             android:gravity="start"
-                            android:layout_weight="0.20"
+                            android:layout_weight="0"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_small"
-                            android:text="Amount"
+                            android:text="170$"
                             android:textColor="#000000"
                             android:gravity="end"
                             android:layout_weight="0.80"
@@ -133,9 +163,6 @@
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
-
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
-
