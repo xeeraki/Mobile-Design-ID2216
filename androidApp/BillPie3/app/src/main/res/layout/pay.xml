@@ -38,10 +38,10 @@
                 android:layout_marginBottom="@dimen/margin_small"
                 >
 
-                <TextView
+                <View
                     android:layout_width="20dp"
                     android:layout_height="fill_parent"
-                    tools:background="@drawable/rectangle_indigo"/>
+                    android:background="@drawable/rectangle_indigo"/>
 
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,10 +58,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_medium2"
                         android:layout_marginBottom="@dimen/margin_small"
-                        android:text="To pay"
                         android:textColor="#000000"
+                        android:text="To pay"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         />
 
                     <LinearLayout
@@ -73,17 +72,21 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
                             android:text="Adam"
-                            android:textColor="#000000"
                             android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
                             android:layout_weight="0.20"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
-                            android:text="70$"
                             android:textColor="#000000"
+                            android:text="70$"
                             android:gravity="end"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="15sp"
                             android:layout_weight="0.80"
                             />
                     </LinearLayout>
@@ -97,7 +100,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
                             android:text="Jiayao"
+                            android:fontFamily="@font/roboto"
                             android:textColor="#000000"
+                            android:textSize="15sp"
                             android:gravity="start"
                             android:layout_weight="0.20"
                             />
@@ -105,8 +110,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
-                            android:text="20$"
+                            android:fontFamily="@font/roboto"
                             android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:text="20$"
                             android:gravity="end"
                             android:layout_weight="0.80"
                             />
@@ -125,10 +132,10 @@
                 android:layout_marginBottom="@dimen/margin_small"
                 >
 
-                <TextView
+                <View
                     android:layout_width="20dp"
                     android:layout_height="fill_parent"
-                    tools:background="@drawable/rectangle_indigo"/>
+                    android:background="@drawable/rectangle_indigo"/>
 
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,10 +152,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_medium2"
                         android:layout_marginBottom="@dimen/margin_small"
-                        android:text="To receive"
                         android:textColor="#000000"
+                        android:text="To receive"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         />
 
                     <LinearLayout
@@ -160,17 +166,21 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
                             android:text="Cassius"
-                            android:textColor="#000000"
                             android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
                             android:layout_weight="0.20"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium2"
-                            android:text="170$"
                             android:textColor="#000000"
+                            android:text="170$"
                             android:gravity="end"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="15sp"
                             android:layout_weight="0.80"
                             />
                     </LinearLayout>
