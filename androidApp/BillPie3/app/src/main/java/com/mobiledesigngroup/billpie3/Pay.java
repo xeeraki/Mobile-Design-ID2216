@@ -1,12 +1,17 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
@@ -27,11 +32,14 @@ import static android.content.ContentValues.TAG;
 // TODO: Add later the possibility to click and view for each user per event the amount
 public class Pay extends Fragment {
 
+    private final String actualUser = "user1";
     private Map<String, String> userDebt;
     private Map<String, Map<String, String>> userMap;
     private Map<String, User> receivedUserMap;
     private ProgressBar progBar;
     private ScrollView scroll;
+    private LinearLayout linearPay;
+
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class Pay extends Fragment {
 
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
+        this.linearPay = view.findViewById(R.id.linear_pay);
 
         this.receivedUserMap = new HashMap<>();
         this.userMap = new HashMap<>();
@@ -109,15 +118,15 @@ public class Pay extends Fragment {
     }
 
     private void filterDataUser() {
-        if (!userMap.containsKey("user1"))  {
+        if (!userMap.containsKey(this.actualUser))  {
             // The user doesn't have debt
         } else {
             // Get his debt before balancing
-            this.userDebt = userMap.get("user1");
+            this.userDebt = userMap.get(this.actualUser);
             for (Map.Entry<String, Map<String, String>> userM: userMap.entrySet()) {
                 if (this.userDebt.containsKey(userM.getKey())) {
                     for (Map.Entry<String, String> subUser: userM.getValue().entrySet()) {
-                        if (subUser.getKey().equals("user1")) {
+                        if (subUser.getKey().equals(this.actualUser)) {
                             this.userDebt.put(userM.getKey(),
                                     Float.toString(Float.parseFloat(this.userDebt.get(userM.getKey()))
                                             - Float.parseFloat(subUser.getValue())));
@@ -128,5 +137,59 @@ public class Pay extends Fragment {
         }
     }
 
-    private void displayDyna(){}
+    private void displayDyna(){
+        //TODO: Show To pay
+        if (userMap.containsKey(this.actualUser)) {
+            for (Map.Entry<String, String> userD: userDebt.entrySet()) {
+                // create a new CardView
+                final CardView cardView = new CardView(this.getActivity());
+
+                // set properties
+                CardView.LayoutParams cardParams = new CardView.LayoutParams(
+                        CardView.LayoutParams.MATCH_PARENT,
+                        CardView.LayoutParams.WRAP_CONTENT
+                );
+                cardParams.setMargins(dpToPixel(2) ,0,dpToPixel(2),dpToPixel(8));
+                cardView.setCardBackgroundColor(Color.WHITE);
+                cardView.setLayoutParams(cardParams);
+                cardView.setRadius(dpToPixel(2));
+
+                // create a new View (Left blue rectangle)
+                final View view = new View(this.getActivity());
+
+                // set properties
+                ViewGroup.LayoutParams viewParams = new ViewGroup.LayoutParams(
+                        dpToPixel(20),
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                );
+                view.setBackground(getResources().getDrawable(R.drawable.rectangle_indigo));
+                view.setLayoutParams(viewParams);
+
+                // add to CardView
+                cardView.addView(view);
+
+                // create a first LinearLayout for the text
+                final LinearLayout linearFirst = new LinearLayout(this.getActivity());
+
+                // set properties
+                LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                linearFirst.setPadding(dpToPixel(16), dpToPixel(16), dpToPixel(16), dpToPixel(16));
+                linearFirst.setLayoutParams(linearFirstParams);
+                linearFirst.setOrientation(LinearLayout.VERTICAL);
+
+                this.linearPay.addView(cardView);
+            }
+        } else {
+            //TODO: Show To receive
+        }
+    }
+
+    private int dpToPixel(float dp) {
+        DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+        float fpixels = metrics.density * dp;
+        return (int) (fpixels + 0.5f);
+    }
 }

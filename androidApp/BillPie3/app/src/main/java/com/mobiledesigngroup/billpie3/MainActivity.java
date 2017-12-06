@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_payment) {
-
+            Intent testCheck = new Intent(this, CheckOutPage.class);
+            startActivity(testCheck);
         } else if (id == R.id.nav_friends) {
 
         } else if (id == R.id.nav_settings) {
