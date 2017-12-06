@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -145,7 +146,7 @@ public class Pay extends Fragment {
 
                 // set properties
                 CardView.LayoutParams cardParams = new CardView.LayoutParams(
-                        CardView.LayoutParams.FILL_PARENT,
+                        CardView.LayoutParams.MATCH_PARENT,
                         CardView.LayoutParams.WRAP_CONTENT
                 );
                 cardParams.setMargins(dpToPixel(2) ,0,dpToPixel(2),dpToPixel(8));
@@ -159,7 +160,7 @@ public class Pay extends Fragment {
                 // set properties
                 ViewGroup.LayoutParams viewParams = new ViewGroup.LayoutParams(
                         dpToPixel(20),
-                        ViewGroup.LayoutParams.FILL_PARENT
+                        ViewGroup.LayoutParams.MATCH_PARENT
                 );
                 view.setBackground(getResources().getDrawable(R.drawable.rectangle_indigo));
                 view.setLayoutParams(viewParams);

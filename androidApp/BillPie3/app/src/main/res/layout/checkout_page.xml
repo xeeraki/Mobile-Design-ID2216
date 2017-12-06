@@ -6,12 +6,12 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ProgressBar
+<!--    <ProgressBar
         android:id="@+id/indeterminateBarPay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        />
+        />-->
 
     <ScrollView
         android:id="@+id/scroll_card_pay"
@@ -82,7 +82,7 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
+<!--            <android.support.v7.widget.CardView
                 android:id="@+id/cardview_checkout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +98,8 @@
                     android:layout_height="fill_parent"
                     android:background="@drawable/rectangle_indigo"/>
 
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -174,7 +175,7 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>-->
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
