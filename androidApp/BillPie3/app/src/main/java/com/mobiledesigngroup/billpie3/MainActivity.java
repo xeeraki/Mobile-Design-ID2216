@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity
         });*/
 
 
+
+
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
         SetUpViewPager(mViewPager);
@@ -95,7 +98,10 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent pay in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if(id == R.id.create_bill) {
+            Intent intent = new Intent(MainActivity.this,AddFriend.class);
+            startActivity(intent);
+        }
         //noinspection SimplifiableIfStatement
 /*        if (id == R.id.action_settings) {
             return true;

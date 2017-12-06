@@ -95,7 +95,7 @@ public class CreateEvent extends AppCompatActivity{
         //addEvent();
         return view;
     }*/
-    public void addEvent(){
+ /*   public void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
         eventId = mDatabase.push().getKey();
 
@@ -129,6 +129,6 @@ public class CreateEvent extends AppCompatActivity{
 
         userReference.addValueEventListener(userListener);
     }
-
+*/
 }
 

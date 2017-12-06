@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 /**
@@ -35,8 +38,11 @@ public class Events extends Fragment{
                 startActivity(intent);
             }
         });
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase = new BillBaseHelper(getActivity());
+
+
+       /* mDatabase = new BillBaseHelper(getActivity());
         ArrayList<String> list = new ArrayList<>();
         Cursor data = mDatabase.getBills();
 
@@ -50,7 +56,7 @@ public class Events extends Fragment{
                 ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(mAdapter);
             }
-        }
+        }*/
         return view;
     }
 }
