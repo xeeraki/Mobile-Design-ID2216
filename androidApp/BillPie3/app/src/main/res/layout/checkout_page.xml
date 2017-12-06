@@ -1,53 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView2"
+    <ProgressBar
+        android:id="@+id/indeterminateBarPay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/total_due"
-        app:layout_constraintBottom_toTopOf="@+id/EventPageListView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerInParent="true"
+        />
 
-    <TextView
-        android:id="@+id/totalDueTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:id="@+id/scroll_card_pay"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:id="@+id/linear_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            >
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/you_will_pay_to"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="#FFFFFF"
+                card_view:cardCornerRadius="2dp"
+                android:layout_marginLeft="@dimen/margin_tinys"
+                android:layout_marginRight="@dimen/margin_tinys"
+                android:layout_marginBottom="@dimen/margin_small"
+                >
 
-    <ListView
-        android:id="@+id/EventPageListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/rectangle_orange"/>
 
-</android.support.constraint.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/linear_total_due"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    >
+
+<!--                    <TextView
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium2"
+                        android:textColor="#000000"
+                        android:text="Total due:"
+                        android:textSize="18sp"
+                        android:gravity="start"
+                        android:layout_weight="0.80"
+                        />-->
+
+<!--                    <TextView
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium2"
+                        android:textColor="#000000"
+                        android:text="2541$"
+                        android:textSize="18sp"
+                        android:gravity="end"
+                        android:layout_weight="0.20"
+                        />-->
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_checkout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="#FFFFFF"
+                card_view:cardCornerRadius="2dp"
+                android:layout_marginLeft="@dimen/margin_tinys"
+                android:layout_marginRight="@dimen/margin_tinys"
+                android:layout_marginBottom="@dimen/margin_small"
+                >
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/rectangle_indigo"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium2"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:textColor="#000000"
+                        android:text="To pay for this event"
+                        android:textSize="18sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium2"
+                            android:text="Adam"
+                            android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:layout_weight="0.20"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium2"
+                            android:textColor="#000000"
+                            android:text="70$"
+                            android:gravity="end"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="15sp"
+                            android:layout_weight="0.80"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium2"
+                            android:text="Jiayao"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:gravity="start"
+                            android:layout_weight="0.20"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium2"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:text="20$"
+                            android:gravity="end"
+                            android:layout_weight="0.80"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
