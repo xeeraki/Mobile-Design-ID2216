@@ -154,7 +154,7 @@ public class CheckOutPage extends AppCompatActivity {
         TextView totalText = new TextView(this);
 
         // set properties
-        totalText.setText(Float.toString(this.totalDue) + "$");
+        totalText.setText("$" + Float.toString(this.totalDue));
         totalText.setTextColor(Color.BLACK);
         totalText.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
         totalText.setGravity(Gravity.END);
@@ -197,7 +197,7 @@ public class CheckOutPage extends AppCompatActivity {
                 TextView text2 = new TextView(this);
 
                 // set properties
-                text2.setText(Float.toString(payFilter.getValue()) + "$");
+                text2.setText("$" + Float.toString(payFilter.getValue()));
                 text2.setTextColor(Color.BLACK);
                 text2.setTextSize(15);
                 text2.setGravity(Gravity.END);
@@ -242,7 +242,7 @@ public class CheckOutPage extends AppCompatActivity {
                 TextView text2 = new TextView(this);
 
                 // set properties
-                text2.setText(Float.toString(receiveFilter.getValue()) + "$");
+                text2.setText("$" + Float.toString(receiveFilter.getValue()));
                 text2.setTextColor(Color.BLACK);
                 text2.setTextSize(15);
                 text2.setGravity(Gravity.END);
