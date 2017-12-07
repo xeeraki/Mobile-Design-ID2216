@@ -262,7 +262,6 @@ public class PayV2 extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        paybackLayout.setPadding(dpToPixel(16), dpToPixel(16), dpToPixel(16), dpToPixel(16));
         paybackLayout.setLayoutParams(pbLayoutParams);
         paybackLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -337,6 +336,7 @@ public class PayV2 extends Fragment {
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 0.1f
         );
+        imageChevron.setAdjustViewBounds(false);
         imageChevron.setLayoutParams(imageChevronParams);
         return imageChevron;
     }
