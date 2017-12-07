@@ -49,6 +49,21 @@ public class CheckOutPage extends AppCompatActivity {
 
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "CheckOutPage: error while retrieving events", databaseError.toException());
+            }
+        });
+
         myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -60,21 +75,6 @@ public class CheckOutPage extends AppCompatActivity {
                 toPayFiltered = new HashMap<>();
                 toReceiveFiltered = new HashMap<>();
                 displayData();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "CheckOutPage: error while retrieving events", databaseError.toException());
-            }
-        });
-
-        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userMap = new HashMap<>();
-                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
-                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
-                }
             }
 
             @Override
