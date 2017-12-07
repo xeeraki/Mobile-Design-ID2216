@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by adam on 2017-11-19.
@@ -24,11 +27,14 @@ import java.util.ArrayList;
 
 public class Events extends Fragment{
     private BillBaseHelper mDatabase;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private List<EventList> eventLists;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.events, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.list_view);
+        View view = inflater.inflate(R.layout.recycle_event, container, false);
+       // ListView listView = (ListView) view.findViewById(R.id.list_view);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,9 +44,21 @@ public class Events extends Fragment{
                 startActivity(intent);
             }
         });
-        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
 
+        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        //DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        eventLists = new ArrayList<>();
+        for(int i = 0; i <5; i++){
+            EventList eventList = new EventList("School Project", "oct 2017");
+                eventLists.add(eventList);
+        }
+        mAdapter = new EventHolder(eventLists,this.getActivity());
+        recyclerView.setAdapter(mAdapter);
 
        /* mDatabase = new BillBaseHelper(getActivity());
         ArrayList<String> list = new ArrayList<>();
