@@ -179,7 +179,7 @@ public class History extends Fragment {
                 // create the linear layout containing the spending title and the amount
                 final LinearLayout linearSpend = new LinearLayout(this.getActivity());
                 linearSpend.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.FILL_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 ));
                 linearSpend.setOrientation(LinearLayout.HORIZONTAL);

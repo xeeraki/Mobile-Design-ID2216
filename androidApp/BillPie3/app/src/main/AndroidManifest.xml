@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".Login"></activity>
         <activity android:name=".CreateEvent"></activity>
+        <activity android:name=".CheckOutPage"></activity>
         <activity android:name="AddFriend"></activity>
 
 
