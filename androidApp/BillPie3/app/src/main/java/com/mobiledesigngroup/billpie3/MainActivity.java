@@ -51,19 +51,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-/*        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CreateEvent.class);
-                startActivity(intent);
-            }
-        });*/
-
-
-
-
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
         SetUpViewPager(mViewPager);
@@ -86,7 +73,8 @@ public class MainActivity extends AppCompatActivity
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new Events(),"Events");
         mAdapter.addFragment(new Pay(),"Pay");
-        mAdapter.addFragment(new History(),"History");
+        //mAdapter.addFragment(new History(),"History");
+        mAdapter.addFragment(new HistoryV2(), "History");
         //mAdapter.addFragment(new CreateEvent(),"Create Event");
         //mAdapter.addFragment(new AddFriend(),"Add Friend");
         //mAdapter.addFragment(new EventPage(),"Event Page");
