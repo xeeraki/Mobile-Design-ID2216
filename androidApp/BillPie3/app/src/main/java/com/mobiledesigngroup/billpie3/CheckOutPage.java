@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class CheckOutPage extends AppCompatActivity {
     private Map<String, Paybacks> paybackMap;
     private Map<String, Float> toPayFiltered;
     private Map<String, Float> toReceiveFiltered;
-    private Map<String, User> userMap;
+    private HashMap<String, User> userMap;
     private Float totalDue = 0f;
     private LinearLayout linearPay;
     private String actualUser = "user1";
@@ -47,9 +48,11 @@ public class CheckOutPage extends AppCompatActivity {
 
         this.linearPay = findViewById(R.id.linear_pay);
 
+        this.userMap = (HashMap<String, User>) getIntent().getSerializableExtra("useM");
+
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
-        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+/*        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userMap = new HashMap<>();
@@ -62,7 +65,7 @@ public class CheckOutPage extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "CheckOutPage: error while retrieving events", databaseError.toException());
             }
-        });
+        });*/
 
         myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
             @Override
