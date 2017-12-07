@@ -1,7 +1,5 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.support.v4.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -13,9 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -30,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -104,7 +98,10 @@ public class MainActivity extends AppCompatActivity
     private void SetUpViewPager(ViewPager viewPager){
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new Events(),"Events");
-        mAdapter.addFragment(new PayV2(),"Pay");
+
+        Pay newPay = new Pay();
+        newPay.setUserMap(this.userMap);
+        mAdapter.addFragment(newPay,"Pay");
 
         HistoryV2 newHist = new HistoryV2();
         newHist.setUserMap(this.userMap);
