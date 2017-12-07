@@ -179,6 +179,14 @@ public class CheckOutPage extends AppCompatActivity {
             LinearLayout linearViewPay = createBeginCard("To pay for this event");
 
             for (Map.Entry<String, Float> payFilter: this.toPayFiltered.entrySet()) {
+
+                final LinearLayout linearLast = new LinearLayout(this);
+                linearLast.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLast.setOrientation(LinearLayout.HORIZONTAL);
+
                 // Create the textView
                 TextView text = new TextView(this);
 
@@ -213,17 +221,26 @@ public class CheckOutPage extends AppCompatActivity {
                 text2Params.setMargins(dpToPixel(22), 0, 0, 0);
                 text2.setLayoutParams(textParams);
 
-                linearViewPay.addView(text);
-                linearViewPay.addView(text2);
+                linearLast.addView(text);
+                linearLast.addView(text2);
+                linearViewPay.addView(linearLast);
             }
         }
 
 
         // Create Card for "To receive"
         if (!toReceiveFiltered.isEmpty()) {
-            LinearLayout linearViewReceive = createBeginCard("To receive");
+            LinearLayout linearViewPay = createBeginCard("To receive");
 
             for (Map.Entry<String, Float> receiveFilter: this.toReceiveFiltered.entrySet()) {
+
+                final LinearLayout linearLast = new LinearLayout(this);
+                linearLast.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLast.setOrientation(LinearLayout.HORIZONTAL);
+
                 // Create the textView
                 TextView text = new TextView(this);
 
@@ -258,8 +275,9 @@ public class CheckOutPage extends AppCompatActivity {
                 text2Params.setMargins(dpToPixel(22), 0, 0, 0);
                 text2.setLayoutParams(textParams);
 
-                linearViewReceive.addView(text);
-                linearViewReceive.addView(text2);
+                linearLast.addView(text);
+                linearLast.addView(text2);
+                linearViewPay.addView(linearLast);
             }
         }
 
@@ -325,16 +343,16 @@ public class CheckOutPage extends AppCompatActivity {
 
         linearViewPay.addView(titleText);
 
-        final LinearLayout linearLast = new LinearLayout(this);
+/*        final LinearLayout linearLast = new LinearLayout(this);
         linearLast.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         linearLast.setOrientation(LinearLayout.HORIZONTAL);
 
-        linearViewPay.addView(linearLast);
+        linearViewPay.addView(linearLast);*/
 
-        return linearLast;
+        return linearViewPay;
     }
 
     private int dpToPixel(float dp) {
