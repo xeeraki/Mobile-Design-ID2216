@@ -194,7 +194,9 @@ public class PayV2 extends Fragment {
                     paybackLayout.addView(createTextReceiver(payback.getKey()));
                     paybackLayout.addView(createTextAmount(payback.getValue()));
                     paybackLayout.addView(imageChevron);
+                    linearFirst.addView(paybackLayout);
                 }
+                cardView.addView(linearFirst);
                 this.linearPay.addView(cardView);
             }
 
@@ -215,7 +217,9 @@ public class PayV2 extends Fragment {
                 LinearLayout paybackLayout = createHorizontalLinearLayout();
                 paybackLayout.addView(createTextReceiver(payback.getKey()));
                 paybackLayout.addView(createTextAmount(payback.getValue()));
+                linearFirst.addView(paybackLayout);
             }
+            cardView.addView(linearFirst);
             this.linearPay.addView(cardView);
         }
     }
