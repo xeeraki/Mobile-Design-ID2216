@@ -63,6 +63,9 @@ public class PayV2 extends Fragment {
         myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mapOwe = new HashMap<>();
+                mapOwed = new HashMap<>();
+                balanceMap = new HashMap<>();
                 for (DataSnapshot pbSnapshot: dataSnapshot.getChildren()) {
                     receivedPaybackMap.put(pbSnapshot.getKey(), pbSnapshot.getValue(Paybacks.class));
                 }
@@ -109,7 +112,7 @@ public class PayV2 extends Fragment {
             }
         }
         Log.w(TAG, "mapOwe: " + mapOwe.toString());
-        Log.w(TAG, "mapOwed: " + mapOwe.toString());
+        Log.w(TAG, "mapOwed: " + mapOwed.toString());
     }
 
     private void balanceMaps() {
@@ -121,7 +124,7 @@ public class PayV2 extends Fragment {
             String receiver = payback.getKey();
             Float balance = payback.getValue();
             if (mapOwe.containsKey(receiver)) {
-                balance -= mapOwe.get(receiver);
+                balance += mapOwe.get(receiver);
             }
             balanceMap.put(receiver, balance);
         }

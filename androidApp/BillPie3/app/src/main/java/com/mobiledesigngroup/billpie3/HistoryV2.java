@@ -109,15 +109,15 @@ public class HistoryV2 extends Fragment {
         cardView.setRadius(dpToPixel(2));
 
         // create a new View (Left blue rectangle)
-        final View viewPay = new View(this.getActivity());
+        final View view1 = new View(this.getActivity());
 
         // set properties
-        ViewGroup.LayoutParams viewParams = new ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams view1Params = new ViewGroup.LayoutParams(
                 dpToPixel(20),
                 ViewGroup.LayoutParams.MATCH_PARENT
         );
-        viewPay.setBackground(getResources().getDrawable(R.drawable.rectangle_orange));
-        viewPay.setLayoutParams(viewParams);
+        view1.setBackground(getResources().getDrawable(R.drawable.rectangle_orange));
+        view1.setLayoutParams(view1Params);
 
         // create the first LinearLayout of the card
         final LinearLayout linearView = new LinearLayout(this.getActivity());
@@ -189,7 +189,7 @@ public class HistoryV2 extends Fragment {
                 TableLayout.LayoutParams.WRAP_CONTENT
         );
         titleEventParams.setMargins(dpToPixel(22), 0, 0, dpToPixel(8));
-        dateText.setLayoutParams(titleEventParams);
+        eventText.setLayoutParams(titleEventParams);
 
         // create second LinearLayout of the card
         final LinearLayout linearView2 = new LinearLayout(this.getActivity());
@@ -236,14 +236,15 @@ public class HistoryV2 extends Fragment {
         titleAmountParams.setMargins(dpToPixel(22), 0, 0, 0);
         amountText.setLayoutParams(titleAmountParams);
 
-        linearView2.addView(nameText);
-        linearView2.addView(amountText);
+        cardView.addView(view1);
+        cardView.addView(linearView);
 
         linearView1.addView(titleText);
         linearView1.addView(dateText);
 
-        cardView.addView(viewPay);
-        cardView.addView(linearView);
+        linearView2.addView(nameText);
+        linearView2.addView(amountText);
+
 
         linearView.addView(linearView1);
         linearView.addView(eventText);
