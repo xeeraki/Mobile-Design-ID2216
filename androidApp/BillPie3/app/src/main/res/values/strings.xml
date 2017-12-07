@@ -6,6 +6,7 @@
     <string name="tab_text_1">Events</string>
     <string name="tab_text_2">Pay</string>
     <string name="tab_text_3">History</string>
+    <string name="name">name</string>
 
     <!--content-->
     <string name="app_name">BillPie</string>
@@ -27,7 +28,7 @@
     <string name="spending1demo_trip">Due to drunk driving lol</string>
     <string name="spending2_trip">Vodka</string>
     <string name="spending2demo_trip">Going mad when my pc freezes</string>
-    <string name="friend_nyc">Friend Trip</string>
+    <string name="friend_nyc">Friends Trip NYC</string>
 
     <!--pay-->
     <string name="oweAdam">€127</string>
