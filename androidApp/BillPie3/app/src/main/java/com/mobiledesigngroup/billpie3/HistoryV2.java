@@ -35,6 +35,12 @@ import static android.content.ContentValues.TAG;
 public class HistoryV2 extends Fragment {
     private ProgressBar progBar;
     private Map<String, Paybacks> paybacksMap;
+
+    public void setUserMap(Map<String, User> userMap) {
+        this.userMap = userMap;
+    }
+
+    private Map<String, User> userMap;
     private Map<String, Paybacks> paybacksFiltered;
     private LinearLayout mainLinear;
     private String actualUser = "user1"; //TODO: Change when the login is set up
@@ -48,6 +54,25 @@ public class HistoryV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
 
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        // To get the full name of the users
+/*        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userM = new HashMap<>();
+
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    userM.put(eventSnapshot.getKey(),
+                            eventSnapshot.getValue(User.class));
+                }
+                Log.w(TAG, "userMapLAAAAAAAAAAAAAaaadqz: " + userM.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "UserMap: error while retrieving events", databaseError.toException());
+            }
+        });*/
 
         myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,7 +90,7 @@ public class HistoryV2 extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "History: error while retrieving events", databaseError.toException());
+                Log.w(TAG, "Paybacks: error while retrieving events", databaseError.toException());
             }
         });
 
@@ -206,7 +231,7 @@ public class HistoryV2 extends Fragment {
         TextView nameText = new TextView(this.getActivity());
 
         // set properties
-        nameText.setText(name);
+        nameText.setText(this.userMap.get(name).full_name);
         nameText.setTextColor(Color.BLACK);
         nameText.setTextSize(15);
         nameText.setGravity(Gravity.START);
@@ -223,7 +248,7 @@ public class HistoryV2 extends Fragment {
         TextView amountText = new TextView(this.getActivity());
 
         // set properties
-        amountText.setText(amount);
+        amountText.setText("$" + amount);
         amountText.setTextColor(Color.BLACK);
         amountText.setTextSize(15);
         amountText.setGravity(Gravity.END);

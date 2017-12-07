@@ -2,12 +2,15 @@ package com.mobiledesigngroup.billpie3;
 import android.os.Bundle;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
+
 /**
  * Created by cassius on 01/12/17.
  */
 
 @IgnoreExtraProperties
-public class Payback {
+public class Payback implements Serializable{
     private String user;
     private String amount;
     private String event;

@@ -1,6 +1,6 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 
 public class MainActivity extends AppCompatActivity
@@ -30,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private FirebaseAuth.AuthStateListener authListener;
+    public HashMap<String, User> userMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +65,27 @@ public class MainActivity extends AppCompatActivity
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
-        SetUpViewPager(mViewPager);
+
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(eventSnapshot.getKey(),
+                            eventSnapshot.getValue(User.class));
+                }
+                SetUpViewPager(mViewPager);
+                Log.w(TAG, "userMapLAAAAAAAAAAAAAaaadqz: " + userMap.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "UserMap: error while retrieving events", databaseError.toException());
+            }
+        });
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -73,8 +105,11 @@ public class MainActivity extends AppCompatActivity
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new Events(),"Events");
         mAdapter.addFragment(new PayV2(),"Pay");
-        //mAdapter.addFragment(new History(),"History");
-        mAdapter.addFragment(new HistoryV2(), "History");
+
+        HistoryV2 newHist = new HistoryV2();
+        newHist.setUserMap(this.userMap);
+        mAdapter.addFragment(newHist, "History");
+
         //mAdapter.addFragment(new CreateEvent(),"Create Event");
         //mAdapter.addFragment(new AddFriend(),"Add Friend");
         //mAdapter.addFragment(new EventPage(),"Event Page");
@@ -124,6 +159,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_payment) {
             Intent testCheck = new Intent(this, CheckOutPage.class);
+            testCheck.putExtra("useM", this.userMap);
             startActivity(testCheck);
         } else if (id == R.id.nav_friends) {
 

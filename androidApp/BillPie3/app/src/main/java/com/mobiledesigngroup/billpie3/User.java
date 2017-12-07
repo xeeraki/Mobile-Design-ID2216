@@ -1,6 +1,8 @@
 package com.mobiledesigngroup.billpie3;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class User {
+public class User implements Serializable {
     public String username;
     public String password;
     public String full_name;

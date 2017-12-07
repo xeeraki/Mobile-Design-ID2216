@@ -34,7 +34,7 @@ public class Pay extends Fragment {
 
     private final String actualUser = "user1";
     private Map<String, String> userDebt;
-    private Map<String, Map<String, String>> userMap;
+    private Map<String, Map<String, String>> users;
     private Map<String, User> receivedUserMap;
     private ProgressBar progBar;
     private ScrollView scroll;
@@ -52,7 +52,7 @@ public class Pay extends Fragment {
         this.linearPay = view.findViewById(R.id.linear_pay);
 
         this.receivedUserMap = new HashMap<>();
-        this.userMap = new HashMap<>();
+        this.users = new HashMap<>();
         this.userDebt = new HashMap<>();
 
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
@@ -82,7 +82,7 @@ public class Pay extends Fragment {
     // TODO: update paid after he pays, then reset for each update the Map
     private void displayData() {
         createUserMap();
-        Log.w(TAG, "USERMAP: " + userMap.toString());
+        Log.w(TAG, "USERMAP: " + users.toString());
         filterDataUser();
         displayDyna();
     }
@@ -96,20 +96,20 @@ public class Pay extends Fragment {
                     // Check if the payback has been paid, if not it's added to the userMap
                     if (!payB.getValue().getPaid()) {
                         // Check if the user who has a debt is already in the map
-                        if (this.userMap.containsKey(user.getKey())) {
+                        if (this.users.containsKey(user.getKey())) {
                             // Check if the user already has a debt to the same user
-                            if (this.userMap.get(user.getKey()).containsKey(payB.getValue().getUser())) {
-                                this.userMap.get(user.getKey()).put(payB.getValue().getUser(),
-                                        this.userMap.get(user.getKey()).get(payB.getValue().getUser())
+                            if (this.users.get(user.getKey()).containsKey(payB.getValue().getUser())) {
+                                this.users.get(user.getKey()).put(payB.getValue().getUser(),
+                                        this.users.get(user.getKey()).get(payB.getValue().getUser())
                                                 + payB.getValue().getAmount());
                             } else {
-                                this.userMap.get(user.getKey()).put(payB.getValue().getUser(),
+                                this.users.get(user.getKey()).put(payB.getValue().getUser(),
                                         payB.getValue().getAmount());
                             }
                         } else {
                             Map<String, String> newPayback = new HashMap<>();
                             newPayback.put(payB.getValue().getUser(), payB.getValue().getAmount());
-                            this.userMap.put(user.getKey(), newPayback);
+                            this.users.put(user.getKey(), newPayback);
                         }
                     }
                 }
@@ -118,12 +118,12 @@ public class Pay extends Fragment {
     }
 
     private void filterDataUser() {
-        if (!userMap.containsKey(this.actualUser))  {
+        if (!users.containsKey(this.actualUser))  {
             // The user doesn't have debt
         } else {
             // Get his debt before balancing
-            this.userDebt = userMap.get(this.actualUser);
-            for (Map.Entry<String, Map<String, String>> userM: userMap.entrySet()) {
+            this.userDebt = users.get(this.actualUser);
+            for (Map.Entry<String, Map<String, String>> userM: users.entrySet()) {
                 if (this.userDebt.containsKey(userM.getKey())) {
                     for (Map.Entry<String, String> subUser: userM.getValue().entrySet()) {
                         if (subUser.getKey().equals(this.actualUser)) {
@@ -139,7 +139,7 @@ public class Pay extends Fragment {
 
     private void displayDyna(){
         //TODO: Show To pay
-        if (userMap.containsKey(this.actualUser)) {
+        if (users.containsKey(this.actualUser)) {
             for (Map.Entry<String, String> userD: userDebt.entrySet()) {
                 // create a new CardView
                 final CardView cardView = new CardView(this.getActivity());
