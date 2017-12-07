@@ -32,7 +32,7 @@ import static android.content.ContentValues.TAG;
  * Created by eric.
  */
 
-public class HistoryV2 extends Fragment {
+public class History extends Fragment {
     private ProgressBar progBar;
     private Map<String, Paybacks> paybacksMap;
 

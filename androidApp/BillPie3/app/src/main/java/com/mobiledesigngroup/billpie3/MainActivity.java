@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         newPay.setUserMap(this.userMap);
         mAdapter.addFragment(newPay,"Pay");
 
-        HistoryV2 newHist = new HistoryV2();
+        History newHist = new History();
         newHist.setUserMap(this.userMap);
         mAdapter.addFragment(newHist, "History");
 

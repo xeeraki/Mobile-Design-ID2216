@@ -19,7 +19,6 @@ public class User implements Serializable {
     public String email;
     public Map<String, Boolean> friends;
     public Map<String, Boolean> events;
-    public Map<String, Payback> paybacks;
 
     // Default constructor (required)
     public User() {
@@ -43,9 +42,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        if (paybacks != null) {
-            return username + password + full_name + phoneNumber + email + friends.toString() + events.toString() + paybacks.toString();
-        }
         return username + password + full_name + phoneNumber + email + friends.toString() + events.toString();
     }
 }
