@@ -3,6 +3,7 @@ package com.mobiledesigngroup.billpie3;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
  */
 public class Login extends AppCompatActivity{
     private final ArrayList<User>users;
+    private Button btnSignIn, btnSignUp;
+    private EditText login, pass;
 
     public Login(){
 
@@ -28,14 +31,14 @@ public class Login extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Button btnLogin = findViewById(R.id.button);
-        final EditText user = findViewById(R.id.username);
-        final EditText pass = findViewById(R.id.password);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnSignUp = findViewById(R.id.btnSignUp);
+        login = findViewById(R.id.passwordSignIn);
+        pass = findViewById(R.id.emailSignIn);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-            String username = user.getText().toString();
+            String username = login.getText().toString();
             String password = pass.getText().toString();
 
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
