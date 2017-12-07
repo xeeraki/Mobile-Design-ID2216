@@ -140,7 +140,7 @@ public class PayV2 extends Fragment {
         for (Map.Entry<String, Float> payback: mapOwe.entrySet()) {
             String payer = payback.getKey();
             if (!mapOwed.containsKey(payer)) {
-                toReceive.put(payer, mapOwe.get(payer));
+                toPay.put(payer, mapOwe.get(payer));
             }
         }
         Log.w(TAG, "toPay: " + toPay.toString());
@@ -177,23 +177,16 @@ public class PayV2 extends Fragment {
                 * */
                 linearFirst.addView(createCardViewTitle("To pay"));
 
-                /* IMAGE VIEW
-                * */
-                ImageView imageChevron = new ImageView(getActivity());
-                TableLayout.LayoutParams imageChevronParams;
-                imageChevron.setImageDrawable(getResources().getDrawable(R.drawable.ic_chevron_right_black_24dp));
-                imageChevronParams = new TableLayout.LayoutParams(
-                        TableLayout.LayoutParams.WRAP_CONTENT,
-                        TableLayout.LayoutParams.WRAP_CONTENT,
-                        0.1f
-                );
-                imageChevron.setLayoutParams(imageChevronParams);
+                TypedValue outValue = new TypedValue();
+                getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 
                 for (Map.Entry<String, Float> payback: toPay.entrySet()) {
                     LinearLayout paybackLayout = createHorizontalLinearLayout();
+                    paybackLayout.setClickable(true);
+                    paybackLayout.setBackgroundResource(outValue.resourceId);
                     paybackLayout.addView(createTextReceiver(payback.getKey()));
                     paybackLayout.addView(createTextAmount(payback.getValue()));
-                    paybackLayout.addView(imageChevron);
+                    paybackLayout.addView(createImage());
                     linearFirst.addView(paybackLayout);
                 }
                 cardView.addView(linearFirst);
@@ -333,6 +326,19 @@ public class PayV2 extends Fragment {
         cardView.setRadius(dpToPixel(2));
 
         return cardView;
+    }
+
+    private ImageView createImage() {
+        ImageView imageChevron = new ImageView(getActivity());
+        TableLayout.LayoutParams imageChevronParams;
+        imageChevron.setImageDrawable(getResources().getDrawable(R.drawable.ic_chevron_right_black_24dp));
+        imageChevronParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                0.1f
+        );
+        imageChevron.setLayoutParams(imageChevronParams);
+        return imageChevron;
     }
 
     private int dpToPixel(float dp) {
