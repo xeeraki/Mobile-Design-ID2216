@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,10 +28,12 @@ import java.util.List;
  */
 
 public class Events extends Fragment{
-    private BillBaseHelper mDatabase;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference myDbRef;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<EventList> eventLists;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +54,10 @@ public class Events extends Fragment{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        //DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance();
+        myDbRef = mDatabase.getReference("events");
+
+
 
         eventLists = new ArrayList<>();
         for(int i = 0; i <5; i++){
@@ -61,21 +67,30 @@ public class Events extends Fragment{
         mAdapter = new EventHolder(eventLists,this.getActivity());
         recyclerView.setAdapter(mAdapter);
 
-       /* mDatabase = new BillBaseHelper(getActivity());
-        ArrayList<String> list = new ArrayList<>();
-        Cursor data = mDatabase.getBills();
-
-        if (data.getCount() == 0) {
-            Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
-        } else {
-            while (data.moveToNext()) {
-                //list.add(data.getString(0));
-                list.add(data.getString(1));
-                list.add(data.getString(2));
-                ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, list);
-                listView.setAdapter(mAdapter);
-            }
-        }*/
         return view;
     }
+/*
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<EventList,EventHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<EventList, EventHolder>( EventList.class,EventHolder.class,myDbRef) {
+
+
+                    @Override
+                    public EventHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                        return null;
+                    }
+
+                    @Override
+                    protected void onBindViewHolder(EventHolder holder, int position, EventList model) {
+
+                    }
+                }
+
+*/
+
+
+
 }
