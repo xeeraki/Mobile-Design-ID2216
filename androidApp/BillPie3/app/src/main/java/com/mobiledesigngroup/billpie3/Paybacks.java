@@ -11,6 +11,16 @@ public class Paybacks {
     private String payer;
     private String receiver;
     private String spending;
+    private String date_paid;
+
+    public void setDate_paid(String date_paid) {
+        this.date_paid = date_paid;
+    }
+
+    public String getDate_paid() {
+
+        return date_paid;
+    }
 
     public String getAmount() {
         return amount;
@@ -58,5 +68,9 @@ public class Paybacks {
 
     public void setSpending(String spending) {
         this.spending = spending;
+    }
+
+    public String toString() {
+        return this.getPaid() + this.getReceiver() + this.getAmount() + this.getPayer() + this.getEvent() + this.getDate_paid() + this.getSpending();
     }
 }
