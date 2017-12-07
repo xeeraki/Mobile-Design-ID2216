@@ -19,6 +19,13 @@ public class Spending {
     public Spending(){
     }
 
+    public Spending(String title, String due_date, String amount, Map<String, String> payers){
+        this.title = title;
+        this.due_date = due_date;
+        this.amount = amount;
+        this.payers = payers;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -22,6 +22,15 @@ public class Paybacks {
         return date_paid;
     }
 
+    public Paybacks(String amount, String event, Boolean paid, String payer, String receiver, String spending, String date_paid) {
+        this.amount = amount;
+        this.event = event;
+        this.paid = paid;
+        this.receiver = receiver;
+        this.spending = spending;
+        this.date_paid = date_paid;
+    }
+
     public String getAmount() {
         return amount;
     }
