@@ -18,15 +18,19 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 /**
  * Created by adam on 2017-11-21.
  */
 
 public class AddFriend extends AppCompatActivity{
-    private EditText friendName, phone;
-    private int userId;
+    private EditText friendName, phones;
+    private String userId = "friend";
     private Button btnSubmit, btnCancel;
     DatabaseReference mDatabase;
+    private Map<String, String> friends;
+    private String name,phone;
 
 
     @Override
@@ -36,7 +40,7 @@ public class AddFriend extends AppCompatActivity{
 
         mDatabase = FirebaseDatabase.getInstance().getReference("friends");
         friendName = (EditText) findViewById(R.id.nameText);
-        phone = (EditText) findViewById(R.id.phoneText);
+        phones = (EditText) findViewById(R.id.phoneText);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
         btnCancel = (Button) findViewById(R.id.btnCancelFriend);
         addFriend();
@@ -47,9 +51,9 @@ public class AddFriend extends AppCompatActivity{
             public void onClick(View v) {
                 String id =  mDatabase.push().getKey();
                 String FriendName = friendName.getText().toString();
-                String Phone = phone.getText().toString();
+                String Phone = phones.getText().toString();
               // if(!TextField.isEmpty(friendName)){
-                mDatabase.child(id).setValue(FriendName,Phone);
+                mDatabase.child(id).child(userId).setValue(FriendName,Phone);
               /*      Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity(), "Not inserted", Toast.LENGTH_LONG).show();
