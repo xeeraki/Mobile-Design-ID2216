@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -37,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
@@ -51,27 +54,39 @@ public class EventPage extends AppCompatActivity {
     private String eventId = "event1";
     private ProgressBar progBar;
     private ScrollView scroll;
-    private LinearLayout linearEventPage;
+    private HorizontalScrollView scrollHorizontal;
+    private String[] members = {"Adam", "Cassius", "Jiayao"};
+    private LinearLayout linearEventPage, linearLayoutMembers;
     private ArrayList<String> spendingTitle;
     private ArrayList<String> spendingAmount;
+    private ArrayList<String> eventMembers;
+    private Map<String, User> userMap;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventpage_dyna);
-        this.progBar = findViewById(R.id.indeterminateBarPay);
-        this.scroll = findViewById(R.id.scroll_card_pay);
+        this.progBar = findViewById(R.id.indeterminateBarEventPag);
+        this.scroll = findViewById(R.id.scroll_card_eventpage);
+        this.scrollHorizontal = findViewById(R.id.horizontalScroll_eventpage);
         this.linearEventPage = findViewById(R.id.linear_eventpage);
-        //final ListView listView = findViewById(R.id.eventPageListView);
+        this.linearLayoutMembers = findViewById(R.id.linearLayoutMembers);
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
+        scrollHorizontal.setVisibility(View.INVISIBLE);
 
         spendingTitle = new ArrayList<>();
         spendingAmount = new ArrayList<>();
+        eventMembers = new ArrayList<>();
 
+        getUserMapAndSpendingsAndEverything();
+    }
+
+    private void getSpendings() {
         DatabaseReference spendingReference = mDatabase.child("events").child(eventId).child("spendings");
 
         ValueEventListener spendingListener = new ValueEventListener() {
@@ -83,26 +98,11 @@ public class EventPage extends AppCompatActivity {
                     final String retrievedAmount = retrievedSpending.getAmount();
                     spendingTitle.add(retrievedTitle);
                     spendingAmount.add(retrievedAmount);
-
-                    /*ArrayAdapter adapter = new ArrayAdapter(EventPage.this, android.R.layout.simple_list_item_2,
-                            android.R.id.text1, spendingAmount) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getView(position, convertView, parent);
-                            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                            text1.setTypeface(null, Typeface.BOLD);
-                            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                            text1.setText(spendingTitle.get(position));
-                            text2.setText("$"+spendingAmount.get(position));
-                            return view;
-                        }
-                    };
-                    listView.setAdapter(adapter);*/
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
-                displayDyna();
+                scrollHorizontal.setVisibility(View.VISIBLE);
+                getEventMembers();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -113,7 +113,65 @@ public class EventPage extends AppCompatActivity {
         spendingReference.addValueEventListener(spendingListener);
     }
 
+    private void getEventMembers() {
+        DatabaseReference memberRef = mDatabase.child("events").child(eventId).child("members");
+
+        ValueEventListener memberListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot memberSnapshot: dataSnapshot.getChildren()) {
+                    eventMembers.add(memberSnapshot.getKey());
+                }
+                Log.w(TAG, "members EVENTPAGE: " + eventMembers);
+                displayDyna();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "EventPage:error while retrieving members", databaseError.toException());
+            }
+        };
+        memberRef.addValueEventListener(memberListener);
+    }
+
+    private void getUserMapAndSpendingsAndEverything() {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+            myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(eventSnapshot.getKey(),
+                            eventSnapshot.getValue(User.class));
+                }
+                Log.w(TAG, "UserMap EVENTPAGE: " + userMap.toString());
+                getSpendings();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "UserMap EVENTPAGE: error while retrieving users", databaseError.toException());
+            }
+        });
+    }
+
     private void displayDyna(){
+        displayMembers();
+        displaySpendings();
+    }
+
+    private void displayMembers() {
+        LinearLayout linearLayoutVertical;
+        for (String member: eventMembers) {
+            linearLayoutVertical = createLinearLayoutVerticalMembers();
+            linearLayoutVertical.addView(createImage());
+            linearLayoutVertical.addView(createTextNameMember(userMap.get(member).full_name));
+            linearLayoutMembers.addView(linearLayoutVertical);
+        }
+    }
+
+    private void displaySpendings() {
         CardView cardView = createNewCardView();
         View view = createBlueRectangleView();
         cardView.addView(view);
@@ -124,12 +182,37 @@ public class EventPage extends AppCompatActivity {
         while (index < spendingTitle.size()) {
             LinearLayout paybackLayout = createHorizontalLinearLayout();
             paybackLayout.addView(createTextStart(spendingTitle.get(index)));
-            paybackLayout.addView(createTextEnd(spendingAmount.get(index)));
+            paybackLayout.addView(createTextEnd("$" + spendingAmount.get(index)));
             linearFirst.addView(paybackLayout);
             index++;
         }
         cardView.addView(linearFirst);
         this.linearEventPage.addView(cardView);
+    }
+
+    private ImageView createImage() {
+        ImageView image = new ImageView(EventPage.this);
+        TableLayout.LayoutParams imageParams;
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tag_faces_black_24dp));
+        imageParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                1.0f
+        );
+        imageParams.gravity = Gravity.CENTER_HORIZONTAL;
+        image.setLayoutParams(imageParams);
+        return image;
+    }
+
+    private LinearLayout createLinearLayoutVerticalMembers() {
+        LinearLayout linear = new LinearLayout(EventPage.this);
+        LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
+                dpToPixel(60),
+                dpToPixel(60)
+        );
+        linear.setLayoutParams(linearFirstParams);
+        linear.setOrientation(LinearLayout.VERTICAL);
+        return linear;
     }
 
     private TextView createCardViewTitle(String text) {
@@ -148,6 +231,24 @@ public class EventPage extends AppCompatActivity {
         toPayText.setLayoutParams(toPayTextParams);
 
         return toPayText;
+    }
+
+    private TextView createTextNameMember(String text) {
+        TextView paybackNameUser = new TextView(EventPage.this);
+
+        paybackNameUser.setText(text);
+        paybackNameUser.setTextColor(Color.BLACK);
+        paybackNameUser.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        paybackNameUser.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
+        TableLayout.LayoutParams paybackNameUserParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                1.0f
+        );
+        paybackNameUser.setGravity(Gravity.CENTER_HORIZONTAL);
+        paybackNameUser.setLayoutParams(paybackNameUserParams);
+
+        return paybackNameUser;
     }
 
     private TextView createTextStart(String text) {
@@ -195,7 +296,7 @@ public class EventPage extends AppCompatActivity {
                 CardView.LayoutParams.MATCH_PARENT,
                 CardView.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(dpToPixel(2) ,0,dpToPixel(2),dpToPixel(8));
+        cardParams.setMargins(dpToPixel(2) ,dpToPixel(90),dpToPixel(2),dpToPixel(8));
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setLayoutParams(cardParams);
         cardView.setRadius(dpToPixel(2));

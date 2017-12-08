@@ -24,7 +24,7 @@
 
         <activity android:name=".ResetPassword"></activity>
         <activity android:name=".SignUp"></activity>
-        <activity android:name=".CreateEvent"></activity>
+        <activity android:name=".AddEvent"></activity>
         <activity android:name=".CheckOutPage"></activity>
         <activity android:name=".AddFriend"></activity>
         <activity android:name=".AddSpending"></activity>
