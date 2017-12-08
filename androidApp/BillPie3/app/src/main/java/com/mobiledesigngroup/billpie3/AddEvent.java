@@ -1,46 +1,37 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static android.content.ContentValues.TAG;
 
 
-public class CreateEvent extends AppCompatActivity{
+public class AddEvent extends AppCompatActivity{
     private EditText amount, title, date;
-    private Button btnSubmit, btnCancel;
     DatabaseReference mDatabase;
     private String eventId;
-    private String userId = "user1";
+    private String actualUser = "user1";
+    private FloatingActionButton fabAdd;
+    private FloatingActionButton fabCheck;
 
     private String[] friendList = {"Cassius", "Jiayao", "Adam"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_event);
+        setContentView(R.layout.add_event);
+        this.fabAdd = findViewById(R.id.fab_add);
+        this.fabCheck = findViewById(R.id.fab_create);
 
         setTitle("Add Event");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
@@ -62,8 +53,7 @@ public class CreateEvent extends AppCompatActivity{
                 })
                 .positiveText("Ok");
 
-        FloatingActionButton fab = findViewById(R.id.fab_add);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 builder.show();
@@ -79,10 +69,17 @@ public class CreateEvent extends AppCompatActivity{
 //        btnCancel = (Button) findViewById(R.id.btn_cancel);
     }
 
+    // Back button navigation
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
 
 /*    @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.create_event, container, false);
+        View view = inflater.inflate(R.layout.add_event, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -114,7 +111,7 @@ public class CreateEvent extends AppCompatActivity{
                 for (DataSnapshot friendSnapshot: dataSnapshot.getChildren()) {
                     String retrievedFriend = friendSnapshot.getValue(String.class);
                     friendList.add(retrievedFriend);
-                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(CreateEvent.this, android.R.layout.simple_list_item_1, friendList);
+                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(AddEvent.this, android.R.layout.simple_list_item_1, friendList);
                     // TODO : display the friends with a checkbox for each
                     //listView.setAdapter(mAdapter);
                 }
@@ -122,7 +119,7 @@ public class CreateEvent extends AppCompatActivity{
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "CreateEvent:error while retrieving friends", databaseError.toException());
+                Log.w(TAG, "AddEvent:error while retrieving friends", databaseError.toException());
             }
 
         };

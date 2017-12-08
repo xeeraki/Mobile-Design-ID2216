@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         newHist.setUserMap(this.userMap);
         mAdapter.addFragment(newHist, "History");
 
-        //mAdapter.addFragment(new CreateEvent(),"Create Event");
+        //mAdapter.addFragment(new AddEvent(),"Create Event");
         //mAdapter.addFragment(new AddFriend(),"Add Friend");
         //mAdapter.addFragment(new EventPage(),"Event Page");
         viewPager.setAdapter(mAdapter);
