@@ -39,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
@@ -58,6 +59,8 @@ public class EventPage extends AppCompatActivity {
     private LinearLayout linearEventPage, linearLayoutMembers;
     private ArrayList<String> spendingTitle;
     private ArrayList<String> spendingAmount;
+    private ArrayList<String> eventMembers;
+    private Map<String, User> userMap;
 
 
     @Override
@@ -78,7 +81,12 @@ public class EventPage extends AppCompatActivity {
 
         spendingTitle = new ArrayList<>();
         spendingAmount = new ArrayList<>();
+        eventMembers = new ArrayList<>();
 
+        getUserMapAndSpendingsAndEverything();
+    }
+
+    private void getSpendings() {
         DatabaseReference spendingReference = mDatabase.child("events").child(eventId).child("spendings");
 
         ValueEventListener spendingListener = new ValueEventListener() {
@@ -94,7 +102,7 @@ public class EventPage extends AppCompatActivity {
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
                 scrollHorizontal.setVisibility(View.VISIBLE);
-                displayDyna();
+                getEventMembers();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -105,6 +113,49 @@ public class EventPage extends AppCompatActivity {
         spendingReference.addValueEventListener(spendingListener);
     }
 
+    private void getEventMembers() {
+        DatabaseReference memberRef = mDatabase.child("events").child(eventId).child("members");
+
+        ValueEventListener memberListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot memberSnapshot: dataSnapshot.getChildren()) {
+                    eventMembers.add(memberSnapshot.getKey());
+                }
+                Log.w(TAG, "members EVENTPAGE: " + eventMembers);
+                displayDyna();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "EventPage:error while retrieving members", databaseError.toException());
+            }
+        };
+        memberRef.addValueEventListener(memberListener);
+    }
+
+    private void getUserMapAndSpendingsAndEverything() {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+            myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(eventSnapshot.getKey(),
+                            eventSnapshot.getValue(User.class));
+                }
+                Log.w(TAG, "UserMap EVENTPAGE: " + userMap.toString());
+                getSpendings();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "UserMap EVENTPAGE: error while retrieving users", databaseError.toException());
+            }
+        });
+    }
+
     private void displayDyna(){
         displayMembers();
         displaySpendings();
@@ -112,13 +163,11 @@ public class EventPage extends AppCompatActivity {
 
     private void displayMembers() {
         LinearLayout linearLayoutVertical;
-        int index = 0;
-        while (index < 3) {
+        for (String member: eventMembers) {
             linearLayoutVertical = createLinearLayoutVerticalMembers();
             linearLayoutVertical.addView(createImage());
-            linearLayoutVertical.addView(createTextNameMember(members[index]));
+            linearLayoutVertical.addView(createTextNameMember(userMap.get(member).full_name));
             linearLayoutMembers.addView(linearLayoutVertical);
-            index++;
         }
     }
 
@@ -188,6 +237,7 @@ public class EventPage extends AppCompatActivity {
         TextView paybackNameUser = new TextView(EventPage.this);
 
         paybackNameUser.setText(text);
+        paybackNameUser.setTextColor(Color.BLACK);
         paybackNameUser.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         paybackNameUser.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
         TableLayout.LayoutParams paybackNameUserParams = new TableLayout.LayoutParams(
