@@ -15,8 +15,13 @@ public class EventList {
     private String rect;
 
 
+    public EventList(){
+
+    }
+
+
     public EventList(String header, String date) {
-        Header = header;
+        this.Header = header;
         this.date = date;
         //this.image = image;
     }

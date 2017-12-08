@@ -1,5 +1,6 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,12 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +31,21 @@ import java.util.List;
  * Created by adam on 2017-11-19.
  */
 
-public class Events extends Fragment{
+public class Events extends Fragment {
     private FirebaseDatabase mDatabase;
     private DatabaseReference myDbRef;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    //private FirebaseRecyclerAdapter<EventList, EventViewHolder> mAdapter;
     private List<EventList> eventLists;
+    private EventHolder eventHolder;
+    private RecyclerView.Adapter sAdapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_event, container, false);
-       // ListView listView = (ListView) view.findViewById(R.id.list_view);
+        // ListView listView = (ListView) view.findViewById(R.id.list_view);
+
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +57,8 @@ public class Events extends Fragment{
         });
 
 
+       /* DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("events");
+        Query query = mDatabase.orderByKey();*/
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -62,35 +71,84 @@ public class Events extends Fragment{
         eventLists = new ArrayList<>();
         for(int i = 0; i <5; i++){
             EventList eventList = new EventList("School Project", "oct 2017");
-                eventLists.add(eventList);
+            eventLists.add(eventList);
         }
-        mAdapter = new EventHolder(eventLists,this.getActivity());
-        recyclerView.setAdapter(mAdapter);
+        sAdapter = new EventHolder(eventLists,this.getActivity());
+        recyclerView.setAdapter(sAdapter);
 
         return view;
     }
+}
 /*
 
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<EventList,EventHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<EventList, EventHolder>( EventList.class,EventHolder.class,myDbRef) {
 
+        Query query = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("events")
+                .limitToLast(5);
+
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseRecyclerOptions<EventList> options =
+                new FirebaseRecyclerOptions.Builder<EventList>()
+                        .setQuery(query, EventList.class)
+                        .build();
+
+
+        FirebaseRecyclerAdapter mAdapter =
+                new FirebaseRecyclerAdapter<EventList, EventViewHolder>(options) {
 
                     @Override
-                    public EventHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                        return null;
+                    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).
+                                inflate(R.layout.events, parent, false);
+                        return new EventViewHolder(view);
                     }
 
                     @Override
-                    protected void onBindViewHolder(EventHolder holder, int position, EventList model) {
-
+                    protected void onBindViewHolder(EventViewHolder holder, int position, EventList model) {
+                        //TODO implement this method
+                        //final DatabaseReference mDbRef=
+                       // EventList event = eventLists.get(position);
+                        //holder.textViewHeader.setText(event.getHeader());
+                        //holder.textViewDate.setText(event.getDate());
+                        //holder.textViewRectangle.setText(event.getRect());
+                        //holder.imageViewEvent.getDrawable(event.getImage());
                     }
-                }
+                };
+        recyclerView.setAdapter(mAdapter);
+    }
+
+    public static class EventViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewHeader;
+        public TextView textViewDate;
+        View mView;
+
+        //public TextView textViewRectangle;
+        //public ImageView imageViewEvent;
+        public EventViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setTitle(String title) {
+            textViewHeader = (TextView) mView.findViewById(R.id.textViewHeader);
+            textViewDate.setText(title);
+        }
+            */
+/*public void setDate(String date) {
+                textViewDate = (TextView) mView.findViewById(R.id.textViewDate);
+                textViewDate.setText(date);
+            }*//*
+
+        //textViewRectangle = (TextView)itemView.findViewById(R.id.textViewRectangle);
+        //imageViewEvent = (ImageView)itemView.findViewById(R.id.imageViewEvent);
 
 */
 
 
-
-}
