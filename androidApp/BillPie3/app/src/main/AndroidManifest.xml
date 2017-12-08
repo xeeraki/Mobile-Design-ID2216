@@ -30,9 +30,6 @@
         <activity android:name=".AddSpending"></activity>
         <activity android:name=".EventPage"></activity>
 
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

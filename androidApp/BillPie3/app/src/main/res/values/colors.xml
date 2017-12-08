@@ -19,7 +19,7 @@
     <color name="colorLightGreen">#8BC34A</color>
     <color name="colorLime">#CDDC39</color>
     <color name="colorYellow">#FFEB3B</color>
-    <color name="colorAmber">#FFC107</color>
+    <color name="colorAmber">#ffc107</color>
     <color name="colorOrange">#ff9800</color>
     <color name="colorDeepOrange">#FF5722</color>
     <color name="colorBrown">#795548</color>

@@ -46,6 +46,15 @@ public class Events extends Fragment {
             }
         });
 
+        FloatingActionButton fabAddSpending = view.findViewById(R.id.fabAddSpending);
+        fabAddSpending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddSpending.class);
+                startActivity(intent);
+            }
+        });
+
 
        /* DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("events");
         Query query = mDatabase.orderByKey();*/
