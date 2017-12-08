@@ -1,13 +1,12 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -17,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,11 +24,12 @@ import static android.content.ContentValues.TAG;
 
 public class AddEvent extends AppCompatActivity{
     DatabaseReference mDatabase;
-    private String eventId;
+    private Map<String, User> userMap;
     private Map<String, Boolean> dataFriendList;
+    private Map<String, String> usedFriendList;
+    private Map<String, Boolean> friendChosen;
     private EditText eventTitle;
     private String actualUser = "user1";
-//    private ArrayList<String> friendList;
 
     private String[] friendList = {"Cassius", "Jiayao", "Adam"};
 
@@ -39,7 +38,6 @@ public class AddEvent extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
 
-        FloatingActionButton fabAdd = findViewById(R.id.fab_add);
         FloatingActionButton fabCheck = findViewById(R.id.fab_create);
         this.eventTitle = findViewById(R.id.eventTitle);
 
@@ -48,48 +46,16 @@ public class AddEvent extends AppCompatActivity{
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
-        // Dialog friend choice
-        final MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
-                .title(R.string.titlef)
-                .items(friendList)
-                .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
-                        /**
-                         * If you use alwaysCallMultiChoiceCallback(), which is discussed below,
-                         * returning false here won't allow the newly selected check box to actually be selected
-                         * (or the newly unselected check box to be unchecked).
-                         * See the limited multi choice dialog example in the sample project for details.
-                         **/
-                        for (int i = 0; i < which.length; i++) {
-                            Log.w(TAG, "which i :" + i + ", value: " + which[i].toString());
-                        }
-                        for (int i = 0; i < text.length; i++) {
-                            Log.w(TAG, "text i :" + i + ", value: " + text[i].toString());
-                        }
-                        return true;
-                    }
-                })
-                .positiveText("Ok");
-
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                builder.show();
-            }
-        });
-
-        // TODO : retrieve the selected friends and put them into a HashMap<String, String>
         fabCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: put on DB
+                addEvent();
+                // Go to main activity
+                finish();
             }
         });
 
         getFriends();
-//        addEvent();
-
     }
 
     // Back button navigation
@@ -101,10 +67,10 @@ public class AddEvent extends AppCompatActivity{
 
     private void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
-        eventId = mDatabase.push().getKey();
+        String eventId = mDatabase.push().getKey();
 
         Event event = new Event(eventTitle.getText().toString(),
-                new HashMap<String, Spending>(), new HashMap<String, Boolean>());
+                new HashMap<String, Spending>(), friendChosen);
         eventRef.child(eventId).setValue(event);
     }
 
@@ -117,17 +83,76 @@ public class AddEvent extends AppCompatActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot friendSnapshot: dataSnapshot.getChildren()) {
-
+                    dataFriendList.put(friendSnapshot.getKey(), friendSnapshot.getValue(Boolean.class));
                 }
+                createFriendList(dataFriendList);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "AddEvent:error while retrieving friends", databaseError.toException());
+                Log.w(TAG, "GetFriends :error while retrieving friends", databaseError.toException());
             }
         };
         userReference.addValueEventListener(userListener);
     }
 
-}
+    private void createFriendList(final Map<String, Boolean> dataFriendList) {
+        mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(userSnapshot.getKey(), userSnapshot.getValue(User.class));
+                }
+                usedFriendList = new HashMap<>();
 
+                for (Map.Entry<String, Boolean> dataF: dataFriendList.entrySet()) {
+                    // Because when we create a user, there is a fake friend put at false
+                    if (dataF.getValue()) {
+                        // Do that because of the Dialog (inverse)
+                        usedFriendList.put(userMap.get(dataF.getKey()).full_name, dataF.getKey());
+                    }
+                }
+
+                Log.w(TAG, "userFriendList: " + usedFriendList.toString());
+                createDialog();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "CreateFriend DB :error while retrieving friends", databaseError.toException());
+            }
+        });
+    }
+
+    private void createDialog() {
+        // Dialog friend choice
+        final MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                .title(R.string.titlef)
+                .items(usedFriendList.keySet().toArray(new String[usedFriendList.keySet().size()]))
+                .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                        friendChosen = new HashMap<>();
+                        for (int i = 0; i < text.length; i++) {
+                            friendChosen.put(usedFriendList.get(text[i]), true);
+                        }
+                        // TODO: Add to the listview page
+                        // Add himself
+                        friendChosen.put(actualUser, true);
+                        Log.w(TAG, "friendChosen :" + friendChosen.toString());
+                        return true;
+                    }
+                })
+                .positiveText("Ok");
+
+        FloatingActionButton fabAdd = findViewById(R.id.fab_add);
+
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                builder.show();
+            }
+        });
+    }
+}
