@@ -1,10 +1,15 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.util.Log;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by adam on 2017-11-13.
@@ -30,6 +35,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.full_name = full_name;
+        this.friends = new HashMap<>();
+        this.friends.put("userCreate", false);
+        Log.w(TAG, "Friends!!!!! :" + this.friends.toString());
+        this.events = new HashMap<>();
+        this.events.put("userCreate", false);
     }
 
     public String getUsername() {

@@ -44,6 +44,7 @@ public class EventPage extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.event_page);
 
         final ListView listView = findViewById(R.id.eventPageListView);
 
