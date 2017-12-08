@@ -12,6 +12,9 @@ public class Paybacks {
     private String receiver;
     private String spending;
     private String date_paid;
+    public Paybacks(){
+        
+    }
 
     public void setDate_paid(String date_paid) {
         this.date_paid = date_paid;
