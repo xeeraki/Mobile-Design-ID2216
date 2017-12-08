@@ -28,9 +28,6 @@
         <activity android:name=".AddFriend"></activity>
         <activity android:name=".AddSpending"></activity>
 
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
