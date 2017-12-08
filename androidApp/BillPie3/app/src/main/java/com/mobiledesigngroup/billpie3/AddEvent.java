@@ -4,22 +4,33 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 
 public class AddEvent extends AppCompatActivity{
-    private EditText amount, title, date;
     DatabaseReference mDatabase;
     private String eventId;
+    private Map<String, Boolean> dataFriendList;
+    private EditText eventTitle;
     private String actualUser = "user1";
-    private FloatingActionButton fabAdd;
-    private FloatingActionButton fabCheck;
+//    private ArrayList<String> friendList;
 
     private String[] friendList = {"Cassius", "Jiayao", "Adam"};
 
@@ -27,8 +38,10 @@ public class AddEvent extends AppCompatActivity{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
-        this.fabAdd = findViewById(R.id.fab_add);
-        this.fabCheck = findViewById(R.id.fab_create);
+
+        FloatingActionButton fabAdd = findViewById(R.id.fab_add);
+        FloatingActionButton fabCheck = findViewById(R.id.fab_create);
+        this.eventTitle = findViewById(R.id.eventTitle);
 
         setTitle("Add Event");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -48,6 +61,12 @@ public class AddEvent extends AppCompatActivity{
                          * (or the newly unselected check box to be unchecked).
                          * See the limited multi choice dialog example in the sample project for details.
                          **/
+                        for (int i = 0; i < which.length; i++) {
+                            Log.w(TAG, "which i :" + i + ", value: " + which[i].toString());
+                        }
+                        for (int i = 0; i < text.length; i++) {
+                            Log.w(TAG, "text i :" + i + ", value: " + text[i].toString());
+                        }
                         return true;
                     }
                 })
@@ -60,13 +79,17 @@ public class AddEvent extends AppCompatActivity{
             }
         });
 
-
-        //getFriends();
-
-        title = (EditText) findViewById(R.id.titleText);
         // TODO : retrieve the selected friends and put them into a HashMap<String, String>
-//        btnSubmit = (Button) findViewById(R.id.btn_submit);
-//        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        fabCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: put on DB
+            }
+        });
+
+        getFriends();
+//        addEvent();
+
     }
 
     // Back button navigation
@@ -76,44 +99,25 @@ public class AddEvent extends AppCompatActivity{
         return true;
     }
 
-
-/*    @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_event, container, false);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        //getFriends();
-
-        title = (EditText) view.findViewById(R.id.titleText);
-        // TODO : retrieve the selected friends and put them into a HashMap<String, String>
-        btnSubmit = (Button) view.findViewById(R.id.btn_submit);
-        btnCancel = (Button) view.findViewById(R.id.btn_cancel);
-        //addEvent();
-        return view;
-    }*/
- /*   public void addEvent(){
+    private void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
         eventId = mDatabase.push().getKey();
 
-        Event event = new Event(title.getText().toString(), new HashMap<String, Spending>(), new HashMap<String, Boolean>());
+        Event event = new Event(eventTitle.getText().toString(),
+                new HashMap<String, Spending>(), new HashMap<String, Boolean>());
         eventRef.child(eventId).setValue(event);
     }
 
-    public void getFriends(){
+    private void getFriends(){
 
-        DatabaseReference userReference = mDatabase.child("users").child(userId).child("friends");
-        final ArrayList<String> friendList = new ArrayList<>();
+        DatabaseReference userReference = mDatabase.child("users").child(this.actualUser).child("friends");
+        this.dataFriendList = new HashMap<>();
 
         ValueEventListener userListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot friendSnapshot: dataSnapshot.getChildren()) {
-                    String retrievedFriend = friendSnapshot.getValue(String.class);
-                    friendList.add(retrievedFriend);
-                    ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(AddEvent.this, android.R.layout.simple_list_item_1, friendList);
-                    // TODO : display the friends with a checkbox for each
-                    //listView.setAdapter(mAdapter);
+
                 }
             }
 
@@ -121,11 +125,9 @@ public class AddEvent extends AppCompatActivity{
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "AddEvent:error while retrieving friends", databaseError.toException());
             }
-
         };
-
         userReference.addValueEventListener(userListener);
     }
-*/
+
 }
 

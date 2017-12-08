@@ -64,7 +64,7 @@ public class EventPage extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventpage_dyna);
-        this.progBar = findViewById(R.id.indeterminateBarPay);
+        this.progBar = findViewById(R.id.indeterminateBarEventPag);
         this.scroll = findViewById(R.id.scroll_card_eventpage);
         this.scrollHorizontal = findViewById(R.id.horizontalScroll_eventpage);
         this.linearEventPage = findViewById(R.id.linear_eventpage);

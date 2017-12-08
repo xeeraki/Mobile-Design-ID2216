@@ -60,7 +60,7 @@ public class Events extends Fragment {
         Query query = mDatabase.orderByKey();*/
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mDatabase = FirebaseDatabase.getInstance();
         myDbRef = mDatabase.getReference("events");
