@@ -174,7 +174,7 @@ public class History extends Fragment {
         TextView titleText = new TextView(this.getActivity());
 
         // set properties
-        titleText.setText(spendingTitle);
+        titleText.setText(findSpendingTitle(spendingTitle, eventTitle));
         titleText.setTextColor(Color.BLACK);
         titleText.setTextSize(18);
         titleText.setGravity(Gravity.START);
@@ -279,6 +279,15 @@ public class History extends Fragment {
         linearView.addView(linearView2);
 
         this.mainLinear.addView(cardView);
+    }
+
+    private String findSpendingTitle(String spendingID, String eventID) {
+        for(Map.Entry<String, Event> ev: this.eventsMap.entrySet()) {
+            if (ev.getKey().equals(eventID)) {
+                return ev.getValue().getSpendings().get(spendingID).getTitle();
+            }
+        }
+        return "Spending Title";
     }
 
     private int dpToPixel(float dp) {

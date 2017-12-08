@@ -1,8 +1,13 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +24,8 @@ public class AddSpending extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String eventId = "event1";
     private Map<String, String> payers;
-    private String title, amount, due_date;
+//    private String title, amount, due_date;
+    private String title;
 
     // eventMembers should be passed from EventPage
     private ArrayList<User> eventMembers;
@@ -27,24 +33,41 @@ public class AddSpending extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_spending);
+//        setTitle("Add Spending");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+//        ImageButton btnDiscard = findViewById(R.id.btnDiscard);
+//        btnDiscard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(AddSpending.this, Events.class));  // go back to Event page
+//            }
+//        });
+
+        EditText textSpendingTitle = findViewById(R.id.textSpendingTitle);
+        title = textSpendingTitle.getText().toString();
+        DatePicker dateSpending = findViewById(R.id.dateSpending);
+
+
+
     }
 
 
-    public void addSpending() {
-        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
-                .child(eventId).child("spendings");
-        String spendingId = spendingRef.push().getKey();
-
-        Spending newSpending = new Spending(title, due_date, amount, payers);
-        spendingRef.child(spendingId).setValue(newSpending);
-    }
-
-    public void calculateSplit() {
-        // retrieve who pays what (payers are not forced to share equally between them)
-        // go through eventMembers and calculate what members owe to each other
-        // insert a new payback in the DB for each reimbursement
-    }
+//    public void addSpending() {
+//        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
+//                .child(eventId).child("spendings");
+//        String spendingId = spendingRef.push().getKey();
+//
+//        Spending newSpending = new Spending(title, due_date, amount, payers);
+//        spendingRef.child(spendingId).setValue(newSpending);
+//    }
+//
+//    public void calculateSplit() {
+//        // retrieve who pays what (payers are not forced to share equally between them)
+//        // go through eventMembers and calculate what members owe to each other
+//        // insert a new payback in the DB for each reimbursement
+//    }
 
 }
