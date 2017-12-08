@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/fullNameSignUp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/passwordSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -58,7 +58,7 @@
         android:text="Sign up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignUp" />
 
     <Button
         android:id="@+id/btnAlreadyRegistered"
