@@ -161,7 +161,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_friends) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent testCheck = new Intent(this, EventPage.class);
+            startActivity(testCheck);
         } else if (id == R.id.nav_help_feedback) {
 
         }

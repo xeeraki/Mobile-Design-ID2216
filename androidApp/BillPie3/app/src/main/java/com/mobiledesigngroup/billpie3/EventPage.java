@@ -36,16 +36,16 @@ import static android.content.ContentValues.TAG;
  * Created by cassius on 28/11/17.
  */
 
-public class EventPage extends Fragment {
+public class EventPage extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private String eventId = "event1";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.event_page, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        final ListView listView = (ListView) view.findViewById(R.id.eventPageListView);
+        final ListView listView = findViewById(R.id.eventPageListView);
 
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
@@ -64,7 +64,7 @@ public class EventPage extends Fragment {
                     spendingTitle.add(retrievedTitle);
                     spendingAmount.add(retrievedAmount);
 
-                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_2,
+                    ArrayAdapter adapter = new ArrayAdapter(EventPage.this, android.R.layout.simple_list_item_2,
                             android.R.id.text1, spendingAmount) {
                         @Override
                         public View getView(int position, View convertView, ViewGroup parent) {
@@ -88,7 +88,5 @@ public class EventPage extends Fragment {
         };
 
         spendingReference.addValueEventListener(spendingListener);
-
-        return view;
     }
 }
