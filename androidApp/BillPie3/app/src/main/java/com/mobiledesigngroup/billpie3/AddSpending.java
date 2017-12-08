@@ -1,16 +1,11 @@
 package com.mobiledesigngroup.billpie3;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,18 +37,18 @@ public class AddSpending extends Activity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        EditText textSpendingTitle = findViewById(R.id.textSpendingTitle);
+        EditText textSpendingTitle = findViewById(R.id.textTitle);
         title = textSpendingTitle.getText().toString();
-        Button btnDateSpending = findViewById(R.id.btnDateSpending);
+//        Button btnDateSpending = findViewById(R.id.btnDateSpending);
 //        btnDateSpending.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View v) {
 //                showDatePickerDialog(v);
 //            }
 //        });
-        EditText textSpendingAmount = findViewById(R.id.textSpendingAmount);
+        EditText textSpendingAmount = findViewById(R.id.textAmount);
         amount = textSpendingAmount.getText().toString();
-        EditText textSpendingDescription = findViewById(R.id.textSpendingDescription);
+        EditText textSpendingDescription = findViewById(R.id.textDescription);
         description = textSpendingDescription.getText().toString();
 
 //        ImageButton btnDiscard = findViewById(R.id.btnDiscard);
