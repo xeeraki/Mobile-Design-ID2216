@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by cassius on 06/12/17.
@@ -20,8 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity {
     private Button btnSignIn, btnSignUp;
-    private EditText textEmail, textPass;
+    private EditText textEmail, textPass, textFullName;
     private FirebaseAuth auth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class SignUp extends AppCompatActivity {
 
         btnSignIn = (Button) findViewById(R.id.btnAlreadyRegistered);
         btnSignUp = (Button) findViewById(R.id.btnSignUpSignUp);
+        textFullName = (EditText) findViewById(R.id.fullNameSignUp);
         textEmail = (EditText) findViewById(R.id.emailSignUp);
         textPass = (EditText) findViewById(R.id.passwordSignUp);
 
@@ -46,7 +50,8 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = textEmail.getText().toString().trim();
+                final String email = textEmail.getText().toString().trim();
+                final String fullName = textFullName.getText().toString().trim();
                 String password = textPass.getText().toString().trim();
 
                 auth.createUserWithEmailAndPassword(email, password)
@@ -59,6 +64,7 @@ public class SignUp extends AppCompatActivity {
                                     Toast.makeText(SignUp.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+                                    createUser(email, fullName);
                                     startActivity(new Intent(SignUp.this, MainActivity.class));
                                     finish();
                                 }
@@ -67,6 +73,13 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void createUser(String email, String fullName) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        String userId = mDatabase.push().getKey();
+        User newUser = new User("username", "password", "phoneNumber", email, fullName);
+        mDatabase.child(userId).setValue(newUser);
     }
 
     @Override
