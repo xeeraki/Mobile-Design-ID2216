@@ -44,6 +44,8 @@ public class History extends Fragment {
     private Map<String, Paybacks> paybacksFiltered;
     private LinearLayout mainLinear;
     private String actualUser = "user1"; //TODO: Change when the login is set up
+    private Map<String, Event> eventsMap;
+    private DatabaseReference myDbRef;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -51,48 +53,49 @@ public class History extends Fragment {
         this.progBar = view.findViewById(R.id.prog_hist);
         this.mainLinear = view.findViewById(R.id.linear_hist);
 
+
         progBar.setVisibility(View.VISIBLE);
 
-        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+        this.myDbRef = FirebaseDatabase.getInstance().getReference();
 
-        // To get the full name of the users
-/*        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+        myDbRef.child("events").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userM = new HashMap<>();
+                eventsMap = new HashMap<>();
 
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
-                    userM.put(eventSnapshot.getKey(),
-                            eventSnapshot.getValue(User.class));
+                    eventsMap.put(eventSnapshot.getKey(),
+                            eventSnapshot.getValue(Event.class));
                 }
-                Log.w(TAG, "userMapLAAAAAAAAAAAAAaaadqz: " + userM.toString());
+
+                myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        paybacksFiltered = new HashMap<>();
+                        paybacksMap = new HashMap<>();
+
+                        for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                            paybacksMap.put(eventSnapshot.getKey(),
+                                    eventSnapshot.getValue(Paybacks.class));
+                        }
+                        progBar.setVisibility(View.INVISIBLE);
+                        displayData();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Paybacks: error while retrieving events", databaseError.toException());
+                    }
+                });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "UserMap: error while retrieving events", databaseError.toException());
-            }
-        });*/
-
-        myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                paybacksFiltered = new HashMap<>();
-                paybacksMap = new HashMap<>();
-
-                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
-                    paybacksMap.put(eventSnapshot.getKey(),
-                            eventSnapshot.getValue(Paybacks.class));
-                }
-                progBar.setVisibility(View.INVISIBLE);
-                displayData();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Paybacks: error while retrieving events", databaseError.toException());
+                Log.w(TAG, "Events: error while retrieving events", databaseError.toException());
             }
         });
+
+
 
         return view;
     }
@@ -171,7 +174,7 @@ public class History extends Fragment {
         TextView titleText = new TextView(this.getActivity());
 
         // set properties
-        titleText.setText(spendingTitle);
+        titleText.setText(findSpendingTitle(spendingTitle, eventTitle));
         titleText.setTextColor(Color.BLACK);
         titleText.setTextSize(18);
         titleText.setGravity(Gravity.START);
@@ -205,7 +208,7 @@ public class History extends Fragment {
         TextView eventText = new TextView(this.getActivity());
 
         // set properties
-        eventText.setText(eventTitle);
+        eventText.setText(this.eventsMap.get(eventTitle).getTitle());
         eventText.setTextColor(Color.BLACK);
         eventText.setTextSize(12);
         eventText.setTypeface(Typeface.create("@font/roboto_light", Typeface.NORMAL));
@@ -276,6 +279,15 @@ public class History extends Fragment {
         linearView.addView(linearView2);
 
         this.mainLinear.addView(cardView);
+    }
+
+    private String findSpendingTitle(String spendingID, String eventID) {
+        for(Map.Entry<String, Event> ev: this.eventsMap.entrySet()) {
+            if (ev.getKey().equals(eventID)) {
+                return ev.getValue().getSpendings().get(spendingID).getTitle();
+            }
+        }
+        return "Spending Title";
     }
 
     private int dpToPixel(float dp) {
