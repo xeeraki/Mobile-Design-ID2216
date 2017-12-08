@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class AddFriend extends AppCompatActivity{
     private EditText friendName, phones;
-    private String userId = "friend";
+    private String userId = "user";
     private Button btnSubmit, btnCancel;
     DatabaseReference mDatabase;
     private Map<String, String> friends;
@@ -38,7 +38,7 @@ public class AddFriend extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addfriend);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("friends");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         friendName = (EditText) findViewById(R.id.nameText);
         phones = (EditText) findViewById(R.id.phoneText);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
@@ -49,11 +49,14 @@ public class AddFriend extends AppCompatActivity{
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id =  mDatabase.push().getKey();
+                DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("users")
+                        .child(userId).child("friends");
+                String id =  friendRef.push().getKey();
                 String FriendName = friendName.getText().toString();
                 String Phone = phones.getText().toString();
+                friendRef.child(id).setValue(FriendName,Phone);
               // if(!TextField.isEmpty(friendName)){
-                mDatabase.child(id).child(userId).setValue(FriendName,Phone);
+
               /*      Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity(), "Not inserted", Toast.LENGTH_LONG).show();
