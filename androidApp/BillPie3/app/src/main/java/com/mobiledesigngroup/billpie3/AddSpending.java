@@ -1,20 +1,24 @@
 package com.mobiledesigngroup.billpie3;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 /**
- * Created by cassius on 07/12/17.
+ * Created by cassius on 07/12/17. Modded by Jiayao on 08/12/17.
  */
 
 public class AddSpending extends Activity {
@@ -33,23 +37,63 @@ public class AddSpending extends Activity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_spending);
-//        setTitle("Add Spending");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        EditText textSpendingTitle = findViewById(R.id.textTitle);
-        title = textSpendingTitle.getText().toString();
-//        Button btnDateSpending = findViewById(R.id.btnDateSpending);
-//        btnDateSpending.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                showDatePickerDialog(v);
-//            }
-//        });
-        EditText textSpendingAmount = findViewById(R.id.textAmount);
-        amount = textSpendingAmount.getText().toString();
+        EditText textTitle = findViewById(R.id.textTitle);
+        title = textTitle.getText().toString();
+        EditText textAmount = findViewById(R.id.textAmount);
+        amount = textAmount.getText().toString();
         EditText textSpendingDescription = findViewById(R.id.textDescription);
         description = textSpendingDescription.getText().toString();
+
+        final EditText textDate = findViewById(R.id.date);
+        Calendar currentDate= Calendar.getInstance();
+        int year=currentDate.get(Calendar.YEAR);
+        int month=currentDate.get(Calendar.MONTH);
+        int day=currentDate.get(Calendar.DAY_OF_MONTH);
+        textDate.setText(day+"/"+month+"/"+year);
+
+        textDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Calendar currentDate= Calendar.getInstance();
+                int year=currentDate.get(Calendar.YEAR);
+                int month=currentDate.get(Calendar.MONTH);
+                int day=currentDate.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(AddSpending.this, new DatePickerDialog.OnDateSetListener(){
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday){
+//                        TODO: get date and time as spending date
+                        selectedmonth+=1;
+                        textDate.setText(selectedday+"/"+selectedmonth+"/"+selectedyear);
+                    }
+                }, year, month, day);
+                datePicker.setTitle("Select date");
+                datePicker.show();
+            }
+        });
+
+        final EditText textDateDue = findViewById(R.id.dateDue);
+        textDateDue.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Calendar currentDate=Calendar.getInstance();
+                int year=currentDate.get(Calendar.YEAR);
+                int month=currentDate.get(Calendar.MONTH);
+                int day=currentDate.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(AddSpending.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        TODO: get date and time as spending DUE date
+                        month+=1;
+                        textDateDue.setText(dayOfMonth+"/"+month+"/"+year);
+                    }
+                }, year, month, day+7);
+                datePicker.setTitle("Select due date");
+                datePicker.show();
+            }
+        });
+
 
 //        ImageButton btnDiscard = findViewById(R.id.btnDiscard);
 //        btnDiscard.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +110,6 @@ public class AddSpending extends Activity {
             }
         });
     }
-
-//    public void showDatePickerDialog(View v) {
-//        DialogFragment newFragment = new DatePickerFragment();
-//        newFragment.show(getSupportFragmentManager(), "datePicker");
-//    }
 
     public void addSpending() {
         DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
