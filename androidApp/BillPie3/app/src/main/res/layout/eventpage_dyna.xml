@@ -6,12 +6,109 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/indeterminateBarEventPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        />
+        />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Members"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScroll_eventpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMembers"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        card_view:srcCompat="@drawable/ic_tag_faces_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        android:fontFamily="@font/roboto"
+                        android:text="Adam"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        card_view:srcCompat="@drawable/ic_tag_faces_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        android:fontFamily="@font/roboto"
+                        android:text="Cassius"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        card_view:srcCompat="@drawable/ic_tag_faces_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_gravity = "center_horizontal"
+                        android:fontFamily="@font/roboto"
+                        android:text="Jiayao"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+    </HorizontalScrollView>
 
     <ScrollView
         android:id="@+id/scroll_card_eventpage"
@@ -28,7 +125,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             >
-            <!--
+
                          <android.support.v7.widget.CardView
                              android:id="@+id/cardview_eventpage"
                              android:layout_width="fill_parent"
@@ -36,7 +133,7 @@
                              card_view:cardBackgroundColor="#FFFFFF"
                              card_view:cardCornerRadius="2dp"
                              android:layout_marginLeft="@dimen/margin_tinys"
-                             android:layout_marginTop="80dp"
+                             android:layout_marginTop="90dp"
                              android:layout_marginRight="@dimen/margin_tinys"
                              android:layout_marginBottom="@dimen/margin_small"
                              >
@@ -127,7 +224,7 @@
                                          android:textSize="15sp" />
                                  </LinearLayout>
                              </LinearLayout>
-                         </android.support.v7.widget.CardView>-->
+                         </android.support.v7.widget.CardView>
                     </LinearLayout>
                 </ScrollView>
             </RelativeLayout>

@@ -1,10 +1,13 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,13 +22,14 @@ import java.util.Map;
  * Created by cassius on 07/12/17.
  */
 
-public class AddSpending extends AppCompatActivity {
+public class AddSpending extends Activity {
 
     private DatabaseReference mDatabase;
     private String eventId = "event1";
     private Map<String, String> payers;
-//    private String title, amount, due_date;
-    private String title;
+    private String title, amount, due_date;
+    private String description;
+//    private String amount;  // later mod to number format
 
     // eventMembers should be passed from EventPage
     private ArrayList<User> eventMembers;
@@ -38,6 +42,20 @@ public class AddSpending extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        EditText textSpendingTitle = findViewById(R.id.textSpendingTitle);
+        title = textSpendingTitle.getText().toString();
+        Button btnDateSpending = findViewById(R.id.btnDateSpending);
+//        btnDateSpending.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                showDatePickerDialog(v);
+//            }
+//        });
+        EditText textSpendingAmount = findViewById(R.id.textSpendingAmount);
+        amount = textSpendingAmount.getText().toString();
+        EditText textSpendingDescription = findViewById(R.id.textSpendingDescription);
+        description = textSpendingDescription.getText().toString();
+
 //        ImageButton btnDiscard = findViewById(R.id.btnDiscard);
 //        btnDiscard.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -45,25 +63,29 @@ public class AddSpending extends AppCompatActivity {
 //                startActivity(new Intent(AddSpending.this, Events.class));  // go back to Event page
 //            }
 //        });
-
-        EditText textSpendingTitle = findViewById(R.id.textSpendingTitle);
-        title = textSpendingTitle.getText().toString();
-        DatePicker dateSpending = findViewById(R.id.dateSpending);
-
-
-
+        Button btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                addSpending();
+            }
+        });
     }
 
-
-//    public void addSpending() {
-//        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
-//                .child(eventId).child("spendings");
-//        String spendingId = spendingRef.push().getKey();
-//
-//        Spending newSpending = new Spending(title, due_date, amount, payers);
-//        spendingRef.child(spendingId).setValue(newSpending);
+//    public void showDatePickerDialog(View v) {
+//        DialogFragment newFragment = new DatePickerFragment();
+//        newFragment.show(getSupportFragmentManager(), "datePicker");
 //    }
-//
+
+    public void addSpending() {
+        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
+                .child(eventId).child("spendings");
+        String spendingId = spendingRef.push().getKey();
+
+        Spending newSpending = new Spending(title, due_date, amount, payers);
+        spendingRef.child(spendingId).setValue(newSpending);
+    }
+
 //    public void calculateSplit() {
 //        // retrieve who pays what (payers are not forced to share equally between them)
 //        // go through eventMembers and calculate what members owe to each other
