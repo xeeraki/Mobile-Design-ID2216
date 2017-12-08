@@ -27,14 +27,14 @@ public class AddFriend extends AppCompatActivity{
     private int userId;
     private Button btnSubmit, btnCancel;
     DatabaseReference mDatabase;
-    SQLiteDatabase sDatabase;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addfriend);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("Friends");
+        mDatabase = FirebaseDatabase.getInstance().getReference("friends");
         friendName = (EditText) findViewById(R.id.nameText);
         phone = (EditText) findViewById(R.id.phoneText);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
@@ -45,13 +45,11 @@ public class AddFriend extends AppCompatActivity{
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String id =  mDatabase.push().getKey();
                 String FriendName = friendName.getText().toString();
                 String Phone = phone.getText().toString();
               // if(!TextField.isEmpty(friendName)){
                 mDatabase.child(id).setValue(FriendName,Phone);
-
               /*      Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity(), "Not inserted", Toast.LENGTH_LONG).show();
