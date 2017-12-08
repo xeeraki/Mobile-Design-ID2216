@@ -1,10 +1,12 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -73,6 +75,27 @@ public class EventPage extends AppCompatActivity {
         this.linearEventPage = findViewById(R.id.linear_eventpage);
         this.linearLayoutMembers = findViewById(R.id.linearLayoutMembers);
 
+        setTitle("Friends Trip to NY");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        FloatingActionButton fabAddSpending = findViewById(R.id.fabButtonToAddSpending);
+        fabAddSpending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventPage.this, AddSpending.class);
+                startActivity(intent);
+            }
+        });
+
+        FloatingActionButton fabCheckOut = findViewById(R.id.fabButtonToCheckOut);
+        fabAddSpending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventPage.this, CheckOutPage.class);
+                startActivity(intent);
+            }
+        });
+
         mDatabase =  FirebaseDatabase.getInstance().getReference();
 
         progBar.setVisibility(View.VISIBLE);
@@ -84,6 +107,12 @@ public class EventPage extends AppCompatActivity {
         eventMembers = new ArrayList<>();
 
         getUserMapAndSpendingsAndEverything();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     private void getSpendings() {
