@@ -46,7 +46,7 @@ public class History extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.historyv2, container, false);
+        View view = inflater.inflate(R.layout.history, container, false);
         this.progBar = view.findViewById(R.id.prog_hist);
         this.mainLinear = view.findViewById(R.id.linear_hist);
 
