@@ -32,7 +32,7 @@ public class AddFriend extends AppCompatActivity{
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         friendName = (EditText) findViewById(R.id.nameText);
-        email = (EditText) findViewById(R.id.phoneText);
+        email = (EditText) findViewById(R.id.emailFriendInput);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
         btnCancel = (Button) findViewById(R.id.btnCancelFriend);
         addFriend();
