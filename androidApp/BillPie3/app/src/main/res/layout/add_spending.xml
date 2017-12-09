@@ -25,6 +25,7 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
         android:text="Edit spending title"
         android:textColor="@color/colorWhite"
         android:textSize="22sp"
@@ -51,6 +52,7 @@
         android:text="Save"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,8 +72,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/ic_attach_money_black_24dp"
@@ -86,6 +88,7 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
         android:text="Enter amount of spending"
         android:textColor="@color/colorGrey"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -124,6 +127,7 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
         android:text="Add description"
         android:textColor="@color/colorGrey"
         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
@@ -149,8 +153,8 @@
         android:fontFamily="@font/roboto"
         android:text="Share with:"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/btnPayer1"
-        app:layout_constraintTop_toBottomOf="@+id/btnPayer1" />
+        app:layout_constraintStart_toStartOf="@+id/tgBtnPayer1"
+        app:layout_constraintTop_toBottomOf="@+id/tgBtnPayer1" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -159,96 +163,8 @@
         android:layout_marginTop="32dp"
         android:adjustViewBounds="false"
         android:background="@drawable/ic_date_range_black_24dp"
-        app:layout_constraintStart_toStartOf="@+id/btnSharer1"
-        app:layout_constraintTop_toBottomOf="@+id/btnSharer1" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnPayer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnPayer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPayer1"
-        app:layout_constraintStart_toEndOf="@+id/btnPayer1"
-        app:layout_constraintTop_toTopOf="@+id/btnPayer1"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnPayer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPayer2"
-        app:layout_constraintStart_toEndOf="@+id/btnPayer2"
-        app:layout_constraintTop_toTopOf="@+id/btnPayer2"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnSharer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnSharer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSharer1"
-        app:layout_constraintStart_toEndOf="@+id/btnSharer1"
-        app:layout_constraintTop_toTopOf="@+id/btnSharer1"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnSharer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorGrey"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSharer2"
-        app:layout_constraintStart_toEndOf="@+id/btnSharer2"
-        app:layout_constraintTop_toTopOf="@+id/btnSharer2"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
+        app:layout_constraintStart_toStartOf="@+id/tgBtnSharer1"
+        app:layout_constraintTop_toBottomOf="@+id/tgBtnSharer1" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -290,5 +206,124 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView8"
         app:srcCompat="@drawable/ic_mode_edit_black_24dp" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnPayer1"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_eric"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnPayer2"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_adam"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnPayer1"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnPayer1"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnPayer1" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnPayer3"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_cassius"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnPayer2"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnPayer2"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnPayer2" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnPayer4"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_jiayao"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnPayer3"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnPayer3"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnPayer3" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnSharer1"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_eric"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnSharer2"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_adam"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnSharer1"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnSharer1"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnSharer1" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnSharer3"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_cassius"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnSharer2"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnSharer2"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnSharer2" />
+
+    <ToggleButton
+        android:id="@+id/tgBtnSharer4"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_jiayao"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@+id/tgBtnSharer3"
+        app:layout_constraintStart_toEndOf="@+id/tgBtnSharer3"
+        app:layout_constraintTop_toTopOf="@+id/tgBtnSharer3" />
 
 </android.support.constraint.ConstraintLayout>
