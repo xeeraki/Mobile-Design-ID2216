@@ -14,6 +14,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -221,7 +222,7 @@ public class AddSpending extends AppCompatActivity {
         LinearLayout linearFirst = new LinearLayout(AddSpending.this);
         LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
                 dpToPixel(75),
-                dpToPixel(75)
+                dpToPixel(100)
         );
         linearFirst.setLayoutParams(linearFirstParams);
         linearFirst.setOrientation(LinearLayout.VERTICAL);
@@ -236,8 +237,8 @@ public class AddSpending extends AppCompatActivity {
         paybackNameUser.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         paybackNameUser.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
         TableLayout.LayoutParams paybackNameUserParams = new TableLayout.LayoutParams(
-                TableLayout.LayoutParams.WRAP_CONTENT,
-                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.MATCH_PARENT,
                 1.0f
         );
         paybackNameUser.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -255,12 +256,13 @@ public class AddSpending extends AppCompatActivity {
         toggleButton.setTextOff("");
         toggleButton.setTextOn("");
         TableLayout.LayoutParams toggleParams = new TableLayout.LayoutParams(
-                dpToPixel(45),
-                dpToPixel(45),
-                1.0f
+                dpToPixel(35),
+                dpToPixel(70)
         );
         Log.w(TAG, "PUTTING TAG : " + id);
         toggleButton.setId(ID_generator + id);
+        toggleButton.setChecked(true);
+        toggleButton.setChecked(false);
         toggleParams.gravity = Gravity.CENTER_HORIZONTAL;
         toggleButton.setLayoutParams(toggleParams);
 
