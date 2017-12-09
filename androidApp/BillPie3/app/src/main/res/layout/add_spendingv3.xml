@@ -23,7 +23,7 @@
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
-        android:text="Edit spending title"
+        android:hint="Edit spending title"
         android:textColor="@color/colorGrey"
         android:textSize="22sp"/>
     <LinearLayout
@@ -48,7 +48,7 @@
             android:inputType="textPersonName"
             android:layout_gravity="center_vertical"
             android:selectAllOnFocus="true"
-            android:text="Enter amount of spending"
+            android:hint="Enter amount of spending"
             android:textColor="@color/colorGrey" />
     </LinearLayout>
 

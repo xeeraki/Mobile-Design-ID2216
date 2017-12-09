@@ -178,6 +178,7 @@ public class AddSpending extends AppCompatActivity {
             toggleButton = findViewById(ID_generator + index);
             Log.w(TAG, "TOGGLEBUTTON : " + toggleButton.toString());
             if (toggleButton.isChecked()) {
+                payers.put(member, "fakeamount");
                 nbOfPayers ++;
             }
             else {
@@ -185,8 +186,8 @@ public class AddSpending extends AppCompatActivity {
             }
             index++;
         }
-        for (String member: eventMembers) {
-            payers.put(member, Float.toString(Float.parseFloat(amount)/nbOfPayers));
+        for (Map.Entry<String, String> payer: payers.entrySet()) {
+            payers.put(payer.getKey(), Float.toString(Float.parseFloat(amount)/nbOfPayers));
         }
     }
 
@@ -219,8 +220,8 @@ public class AddSpending extends AppCompatActivity {
     private LinearLayout createVerticalLinearLayout() {
         LinearLayout linearFirst = new LinearLayout(AddSpending.this);
         LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
-                dpToPixel(80),
-                dpToPixel(80)
+                dpToPixel(75),
+                dpToPixel(75)
         );
         linearFirst.setLayoutParams(linearFirstParams);
         linearFirst.setOrientation(LinearLayout.VERTICAL);
@@ -248,14 +249,14 @@ public class AddSpending extends AppCompatActivity {
     public ToggleButton createToggleButton(int id) {
         ToggleButton toggleButton = new ToggleButton(AddSpending.this);
 
-        toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
+        toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.check));
         toggleButton.setFocusable(false);
         toggleButton.setFocusableInTouchMode(false);
         toggleButton.setTextOff("");
         toggleButton.setTextOn("");
         TableLayout.LayoutParams toggleParams = new TableLayout.LayoutParams(
-                dpToPixel(50),
-                dpToPixel(50),
+                dpToPixel(55),
+                dpToPixel(55),
                 1.0f
         );
         Log.w(TAG, "PUTTING TAG : " + id);
