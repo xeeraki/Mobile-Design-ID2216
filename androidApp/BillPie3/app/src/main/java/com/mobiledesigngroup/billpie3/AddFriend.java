@@ -3,26 +3,31 @@ package com.mobiledesigngroup.billpie3;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by adam on 2017-11-21.
  */
 
 public class AddFriend extends AppCompatActivity{
-    private EditText friendName, email;
-    private String userId = "email";
-    private Button btnSubmit, btnCancel;
+    private EditText email;
+    private Button btnSubmit;
+    private String userId = "user1";
     DatabaseReference mDatabase;
-    private Map<String, String> friends;
-    private String name,phone;
 
 
     @Override
@@ -30,32 +35,59 @@ public class AddFriend extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_friend);
 
+        setTitle("Add friend");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        friendName = (EditText) findViewById(R.id.nameText);
         email = (EditText) findViewById(R.id.emailFriendInput);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
-        btnCancel = (Button) findViewById(R.id.btnCancelFriend);
-        addFriend();
-    }
-    public void addFriend(){
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("users").child("user")
-                        .child(userId).child("friends");
-                String id =  friendRef.push().getKey();
-                String FriendName = friendName.getText().toString();
-                String Email = email.getText().toString();
-                friendRef.child(id).setValue(FriendName,Email);
-              // if(!TextField.isEmpty(friendName)){
-
-              /*      Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getActivity(), "Not inserted", Toast.LENGTH_LONG).show();
-                }*/
-
+                String emailText = email.getText().toString();
+                getUserIdByEmailAndAddFriend(emailText);
             }
         });
+    }
 
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    private void getUserIdByEmailAndAddFriend(final String emailTextVal) {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String retrievedId = "notfound";
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    User retrievedUser = userSnapshot.getValue(User.class);
+                    if (retrievedUser.email.equals(emailTextVal)) {
+                        userId = userSnapshot.getKey();
+                    }
+                }
+
+                Log.w(TAG, "ADDFRIEND: USERID: " + userId);
+
+                if (retrievedId.equals("notfound")) {
+                    return;
+                }
+
+                DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("users").child("user")
+                        .child(userId).child("friends");
+
+                friendRef.child(retrievedId).setValue(true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "ADDFRIEND: error while retrieving users", databaseError.toException());
+            }
+        });
     }
 }
