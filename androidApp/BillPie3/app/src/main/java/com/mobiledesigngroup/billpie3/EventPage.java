@@ -90,6 +90,7 @@ public class EventPage extends AppCompatActivity {
                 Intent intent = new Intent(EventPage.this, AddSpending.class);
                 intent.putExtra("eventMembers", eventMembers);
                 intent.putExtra("userMap", userMap);
+                intent.putExtra("eventID", eventId);
                 startActivity(intent);
             }
         });

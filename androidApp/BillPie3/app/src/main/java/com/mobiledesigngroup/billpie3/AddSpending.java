@@ -65,6 +65,7 @@ public class AddSpending extends AppCompatActivity {
 
         eventMembers = getIntent().getStringArrayListExtra("eventMembers");
         userMap = (HashMap<String, User>) getIntent().getSerializableExtra("userMap");
+        eventId = getIntent().getStringExtra("eventID");
 
         horizontalLinearPayedBy = findViewById(R.id.horizontalLayoutPaidBy);
 
