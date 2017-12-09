@@ -2,11 +2,13 @@ package com.mobiledesigngroup.billpie3;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,53 +34,56 @@ import java.util.Map;
  * Created by cassius on 07/12/17. Modded by Jiayao on 08/12/17.
  */
 
-public class AddSpending extends Activity {
+public class AddSpending extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private String eventId = "event1";
+    int nbOfPayers;
+    private Button btnAddSpending;
     private Map<String, String> payers;
+    private ArrayList<String> nonPayers;
     private String title, amount, due_date;
+    View generalView;
     private String date; // date of spending
-    private String description;
     private Map<String, User> userMap;
     private LinearLayout horizontalLinearPayedBy;
-    private LinearLayout horizontalLinearSharedWith;
 //    private String amount;  // later mod to number format
 
-    // eventMembers should be passed from EventPage
     private ArrayList<String> eventMembers;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        generalView = getLayoutInflater().inflate(R.layout.add_spendingv3, null);
+
         setContentView(R.layout.add_spendingv3);
 
+        payers = new HashMap<>();
+        nbOfPayers = 0;
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         eventMembers = getIntent().getStringArrayListExtra("eventMembers");
         userMap = (HashMap<String, User>) getIntent().getSerializableExtra("userMap");
 
         horizontalLinearPayedBy = findViewById(R.id.horizontalLayoutPaidBy);
-        horizontalLinearSharedWith = findViewById(R.id.horizontalLayoutSharedWith);
 
         displayMembers();
 
-        EditText textTitle = findViewById(R.id.textTitle);
-        title = textTitle.getText().toString();
         EditText textAmount = findViewById(R.id.textAmount);
         amount = textAmount.getText().toString();
+        btnAddSpending = findViewById(R.id.btnSubmitSpending);
 
-//        fixed friends list rather than from firebase
-        /*boolean[] boolPayers = new boolean[4];
-        ToggleButton btnPayer1 = findViewById(R.id.tgBtnPayer1);
-        boolPayers[0]=btnPayer1.isChecked();
-        ToggleButton btnPayer2 = findViewById(R.id.tgBtnPayer2);
-        boolPayers[1] = btnPayer2.isChecked();
-        ToggleButton btnPayer3 = findViewById(R.id.tgBtnPayer3);
-        boolPayers[2] = btnPayer3.isChecked();
-        ToggleButton btnPayer4 = findViewById(R.id.tgBtnPayer4);
-        boolPayers[3] = btnPayer4.isChecked();*/
-//        String payers: boolean boolPayers[]
+        btnAddSpending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText textTitle = findViewById(R.id.textTitle);
+                title = textTitle.getText().toString();
+                getPayers();
+                String idSpending = addSpending();
+                addPaybacks(idSpending);
+            }
+        });
 
         /*final EditText textDate = findViewById(R.id.date);
         Calendar currentDate= Calendar.getInstance();
@@ -151,14 +156,51 @@ public class AddSpending extends Activity {
 
         for (String user: eventMembers) {
             linearLayout = createVerticalLinearLayout();
-            linearLayout.addView(createToggleButton());
+            linearLayout.addView(createToggleButton(user));
             linearLayout.addView(createTextNameMember(userMap.get(user).full_name));
             horizontalLinearPayedBy.addView(linearLayout);
+        }
+    }
 
-            linearLayout = createVerticalLinearLayout();
-            linearLayout.addView(createToggleButton());
-            linearLayout.addView(createTextNameMember(userMap.get(user).full_name));
-            horizontalLinearSharedWith.addView(linearLayout);
+    private void getPayers() {
+        ToggleButton toggleButton;
+        for (String member: eventMembers) {
+            toggleButton = generalView.findViewWithTag(member);
+            if (toggleButton.isChecked()) {
+                nbOfPayers ++;
+            }
+            else {
+                nonPayers.add(member);
+            }
+        }
+        for (String member: eventMembers) {
+            payers.put(member, Float.toString(Float.parseFloat(amount)/nbOfPayers));
+        }
+    }
+
+    private String addSpending() {
+        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
+                .child(eventId).child("spendings");
+        String spendingId = spendingRef.push().getKey();
+
+        Spending newSpending = new Spending(title, due_date, amount, payers);
+        spendingRef.child(spendingId).setValue(newSpending);
+        return spendingId;
+    }
+
+    private void addPaybacks(String idSpending) {
+        DatabaseReference paybackRef = FirebaseDatabase.getInstance().getReference("paybacks");
+        String paybackId;
+        int nbMembers = eventMembers.size();
+        int nbNonPayers = nonPayers.size();
+        float mustPay;
+        for (String user: nonPayers) {
+            for (Map.Entry<String, String> payer: payers.entrySet()) {
+                paybackId = paybackRef.push().getKey();
+                mustPay = (Float.parseFloat(payer.getValue()) - Float.parseFloat(amount)/nbMembers)/nbNonPayers;
+                Paybacks newPayback = new Paybacks(Float.toString(mustPay), eventId, false, user, payer.getKey(), idSpending, "notpaid");
+                paybackRef.child(paybackId).setValue(newPayback);
+            }
         }
     }
 
@@ -191,7 +233,7 @@ public class AddSpending extends Activity {
         return paybackNameUser;
     }
 
-    private ToggleButton createToggleButton() {
+    private ToggleButton createToggleButton(String id) {
         ToggleButton toggleButton = new ToggleButton(AddSpending.this);
 
         toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
@@ -204,32 +246,17 @@ public class AddSpending extends Activity {
                 dpToPixel(50),
                 1.0f
         );
+        toggleButton.setTag(id);
         toggleParams.gravity = Gravity.CENTER_HORIZONTAL;
         toggleButton.setLayoutParams(toggleParams);
 
         return toggleButton;
     }
 
-    public void addSpending() {
-        DatabaseReference spendingRef = FirebaseDatabase.getInstance().getReference("events")
-                .child(eventId).child("spendings");
-        String spendingId = spendingRef.push().getKey();
-
-        Spending newSpending = new Spending(title, due_date, amount, payers);
-        spendingRef.child(spendingId).setValue(newSpending);
-    }
-
-
     private int dpToPixel(float dp) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
         return (int) (fpixels + 0.5f);
     }
-
-//    public void calculateSplit() {
-//        // retrieve who pays what (payers are not forced to share equally between them)
-//        // go through eventMembers and calculate what members owe to each other
-//        // insert a new payback in the DB for each reimbursement
-//    }
 
 }

@@ -30,6 +30,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="35dp"
@@ -70,118 +71,118 @@
         android:orientation="horizontal">
 
 
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:orientation="vertical">
-    <ToggleButton
-        android:id="@+id/tgBtnPayer1"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/check"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textOff=""
-        android:textOn=""
-        android:checked="true" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_gravity = "center_horizontal"
-                android:fontFamily="@font/roboto"
-                android:text="Adam"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-        </LinearLayout>
+               <LinearLayout
+                   android:layout_width="75dp"
+                   android:layout_height="75dp"
+                   android:orientation="vertical">
+           <ToggleButton
+               android:id="@+id/tgBtnPayer1"
+               android:layout_width="55dp"
+               android:layout_height="55dp"
+               android:layout_weight="1"
+               android:layout_gravity="center_horizontal"
+               android:background="@drawable/check"
+               android:focusable="false"
+               android:focusableInTouchMode="false"
+               android:textOff=""
+               android:textOn=""
+               android:checked="true" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1.0"
+                       android:layout_gravity = "center_horizontal"
+                       android:fontFamily="@font/roboto"
+                       android:text="Adam"
+                       android:textColor="#000000"
+                       android:textSize="15sp" />
+               </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tgBtnPayer2"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:orientation="vertical">
-            <ToggleButton
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/check"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:textOff=""
-                android:textOn=""
-                android:checked="true" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_gravity = "center_horizontal"
-                android:fontFamily="@font/roboto"
-                android:text="Cassius"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:orientation="vertical">
-            <ToggleButton
-                android:id="@+id/tgBtnPayer3"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/check"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:textOff=""
-                android:textOn=""
-                android:checked="true" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_gravity = "center_horizontal"
-                android:fontFamily="@font/roboto"
-                android:text="Jiayao"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-        </LinearLayout>
+               <LinearLayout
+                   android:id="@+id/tgBtnPayer2"
+                   android:layout_width="75dp"
+                   android:layout_height="75dp"
+                   android:orientation="vertical">
+                   <ToggleButton
+                       android:layout_width="55dp"
+                       android:layout_height="55dp"
+                       android:layout_weight="1"
+                       android:layout_gravity="center_horizontal"
+                       android:background="@drawable/check"
+                       android:focusable="false"
+                       android:focusableInTouchMode="false"
+                       android:textOff=""
+                       android:textOn=""
+                       android:checked="true" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1.0"
+                       android:layout_gravity = "center_horizontal"
+                       android:fontFamily="@font/roboto"
+                       android:text="Cassius"
+                       android:textColor="#000000"
+                       android:textSize="15sp" />
+               </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:orientation="vertical">
-            <ToggleButton
-                android:id="@+id/tgBtnPayer4"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/check"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:textOff=""
-                android:textOn=""
-                android:checked="true" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_gravity = "center_horizontal"
-                android:fontFamily="@font/roboto"
-                android:text="Eric"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-        </LinearLayout>
+               <LinearLayout
+                   android:layout_width="75dp"
+                   android:layout_height="75dp"
+                   android:orientation="vertical">
+                   <ToggleButton
+                       android:id="@+id/tgBtnPayer3"
+                       android:layout_width="55dp"
+                       android:layout_height="55dp"
+                       android:layout_weight="1"
+                       android:layout_gravity="center_horizontal"
+                       android:background="@drawable/check"
+                       android:focusable="false"
+                       android:focusableInTouchMode="false"
+                       android:textOff=""
+                       android:textOn=""
+                       android:checked="true" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1.0"
+                       android:layout_gravity = "center_horizontal"
+                       android:fontFamily="@font/roboto"
+                       android:text="Jiayao"
+                       android:textColor="#000000"
+                       android:textSize="15sp" />
+               </LinearLayout>
 
--->
-    </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="75dp"
+                   android:layout_height="75dp"
+                   android:orientation="vertical">
+                   <ToggleButton
+                       android:id="@+id/tgBtnPayer4"
+                       android:layout_width="55dp"
+                       android:layout_height="55dp"
+                       android:layout_weight="1"
+                       android:layout_gravity="center_horizontal"
+                       android:background="@drawable/check"
+                       android:focusable="false"
+                       android:focusableInTouchMode="false"
+                       android:textOff=""
+                       android:textOn=""
+                       android:checked="true" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1.0"
+                       android:layout_gravity = "center_horizontal"
+                       android:fontFamily="@font/roboto"
+                       android:text="Eric"
+                       android:textColor="#000000"
+                       android:textSize="15sp" />
+               </LinearLayout>
+
+
+   <!-- </LinearLayout>
 
 
         <TextView
@@ -201,6 +202,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="7dp"
         android:orientation="horizontal">
+
 
         <LinearLayout
             android:layout_width="75dp"
@@ -308,7 +310,7 @@
                 android:textColor="#000000"
                 android:textSize="15sp" />
         </LinearLayout>
-
+-->
     </LinearLayout>
 
         <LinearLayout
@@ -338,6 +340,14 @@
             android:text="Add due date"
             android:textColor="@color/colorGrey" />
     </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmitSpending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:text="Confirm" />
     </LinearLayout>
 
 </RelativeLayout>
