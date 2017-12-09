@@ -1,74 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="146dp"
+        android:src="@drawable/ic_person_pin_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView20"
+        app:layout_constraintEnd_toStartOf="@+id/fullNameSignUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="118dp"
+        android:src="@drawable/ic_email_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView21"
+        app:layout_constraintEnd_toStartOf="@+id/emailSignUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="118dp"
+        android:src="@drawable/ic_lock_outline_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignUpSignUp"
+        app:layout_constraintEnd_toStartOf="@+id/passwordSignUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView20" />
 
     <EditText
         android:id="@+id/fullNameSignUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="130dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginTop="146dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Full name"
+        android:inputType="textPersonName"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailSignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView19"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/emailSignUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="133dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordSignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView20"
         app:layout_constraintTop_toBottomOf="@+id/fullNameSignUp" />
 
     <EditText
         android:id="@+id/passwordSignUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="133dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlreadyRegistered"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView21"
         app:layout_constraintTop_toBottomOf="@+id/emailSignUp" />
 
     <Button
         android:id="@+id/btnSignUpSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="194dp"
+        android:layout_marginStart="118dp"
         android:text="Sign up"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAlreadyRegistered"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
 
     <Button
         android:id="@+id/btnAlreadyRegistered"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="194dp"
+        android:layout_marginEnd="94dp"
         android:text="already registered?"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignUpSignUp" />
+        app:layout_constraintStart_toEndOf="@+id/btnSignUpSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignUp" />
 </android.support.constraint.ConstraintLayout>
