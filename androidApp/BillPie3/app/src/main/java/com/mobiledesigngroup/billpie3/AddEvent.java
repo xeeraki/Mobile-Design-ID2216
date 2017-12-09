@@ -1,12 +1,21 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,12 +72,20 @@ public class AddEvent extends AppCompatActivity{
         return true;
     }
 
+    SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
+
     private void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
         String eventId = mDatabase.push().getKey();
 
-        Event event = new Event(eventTitle.getText().toString(),
-                new HashMap<String, Spending>(), friendChosen);
+        // create fake spending
+        Spending fakeSpending = new Spending("defaultSpending", "00/00/0000", "0", new HashMap<String, String>());
+
+        // create Map default spending
+        Map<String, Spending> defaultSpend = new HashMap<>();
+        defaultSpend.put("defaultSpending", fakeSpending);
+
+        Event event = new Event(eventTitle.getText().toString(), defaultSpend, friendChosen, curFormater.format(new Date()));
         eventRef.child(eventId).setValue(event);
     }
 
@@ -134,7 +152,7 @@ public class AddEvent extends AppCompatActivity{
                         for (int i = 0; i < text.length; i++) {
                             friendChosen.put(usedFriendList.get(text[i]), true);
                         }
-                        // TODO: Add to the listview page
+                        createParticipantsDyna(text);
                         // Add himself
                         friendChosen.put(actualUser, true);
                         Log.w(TAG, "friendChosen :" + friendChosen.toString());
@@ -151,5 +169,64 @@ public class AddEvent extends AppCompatActivity{
                 builder.show();
             }
         });
+    }
+
+    private void createParticipantsDyna(CharSequence[] friendChosen) {
+        LinearLayout partLinear = findViewById(R.id.participants_linear);
+
+        for (int i = 0; i < friendChosen.length; i++) {
+            // create the first LinearLayout
+            final LinearLayout linearView = new LinearLayout(this);
+
+            // set properties
+            LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
+                    dpToPixel(74),
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+
+            linearView.setPadding(dpToPixel(12), dpToPixel(11), 0, 0);
+            linearView.setLayoutParams(linearFirstParams);
+            linearView.setOrientation(LinearLayout.VERTICAL);
+
+            partLinear.addView(linearView);
+
+            // Crete the image view
+            ImageView image = new ImageView(this);
+            TableLayout.LayoutParams imageParams;
+            image.setImageDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
+            imageParams = new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT
+            );
+            imageParams.gravity = Gravity.CENTER_HORIZONTAL;
+            image.setLayoutParams(imageParams);
+            image.setMinimumHeight(dpToPixel(68));
+            image.setMinimumWidth(dpToPixel(68));
+
+            linearView.addView(image);
+
+            // Create the Name textView
+            TextView nameText = new TextView(this);
+
+            // set properties
+            nameText.setText(friendChosen[i]);
+            nameText.setTextColor(Color.BLACK);
+            nameText.setTextSize(12);
+            nameText.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
+            TableLayout.LayoutParams nameParams = new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT
+            );
+            nameText.setGravity(Gravity.CENTER_HORIZONTAL);
+            nameText.setLayoutParams(nameParams);
+
+            linearView.addView(nameText);
+        }
+    }
+
+    private int dpToPixel(float dp) {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float fpixels = metrics.density * dp;
+        return (int) (fpixels + 0.5f);
     }
 }

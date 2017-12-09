@@ -3,11 +3,13 @@ package com.mobiledesigngroup.billpie3;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +29,7 @@ public class AddSpending extends Activity {
     private String eventId = "event1";
     private Map<String, String> payers;
     private String title, amount, due_date;
+    private String date; // date of spending
     private String description;
 //    private String amount;  // later mod to number format
 
@@ -47,6 +50,18 @@ public class AddSpending extends Activity {
         EditText textSpendingDescription = findViewById(R.id.textDescription);
         description = textSpendingDescription.getText().toString();
 
+//        fixed friends list rather than from firebase
+        boolean[] boolPayers = new boolean[4];
+        ToggleButton btnPayer1 = findViewById(R.id.tgBtnPayer1);
+        boolPayers[0]=btnPayer1.isChecked();
+        ToggleButton btnPayer2 = findViewById(R.id.tgBtnPayer2);
+        boolPayers[1] = btnPayer2.isChecked();
+        ToggleButton btnPayer3 = findViewById(R.id.tgBtnPayer3);
+        boolPayers[2] = btnPayer3.isChecked();
+        ToggleButton btnPayer4 = findViewById(R.id.tgBtnPayer4);
+        boolPayers[3] = btnPayer4.isChecked();
+//        String payers: boolean boolPayers[]
+
         final EditText textDate = findViewById(R.id.date);
         Calendar currentDate= Calendar.getInstance();
         int year=currentDate.get(Calendar.YEAR);
@@ -63,8 +78,8 @@ public class AddSpending extends Activity {
                 int day=currentDate.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePicker = new DatePickerDialog(AddSpending.this, new DatePickerDialog.OnDateSetListener(){
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday){
-//                        TODO: get date and time as spending date
                         selectedmonth+=1;
+                        date = selectedday+"/"+selectedmonth+"/"+selectedyear;
                         textDate.setText(selectedday+"/"+selectedmonth+"/"+selectedyear);
                     }
                 }, year, month, day);
@@ -84,16 +99,15 @@ public class AddSpending extends Activity {
                 DatePickerDialog datePicker = new DatePickerDialog(AddSpending.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                        TODO: get date and time as spending DUE date
                         month+=1;
-                        textDateDue.setText(dayOfMonth+"/"+month+"/"+year);
+                        due_date = dayOfMonth+"/"+month+"/"+year;
+                        textDateDue.setText(""+due_date);
                     }
                 }, year, month, day+7);
                 datePicker.setTitle("Select due date");
                 datePicker.show();
             }
         });
-
 
 //        ImageButton btnDiscard = findViewById(R.id.btnDiscard);
 //        btnDiscard.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +116,8 @@ public class AddSpending extends Activity {
 //                startActivity(new Intent(AddSpending.this, Events.class));  // go back to Event page
 //            }
 //        });
+
+//        TODO: double-check save spending record to firebase
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener(){
             @Override
