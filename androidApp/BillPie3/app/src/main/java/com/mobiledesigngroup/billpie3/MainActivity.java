@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private FirebaseAuth.AuthStateListener authListener;
-    public HashMap<String, User> userMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,27 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
-
-        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
-
-        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userMap = new HashMap<>();
-
-                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
-                    userMap.put(eventSnapshot.getKey(),
-                            eventSnapshot.getValue(User.class));
-                }
-                SetUpViewPager(mViewPager);
-                Log.w(TAG, "userMapLAAAAAAAAAAAAAaaadqz: " + userMap.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "UserMap: error while retrieving events", databaseError.toException());
-            }
-        });
+        SetUpViewPager(mViewPager);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -99,13 +78,9 @@ public class MainActivity extends AppCompatActivity
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new EventsV2(),"Events");
 
-        Pay newPay = new Pay();
-        newPay.setUserMap(this.userMap);
-        mAdapter.addFragment(newPay,"Pay");
+        mAdapter.addFragment(new Pay(),"Pay");
 
-        History newHist = new History();
-        newHist.setUserMap(this.userMap);
-        mAdapter.addFragment(newHist, "History");
+        mAdapter.addFragment(new History(), "History");
 
         //mAdapter.addFragment(new AddEvent(),"Create Event");
         //mAdapter.addFragment(new AddFriend(),"Add Friend");

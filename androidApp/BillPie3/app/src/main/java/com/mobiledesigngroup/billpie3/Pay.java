@@ -46,9 +46,6 @@ public class Pay extends Fragment {
 
     private Map<String, User> userMap;
 
-    public void setUserMap(Map<String, User> userMap) {
-        this.userMap = userMap;
-    }
 
     private Map<String, Float> mapOwe;
     private Map<String, Float> mapOwed;
@@ -80,10 +77,9 @@ public class Pay extends Fragment {
                 for (DataSnapshot pbSnapshot: dataSnapshot.getChildren()) {
                     receivedPaybackMap.put(pbSnapshot.getKey(), pbSnapshot.getValue(Paybacks.class));
                 }
-                progBar.setVisibility(View.INVISIBLE);
-                scroll.setVisibility(View.VISIBLE);
+                createUserMap();
+
                 Log.w(TAG, "ReceivedPaybackMap: " + receivedPaybackMap.toString());
-                displayData();
             }
 
             @Override
@@ -352,5 +348,27 @@ public class Pay extends Fragment {
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
         return (int) (fpixels + 0.5f);
+    }
+
+    private void createUserMap() {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
+                }
+                progBar.setVisibility(View.INVISIBLE);
+                scroll.setVisibility(View.VISIBLE);
+                displayData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Pay: error while retrieving events", databaseError.toException());
+            }
+        });
     }
 }
