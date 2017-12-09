@@ -53,6 +53,7 @@ dependencies {
     compile files('libs/itext7-kernel-7.0.2.jar')
     compile files('libs/itext7-pdfa-7.0.2.jar')
     compile files('libs/itext7-layout-7.0.2.jar')
+    compile files('libs/slf4j-api-1.7.25.jar')
 }
 
 

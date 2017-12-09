@@ -2,6 +2,7 @@ package com.mobiledesigngroup.billpie3;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -323,6 +326,14 @@ public class History extends Fragment {
 
     private void createPDF() {
         Log.w(TAG, "Create PDF!!!!");
-        new PdfManager();
+        PdfManager pdfManager = new PdfManager();
+        String dlDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/test.pdf";
+        File file = new File(dlDirectory);
+        file.getParentFile().mkdirs();
+        try {
+            pdfManager.createPdf(dlDirectory);
+        } catch(IOException e) {
+            Log.w(TAG, e.toString());
+        }
     }
 }
