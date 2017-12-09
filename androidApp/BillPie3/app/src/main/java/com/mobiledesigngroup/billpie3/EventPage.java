@@ -62,7 +62,7 @@ public class EventPage extends AppCompatActivity {
     private ArrayList<String> spendingTitle;
     private ArrayList<String> spendingAmount;
     private ArrayList<String> eventMembers;
-    private Map<String, User> userMap;
+    private HashMap<String, User> userMap;
     private String eventTitle;
 
 
@@ -88,6 +88,8 @@ public class EventPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventPage.this, AddSpending.class);
+                intent.putExtra("eventMembers", eventMembers);
+                intent.putExtra("userMap", userMap);
                 startActivity(intent);
             }
         });
