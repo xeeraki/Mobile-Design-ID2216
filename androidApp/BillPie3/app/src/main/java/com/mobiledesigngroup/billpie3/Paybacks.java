@@ -32,6 +32,7 @@ public class Paybacks {
         this.receiver = receiver;
         this.spending = spending;
         this.date_paid = date_paid;
+        this.payer = payer;
     }
 
     public String getAmount() {
