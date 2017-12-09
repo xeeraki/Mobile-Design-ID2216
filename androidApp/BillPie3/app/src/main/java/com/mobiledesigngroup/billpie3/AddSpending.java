@@ -69,6 +69,9 @@ public class AddSpending extends AppCompatActivity {
         nbOfPayers = 0;
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        setTitle("Add a spending");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         eventMembers = getIntent().getStringArrayListExtra("eventMembers");
         userMap = (HashMap<String, User>) getIntent().getSerializableExtra("userMap");
         eventId = getIntent().getStringExtra("eventID");
@@ -90,6 +93,7 @@ public class AddSpending extends AppCompatActivity {
                 getPayers();
                 String idSpending = addSpending();
                 addPaybacks(idSpending);
+                finish();
             }
         });
 
@@ -156,6 +160,12 @@ public class AddSpending extends AppCompatActivity {
                 addSpending();
             }
         });*/
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     private void displayMembers() {

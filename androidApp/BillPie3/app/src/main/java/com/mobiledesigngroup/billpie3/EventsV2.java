@@ -30,9 +30,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -125,6 +129,9 @@ public class EventsV2 extends Fragment {
 //        TypedValue outValue = new TypedValue();
 //        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+
         for (final Map.Entry<String, Event> eventEntry: events.entrySet()) {
 
             final Event event = eventEntry.getValue();
@@ -151,7 +158,15 @@ public class EventsV2 extends Fragment {
             LinearLayout linearHorizontal = createHorizontalLinearLayout();
 
             linearHorizontal.addView(createCardViewTitle(event.getTitle()));
-            linearHorizontal.addView(createTextDate(event.getCreateDate()));
+
+            Date date = new Date();
+            try {
+                 date = sdf.parse(event.getCreateDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            linearHorizontal.addView(createTextDate(month_date.format(date)));
             linearHorizontal.addView(createImage());
 
             linearVertical.addView(linearHorizontal);
