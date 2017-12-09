@@ -48,24 +48,9 @@ public class CheckOutPage extends AppCompatActivity {
 
         this.linearPay = findViewById(R.id.linear_pay);
 
-        this.userMap = (HashMap<String, User>) getIntent().getSerializableExtra("useM");
+//        this.userMap = (HashMap<String, User>) getIntent().getSerializableExtra("useM");
 
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
-
-/*        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userMap = new HashMap<>();
-                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
-                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "CheckOutPage: error while retrieving events", databaseError.toException());
-            }
-        });*/
 
         myDbRef.child("paybacks").addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,7 +62,7 @@ public class CheckOutPage extends AppCompatActivity {
                 // To create a new when the data changes
                 toPayFiltered = new HashMap<>();
                 toReceiveFiltered = new HashMap<>();
-                displayData();
+                createUserMap();
             }
 
             @Override
@@ -343,16 +328,27 @@ public class CheckOutPage extends AppCompatActivity {
 
         linearViewPay.addView(titleText);
 
-/*        final LinearLayout linearLast = new LinearLayout(this);
-        linearLast.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        linearLast.setOrientation(LinearLayout.HORIZONTAL);
-
-        linearViewPay.addView(linearLast);*/
-
         return linearViewPay;
+    }
+
+    private void createUserMap() {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
+                }
+                displayData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "CheckOutPage: error while retrieving events", databaseError.toException());
+            }
+        });
     }
 
     private int dpToPixel(float dp) {

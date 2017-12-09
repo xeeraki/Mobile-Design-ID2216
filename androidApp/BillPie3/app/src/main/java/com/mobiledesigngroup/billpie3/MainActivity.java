@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_payment) {
             Intent testCheck = new Intent(this, CheckOutPage.class);
-            testCheck.putExtra("useM", this.userMap);
+//            testCheck.putExtra("useM", this.userMap);
             startActivity(testCheck);
         } else if (id == R.id.nav_friends) {
 
