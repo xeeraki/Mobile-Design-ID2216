@@ -116,6 +116,7 @@ public class EventsV2 extends Fragment {
         for (Map.Entry<String, Event> eventEntry: events.entrySet()) {
             Event event = eventEntry.getValue();
             CardView cardView = createNewCardView();
+            cardView.setClickable(true);
             View view = createBlueRectangleView();
             cardView.addView(view);
             LinearLayout linearVertical = createVerticalLinearLayout();
@@ -133,14 +134,15 @@ public class EventsV2 extends Fragment {
             for (Map.Entry<String, Boolean> userEntry: event.getMembers().entrySet()) {
                 LinearLayout linearVerticalMembers = createLinearLayoutVerticalMembers();
                 ImageView imageMember = createImageMember();
-                TextView nameMember = createNameMember(userMap.get(userEntry.getValue()).full_name);
+                TextView nameMember = createNameMember(userMap.get(userEntry.getKey()).full_name);
                 linearVerticalMembers.addView(imageMember);
                 linearVerticalMembers.addView(nameMember);
                 linearHorizontalMembers.addView(linearVerticalMembers);
             }
 
             linearVertical.addView(linearHorizontalMembers);
-
+            cardView.addView(linearVertical);
+            linearEvents.addView(cardView);
         }
     }
 
@@ -190,7 +192,7 @@ public class EventsV2 extends Fragment {
     private ImageView createImageMember() {
         ImageView image = new ImageView(getActivity());
         TableLayout.LayoutParams imageParams;
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tag_faces_black_24dp));
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
         imageParams = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT,
