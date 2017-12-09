@@ -67,11 +67,9 @@ public class AddSpending extends Activity {
         title = textTitle.getText().toString();
         EditText textAmount = findViewById(R.id.textAmount);
         amount = textAmount.getText().toString();
-        EditText textSpendingDescription = findViewById(R.id.textDescription);
-        description = textSpendingDescription.getText().toString();
 
 //        fixed friends list rather than from firebase
-        boolean[] boolPayers = new boolean[4];
+        /*boolean[] boolPayers = new boolean[4];
         ToggleButton btnPayer1 = findViewById(R.id.tgBtnPayer1);
         boolPayers[0]=btnPayer1.isChecked();
         ToggleButton btnPayer2 = findViewById(R.id.tgBtnPayer2);
@@ -79,10 +77,10 @@ public class AddSpending extends Activity {
         ToggleButton btnPayer3 = findViewById(R.id.tgBtnPayer3);
         boolPayers[2] = btnPayer3.isChecked();
         ToggleButton btnPayer4 = findViewById(R.id.tgBtnPayer4);
-        boolPayers[3] = btnPayer4.isChecked();
+        boolPayers[3] = btnPayer4.isChecked();*/
 //        String payers: boolean boolPayers[]
 
-        final EditText textDate = findViewById(R.id.date);
+        /*final EditText textDate = findViewById(R.id.date);
         Calendar currentDate= Calendar.getInstance();
         int year=currentDate.get(Calendar.YEAR);
         int month=currentDate.get(Calendar.MONTH);
@@ -106,7 +104,7 @@ public class AddSpending extends Activity {
                 datePicker.setTitle("Select date");
                 datePicker.show();
             }
-        });
+        });*/
 
         final EditText textDateDue = findViewById(R.id.dateDue);
         textDateDue.setOnClickListener(new View.OnClickListener(){
@@ -138,13 +136,13 @@ public class AddSpending extends Activity {
 //        });
 
 //        TODO: double-check save spending record to firebase
-        Button btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(new View.OnClickListener(){
+        //Button btnSave = findViewById(R.id.btnSave);
+       /* btnSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 addSpending();
             }
-        });
+        });*/
     }
 
     private void displayMembers() {
