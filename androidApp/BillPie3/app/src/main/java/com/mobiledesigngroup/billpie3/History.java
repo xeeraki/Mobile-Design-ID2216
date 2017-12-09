@@ -2,6 +2,7 @@ package com.mobiledesigngroup.billpie3;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -50,6 +51,7 @@ public class History extends Fragment {
         this.progBar = view.findViewById(R.id.prog_hist);
         this.mainLinear = view.findViewById(R.id.linear_hist);
 
+        FloatingActionButton pdfFab = view.findViewById(R.id.pdf_fab);
 
         progBar.setVisibility(View.VISIBLE);
 
@@ -91,8 +93,6 @@ public class History extends Fragment {
                 Log.w(TAG, "Events: error while retrieving events", databaseError.toException());
             }
         });
-
-
 
         return view;
     }
