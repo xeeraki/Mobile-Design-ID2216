@@ -88,7 +88,7 @@ public class EventPage extends AppCompatActivity {
         });
 
         FloatingActionButton fabCheckOut = findViewById(R.id.fabButtonToCheckOut);
-        fabAddSpending.setOnClickListener(new View.OnClickListener() {
+        fabCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventPage.this, CheckOutPage.class);

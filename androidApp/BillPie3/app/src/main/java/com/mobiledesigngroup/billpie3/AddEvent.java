@@ -1,6 +1,5 @@
 package com.mobiledesigngroup.billpie3;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -30,8 +29,6 @@ public class AddEvent extends AppCompatActivity{
     private Map<String, Boolean> friendChosen;
     private EditText eventTitle;
     private String actualUser = "user1";
-
-    private String[] friendList = {"Cassius", "Jiayao", "Adam"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
