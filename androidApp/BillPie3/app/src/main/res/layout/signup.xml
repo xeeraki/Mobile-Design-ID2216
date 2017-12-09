@@ -15,7 +15,7 @@
         android:layout_marginTop="130dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Full Name"
+        android:hint="Full name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email"
+        android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullNameSignUp" />
@@ -42,8 +42,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailSignUp" />
