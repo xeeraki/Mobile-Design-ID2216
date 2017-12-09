@@ -1,37 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <ProgressBar
         android:id="@+id/indeterminateBarEvents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scroll_card_events"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        >
-        <LinearLayout
-            android:id="@+id/linear_events"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            >
 
-           <!-- <android.support.v7.widget.CardView
+    <!-- <android.support.v7.widget.CardView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 card_view:cardBackgroundColor="#FFFFFF"
@@ -314,20 +301,19 @@
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>-->
-        </LinearLayout>
-    </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|end">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/FABevents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            card_view:srcCompat="@drawable/ic_add_white_24dp" />
-    </LinearLayout>
-</RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FABevents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        card_view:backgroundTint="@color/colorRed"
+        card_view:fabSize="normal"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:srcCompat="@drawable/ic_add_white_24dp" />
+
+</android.support.constraint.ConstraintLayout>
