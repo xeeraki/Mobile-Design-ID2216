@@ -97,6 +97,7 @@ public class EventPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventPage.this, CheckOutPage.class);
+                intent.putExtra("eventID", eventId);
                 startActivity(intent);
             }
         });
