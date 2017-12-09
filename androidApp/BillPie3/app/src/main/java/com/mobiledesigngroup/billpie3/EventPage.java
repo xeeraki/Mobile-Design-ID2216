@@ -75,6 +75,9 @@ public class EventPage extends AppCompatActivity {
         this.linearEventPage = findViewById(R.id.linear_eventpage);
         this.linearLayoutMembers = findViewById(R.id.linearLayoutMembers);
 
+
+        eventId = getIntent().getStringExtra("eventID");
+
         setTitle("Friends Trip to NY");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -116,7 +116,7 @@ public class EventsV2 extends Fragment {
 //        TypedValue outValue = new TypedValue();
 //        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 
-        for (Map.Entry<String, Event> eventEntry: events.entrySet()) {
+        for (final Map.Entry<String, Event> eventEntry: events.entrySet()) {
 
             Event event = eventEntry.getValue();
             CardView cardView = createNewCardView();
@@ -127,6 +127,9 @@ public class EventsV2 extends Fragment {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), EventPage.class);
+                    intent.putExtra("eventID", eventEntry.getKey());
+                    startActivity(intent);
                     Log.w(TAG, "LOL I JUST CLICKED ON A CARD");
                 }
             }) ;
@@ -138,7 +141,7 @@ public class EventsV2 extends Fragment {
             LinearLayout linearHorizontal = createHorizontalLinearLayout();
 
             linearHorizontal.addView(createCardViewTitle(event.getTitle()));
-            linearHorizontal.addView(createTextDate("Oct. 2017"));
+            linearHorizontal.addView(createTextDate(event.getCreateDate()));
             linearHorizontal.addView(createImage());
 
             linearVertical.addView(linearHorizontal);
