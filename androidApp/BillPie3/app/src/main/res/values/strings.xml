@@ -37,7 +37,7 @@
 
     <string name="adamid2">Adam</string>
     <string name="create_bill">Create</string>
-    <string name="title">Event Title</string>
+    <string name="title">Edit Event Title</string>
     <string name="amount">Amount</string>
     <string name="submit">SUBMIT</string>
     <string name="cancel">Cancel</string>
