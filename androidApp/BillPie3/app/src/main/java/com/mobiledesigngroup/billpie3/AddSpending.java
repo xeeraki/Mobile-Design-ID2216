@@ -49,6 +49,8 @@ public class AddSpending extends AppCompatActivity {
     private String date; // date of spending
     private Map<String, User> userMap;
     private LinearLayout horizontalLinearPayedBy;
+
+    private int ID_generator = 50000;
 //    private String amount;  // later mod to number format
 
     private ArrayList<String> eventMembers;
@@ -156,21 +158,22 @@ public class AddSpending extends AppCompatActivity {
     private void displayMembers() {
 
         LinearLayout linearLayout;
-
-        for (String user: eventMembers) {
+        int index = 0;
+        while (index < eventMembers.size()) {
             linearLayout = createVerticalLinearLayout();
-            linearLayout.addView(createToggleButton(user));
-            linearLayout.addView(createTextNameMember(userMap.get(user).full_name));
+            linearLayout.addView(createToggleButton(index));
+            linearLayout.addView(createTextNameMember(userMap.get(eventMembers.get(index)).full_name));
             horizontalLinearPayedBy.addView(linearLayout);
+            index++;
         }
     }
 
     private void getPayers() {
         ToggleButton toggleButton;
+        int index = 0;
         for (String member: eventMembers) {
             Log.w(TAG, "EVENTMEMBER : " + member);
-            Log.w(TAG, "general VIEW : " + generalView.toString());
-            toggleButton = generalView.findViewWithTag(member);
+            toggleButton = findViewById(ID_generator + index);
             Log.w(TAG, "TOGGLEBUTTON : " + toggleButton.toString());
             if (toggleButton.isChecked()) {
                 nbOfPayers ++;
@@ -178,6 +181,7 @@ public class AddSpending extends AppCompatActivity {
             else {
                 nonPayers.add(member);
             }
+            index++;
         }
         for (String member: eventMembers) {
             payers.put(member, Float.toString(Float.parseFloat(amount)/nbOfPayers));
@@ -239,7 +243,7 @@ public class AddSpending extends AppCompatActivity {
         return paybackNameUser;
     }
 
-    public ToggleButton createToggleButton(String id) {
+    public ToggleButton createToggleButton(int id) {
         ToggleButton toggleButton = new ToggleButton(AddSpending.this);
 
         toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
@@ -253,7 +257,7 @@ public class AddSpending extends AppCompatActivity {
                 1.0f
         );
         Log.w(TAG, "PUTTING TAG : " + id);
-        toggleButton.setTag(id);
+        toggleButton.setId(ID_generator + id);
         toggleParams.gravity = Gravity.CENTER_HORIZONTAL;
         toggleButton.setLayoutParams(toggleParams);
 
