@@ -255,8 +255,8 @@ public class AddSpending extends AppCompatActivity {
         toggleButton.setTextOff("");
         toggleButton.setTextOn("");
         TableLayout.LayoutParams toggleParams = new TableLayout.LayoutParams(
-                dpToPixel(55),
-                dpToPixel(55),
+                dpToPixel(45),
+                dpToPixel(45),
                 1.0f
         );
         Log.w(TAG, "PUTTING TAG : " + id);
