@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,13 +69,15 @@ public class AddFriend extends AppCompatActivity{
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     User retrievedUser = userSnapshot.getValue(User.class);
                     if (retrievedUser.email.equals(emailTextVal)) {
-                        userId = userSnapshot.getKey();
+                        retrievedId = userSnapshot.getKey();
+                        break;
                     }
                 }
 
                 Log.w(TAG, "ADDFRIEND: USERID: " + userId);
 
                 if (retrievedId.equals("notfound")) {
+                    Toast.makeText(AddFriend.this, "This email does not correspond to any user", Toast.LENGTH_LONG).show();
                     return;
                 }
 
