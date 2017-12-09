@@ -1,7 +1,10 @@
 package com.mobiledesigngroup.billpie3;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,11 +27,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 
 import static android.content.ContentValues.TAG;
 
@@ -39,7 +50,8 @@ import static android.content.ContentValues.TAG;
 public class History extends Fragment {
     private ProgressBar progBar;
     private Map<String, Paybacks> paybacksMap;
-
+    private File pdfFolder;
+    private File pdfFile;
 
     private Map<String, User> userMap;
     private Map<String, Paybacks> paybacksFiltered;
@@ -100,7 +112,7 @@ public class History extends Fragment {
         pdfFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createPDF();
+                callPDF();
             }
         });
 
@@ -324,16 +336,60 @@ public class History extends Fragment {
         });
     }
 
-    private void createPDF() {
+    private void callPDF() {
         Log.w(TAG, "Create PDF!!!!");
-        PdfManager pdfManager = new PdfManager();
-        String dlDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/test.pdf";
-        File file = new File(dlDirectory);
-        file.getParentFile().mkdirs();
+
+        createFolder();
         try {
-            pdfManager.createPdf(dlDirectory);
-        } catch(IOException e) {
-            Log.w(TAG, e.toString());
+            createPdf();
+        } catch (FileNotFoundException f) {
+            Log.w(TAG, "FileNotFoundException: " + f.toString());
+        } catch (DocumentException d) {
+            Log.w(TAG, "DocumentException: " + d.toString());
         }
+        viewPdf();
+    }
+
+    private void createFolder() {
+        this.pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "BillPie");
+        if (!pdfFolder.exists()) {
+            pdfFolder.mkdir();
+        }
+    }
+
+    private void createPdf() throws FileNotFoundException, DocumentException {
+
+        //Create time stamp
+        Date date = new Date() ;
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
+        this.pdfFile = new File(pdfFolder + timeStamp + ".pdf");
+
+        OutputStream output = new FileOutputStream(this.pdfFile);
+
+        //Step 1
+        Document document = new Document();
+
+        //Step 2
+        PdfWriter.getInstance(document, output);
+
+        //Step 3
+        document.open();
+
+        //Step 4 Add content
+        document.add(new Paragraph("SUBJECT"));
+        document.add(new Paragraph("BODY"));
+
+        //Step 5: Close the document
+        document.close();
+
+    }
+
+    private void viewPdf(){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(this.pdfFile), "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 }

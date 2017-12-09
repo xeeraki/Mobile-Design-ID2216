@@ -31,6 +31,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'com/itextpdf/text/AGPL.txt'
+        exclude 'com/itextpdf/text/LICENSE.txt'
+    }
 }
 
 dependencies {
@@ -48,12 +52,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
-    compile files('libs/itext7-forms-7.0.2.jar')
-    compile files('libs/itext7-io-7.0.2.jar')
-    compile files('libs/itext7-kernel-7.0.2.jar')
-    compile files('libs/itext7-pdfa-7.0.2.jar')
-    compile files('libs/itext7-layout-7.0.2.jar')
-    compile files('libs/slf4j-api-1.7.25.jar')
+    compile files('libs/itext5-itext-pdfa-5.5.12.jar')
+    compile files('libs/itext5-itext-xtra-5.5.12.jar')
+    compile files('libs/itext5-itextpdf-5.5.12.jar')
+    compile files('libs/itext5-xmlworker-5.5.12.jar')
 }
 
 
