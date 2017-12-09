@@ -165,8 +165,8 @@ public class AddSpending extends Activity {
     private LinearLayout createVerticalLinearLayout() {
         LinearLayout linearFirst = new LinearLayout(AddSpending.this);
         LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
-                dpToPixel(75),
-                dpToPixel(75)
+                dpToPixel(80),
+                dpToPixel(80)
         );
         linearFirst.setLayoutParams(linearFirstParams);
         linearFirst.setOrientation(LinearLayout.VERTICAL);
@@ -197,9 +197,11 @@ public class AddSpending extends Activity {
         toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
         toggleButton.setFocusable(false);
         toggleButton.setFocusableInTouchMode(false);
+        toggleButton.setTextOff("");
+        toggleButton.setTextOn("");
         TableLayout.LayoutParams toggleParams = new TableLayout.LayoutParams(
-                dpToPixel(55),
-                dpToPixel(55),
+                dpToPixel(50),
+                dpToPixel(50),
                 1.0f
         );
         toggleParams.gravity = Gravity.CENTER_HORIZONTAL;
