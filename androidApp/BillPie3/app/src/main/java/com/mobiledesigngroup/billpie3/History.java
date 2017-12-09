@@ -36,9 +36,6 @@ public class History extends Fragment {
     private ProgressBar progBar;
     private Map<String, Paybacks> paybacksMap;
 
-    public void setUserMap(Map<String, User> userMap) {
-        this.userMap = userMap;
-    }
 
     private Map<String, User> userMap;
     private Map<String, Paybacks> paybacksFiltered;
@@ -78,8 +75,8 @@ public class History extends Fragment {
                             paybacksMap.put(eventSnapshot.getKey(),
                                     eventSnapshot.getValue(Paybacks.class));
                         }
-                        progBar.setVisibility(View.INVISIBLE);
-                        displayData();
+                        createUserMap();
+
                     }
 
                     @Override
@@ -294,5 +291,26 @@ public class History extends Fragment {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
         return (int) (fpixels + 0.5f);
+    }
+
+    private void createUserMap() {
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
+
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userMap = new HashMap<>();
+                for (DataSnapshot paybackSnapshot: dataSnapshot.getChildren()) {
+                    userMap.put(paybackSnapshot.getKey(), paybackSnapshot.getValue(User.class));
+                }
+                progBar.setVisibility(View.INVISIBLE);
+                displayData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "History: error while retrieving events", databaseError.toException());
+            }
+        });
     }
 }
