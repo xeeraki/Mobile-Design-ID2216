@@ -52,6 +52,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
+    compile files('libs/slf4j-api-1.7.25.jar')
     compile files('libs/itext5-itext-pdfa-5.5.12.jar')
     compile files('libs/itext5-itext-xtra-5.5.12.jar')
     compile files('libs/itext5-itextpdf-5.5.12.jar')
