@@ -64,6 +64,7 @@ public class AddSpending extends AppCompatActivity {
         setContentView(R.layout.add_spendingv3);
 
         payers = new HashMap<>();
+        nonPayers = new ArrayList<>();
         nbOfPayers = 0;
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -75,13 +76,14 @@ public class AddSpending extends AppCompatActivity {
 
         displayMembers();
 
-        EditText textAmount = findViewById(R.id.textAmount);
-        amount = textAmount.getText().toString();
+
         btnAddSpending = findViewById(R.id.btnSubmitSpending);
 
         btnAddSpending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText textAmount = findViewById(R.id.textAmount);
+                amount = textAmount.getText().toString();
                 EditText textTitle = findViewById(R.id.textTitle);
                 title = textTitle.getText().toString();
                 getPayers();

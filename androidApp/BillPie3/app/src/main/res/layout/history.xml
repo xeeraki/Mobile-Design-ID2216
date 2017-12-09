@@ -127,4 +127,20 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:gravity="bottom|end"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+        <android.support.design.widget.FloatingActionButton
+            app:fabSize="normal"
+            android:id="@+id/pdf_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_file_download_white_24dp">
+        </android.support.design.widget.FloatingActionButton>
+    </LinearLayout>
 </RelativeLayout>
