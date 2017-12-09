@@ -58,6 +58,8 @@ public class AddSpending extends Activity {
         eventMembers = getIntent().getStringArrayListExtra("eventMembers");
         userMap = (HashMap<String, User>) getIntent().getSerializableExtra("userMap");
 
+        displayMembers();
+
         horizontalLinearPayedBy = findViewById(R.id.horizontalLayoutPaidBy);
         horizontalLinearSharedWith = findViewById(R.id.horizontalLayoutSharedWith);
 
