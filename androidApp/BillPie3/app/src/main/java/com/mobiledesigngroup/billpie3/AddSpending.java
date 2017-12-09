@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import static android.content.ContentValues.TAG;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -166,7 +168,10 @@ public class AddSpending extends AppCompatActivity {
     private void getPayers() {
         ToggleButton toggleButton;
         for (String member: eventMembers) {
+            Log.w(TAG, "EVENTMEMBER : " + member);
+            Log.w(TAG, "general VIEW : " + generalView.toString());
             toggleButton = generalView.findViewWithTag(member);
+            Log.w(TAG, "TOGGLEBUTTON : " + toggleButton.toString());
             if (toggleButton.isChecked()) {
                 nbOfPayers ++;
             }
@@ -234,7 +239,7 @@ public class AddSpending extends AppCompatActivity {
         return paybackNameUser;
     }
 
-    private ToggleButton createToggleButton(String id) {
+    public ToggleButton createToggleButton(String id) {
         ToggleButton toggleButton = new ToggleButton(AddSpending.this);
 
         toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
@@ -247,6 +252,7 @@ public class AddSpending extends AppCompatActivity {
                 dpToPixel(50),
                 1.0f
         );
+        Log.w(TAG, "PUTTING TAG : " + id);
         toggleButton.setTag(id);
         toggleParams.gravity = Gravity.CENTER_HORIZONTAL;
         toggleButton.setLayoutParams(toggleParams);
