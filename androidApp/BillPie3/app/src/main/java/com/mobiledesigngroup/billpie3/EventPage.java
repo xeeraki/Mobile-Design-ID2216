@@ -63,6 +63,7 @@ public class EventPage extends AppCompatActivity {
     private ArrayList<String> spendingAmount;
     private ArrayList<String> eventMembers;
     private Map<String, User> userMap;
+    private String eventTitle;
 
 
     @Override
@@ -77,8 +78,9 @@ public class EventPage extends AppCompatActivity {
 
 
         eventId = getIntent().getStringExtra("eventID");
+        eventTitle = getIntent().getStringExtra("eventTitle");
 
-        setTitle("Friends Trip to NY");
+        setTitle(eventTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fabAddSpending = findViewById(R.id.fabButtonToAddSpending);

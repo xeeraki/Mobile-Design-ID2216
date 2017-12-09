@@ -118,7 +118,7 @@ public class EventsV2 extends Fragment {
 
         for (final Map.Entry<String, Event> eventEntry: events.entrySet()) {
 
-            Event event = eventEntry.getValue();
+            final Event event = eventEntry.getValue();
             CardView cardView = createNewCardView();
 
             cardView.setClickable(true);
@@ -129,6 +129,7 @@ public class EventsV2 extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), EventPage.class);
                     intent.putExtra("eventID", eventEntry.getKey());
+                    intent.putExtra("eventTitle", event.getTitle());
                     startActivity(intent);
                     Log.w(TAG, "LOL I JUST CLICKED ON A CARD");
                 }
