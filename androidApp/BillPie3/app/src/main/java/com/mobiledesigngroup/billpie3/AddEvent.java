@@ -2,6 +2,7 @@ package com.mobiledesigngroup.billpie3;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +72,8 @@ public class AddEvent extends AppCompatActivity{
         return true;
     }
 
+    SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
+
     private void addEvent(){
         DatabaseReference eventRef = mDatabase.child("events");
         String eventId = mDatabase.push().getKey();
@@ -81,7 +85,7 @@ public class AddEvent extends AppCompatActivity{
         Map<String, Spending> defaultSpend = new HashMap<>();
         defaultSpend.put("defaultSpending", fakeSpending);
 
-        Event event = new Event(eventTitle.getText().toString(), defaultSpend, friendChosen);
+        Event event = new Event(eventTitle.getText().toString(), defaultSpend, friendChosen, curFormater.format(new Date()));
         eventRef.child(eventId).setValue(event);
     }
 
