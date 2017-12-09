@@ -362,9 +362,9 @@ public class History extends Fragment {
 
         //Create time stamp
         Date date = new Date() ;
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String timeStamp = new SimpleDateFormat("dd_MM_yyyy").format(date);
 
-        this.pdfFile = new File(pdfFolder + timeStamp + ".pdf");
+        this.pdfFile = new File(this.pdfFolder + "/" + timeStamp + ".pdf");
 
         OutputStream output = new FileOutputStream(this.pdfFile);
 
@@ -389,7 +389,7 @@ public class History extends Fragment {
     private void viewPdf(){
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(this.pdfFile), "application/pdf");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }
