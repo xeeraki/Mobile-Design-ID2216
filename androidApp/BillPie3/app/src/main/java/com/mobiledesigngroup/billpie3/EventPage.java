@@ -129,11 +129,13 @@ public class EventPage extends AppCompatActivity {
                 spendingTitle = new ArrayList<>();
                 spendingAmount = new ArrayList<>();
                 for (DataSnapshot spendingSnapshot: dataSnapshot.getChildren()) {
-                    Spending retrievedSpending = spendingSnapshot.getValue(Spending.class);
-                    final String retrievedTitle = retrievedSpending.getTitle();
-                    final String retrievedAmount = retrievedSpending.getAmount();
-                    spendingTitle.add(retrievedTitle);
-                    spendingAmount.add(retrievedAmount);
+                    if (!spendingSnapshot.getKey().equals("defaultSpending")) {
+                        Spending retrievedSpending = spendingSnapshot.getValue(Spending.class);
+                        final String retrievedTitle = retrievedSpending.getTitle();
+                        final String retrievedAmount = retrievedSpending.getAmount();
+                        spendingTitle.add(retrievedTitle);
+                        spendingAmount.add(retrievedAmount);
+                    }
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
@@ -230,7 +232,7 @@ public class EventPage extends AppCompatActivity {
     private ImageView createImage() {
         ImageView image = new ImageView(EventPage.this);
         TableLayout.LayoutParams imageParams;
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tag_faces_black_24dp));
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp));
         imageParams = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT,
