@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,7 +46,7 @@ public class AddEvent extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
 
-        FloatingActionButton fabCheck = findViewById(R.id.fab_create);
+        Button fabCheck = findViewById(R.id.fab_create);
         this.eventTitle = findViewById(R.id.eventTitle);
 
         setTitle("Add Event");
