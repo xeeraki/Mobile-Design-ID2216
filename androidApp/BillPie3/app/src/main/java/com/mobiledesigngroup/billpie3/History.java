@@ -313,4 +313,8 @@ public class History extends Fragment {
             }
         });
     }
+
+    private void createPDF() {
+
+    }
 }

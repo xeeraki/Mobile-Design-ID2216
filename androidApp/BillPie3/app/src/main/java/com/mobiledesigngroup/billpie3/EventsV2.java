@@ -113,8 +113,8 @@ public class EventsV2 extends Fragment {
 
     private void displayDyna() {
 
-        TypedValue outValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+//        TypedValue outValue = new TypedValue();
+//        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 
         for (Map.Entry<String, Event> eventEntry: events.entrySet()) {
 
@@ -122,7 +122,7 @@ public class EventsV2 extends Fragment {
             CardView cardView = createNewCardView();
 
             cardView.setClickable(true);
-            cardView.setBackgroundResource(outValue.resourceId);
+//            cardView.setBackgroundResource(outValue.resourceId);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
