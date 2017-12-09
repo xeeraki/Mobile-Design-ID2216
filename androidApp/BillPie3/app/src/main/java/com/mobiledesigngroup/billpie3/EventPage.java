@@ -121,6 +121,8 @@ public class EventPage extends AppCompatActivity {
         ValueEventListener spendingListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                spendingTitle = new ArrayList<>();
+                spendingAmount = new ArrayList<>();
                 for (DataSnapshot spendingSnapshot: dataSnapshot.getChildren()) {
                     Spending retrievedSpending = spendingSnapshot.getValue(Spending.class);
                     final String retrievedTitle = retrievedSpending.getTitle();
@@ -148,6 +150,7 @@ public class EventPage extends AppCompatActivity {
         ValueEventListener memberListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                eventMembers = new ArrayList<>();
                 for (DataSnapshot memberSnapshot: dataSnapshot.getChildren()) {
                     eventMembers.add(memberSnapshot.getKey());
                 }

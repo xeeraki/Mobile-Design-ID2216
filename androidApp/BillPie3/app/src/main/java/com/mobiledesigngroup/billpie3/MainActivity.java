@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
 
     private void SetUpViewPager(ViewPager viewPager){
         SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new Events(),"Events");
+        mAdapter.addFragment(new EventsV2(),"Events");
 
         Pay newPay = new Pay();
         newPay.setUserMap(this.userMap);
