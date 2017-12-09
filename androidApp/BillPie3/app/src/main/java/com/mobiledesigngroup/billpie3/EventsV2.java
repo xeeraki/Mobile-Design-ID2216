@@ -129,8 +129,8 @@ public class EventsV2 extends Fragment {
 //        TypedValue outValue = new TypedValue();
 //        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//        SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
 
         for (final Map.Entry<String, Event> eventEntry: events.entrySet()) {
 
@@ -159,14 +159,16 @@ public class EventsV2 extends Fragment {
 
             linearHorizontal.addView(createCardViewTitle(event.getTitle()));
 
-            Date date = new Date();
+/*            Date date = new Date();
             try {
+                Log.w(TAG, "getCreateDate: " + event.getCreateDate());
                  date = sdf.parse(event.getCreateDate());
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
 
-            linearHorizontal.addView(createTextDate(month_date.format(date)));
+//            linearHorizontal.addView(createTextDate(month_date.format(date)));
+            linearHorizontal.addView(createTextDate(event.getCreateDate()));
             linearHorizontal.addView(createImage());
 
             linearVertical.addView(linearHorizontal);

@@ -11,23 +11,23 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Event {
+    private String create_date;
     private String title;
     private Map<String, Spending> spendings;
     private Map<String, Boolean> members;
-    private String createDate;
 
     public Event(){
     }
 
-    public Event(String title, Map<String, Spending> spendings, Map<String, Boolean> members, String createDate){
+    public Event(String title, Map<String, Spending> spendings, Map<String, Boolean> members, String create_date){
         this.title = title;
         this.spendings = spendings;
         this.members = members;
-        this.createDate = createDate;
+        this.create_date = create_date;
     }
 
     public String getCreateDate() {
-        return createDate;
+        return create_date;
     }
 
     public String getTitle() {
@@ -44,6 +44,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return "title: " + title + ", spending: " + spendings.toString() + ", members" + members.toString();
+        return "title: " + title + ", spending: " + spendings.toString() + ", members" + members.toString() + ", create_date " + create_date;
     }
 }
