@@ -48,6 +48,11 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
+    compile files('libs/itext7-forms-7.0.2.jar')
+    compile files('libs/itext7-io-7.0.2.jar')
+    compile files('libs/itext7-kernel-7.0.2.jar')
+    compile files('libs/itext7-pdfa-7.0.2.jar')
+    compile files('libs/itext7-layout-7.0.2.jar')
 }
 
 

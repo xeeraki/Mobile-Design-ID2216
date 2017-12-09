@@ -51,7 +51,7 @@ public class History extends Fragment {
         this.progBar = view.findViewById(R.id.prog_hist);
         this.mainLinear = view.findViewById(R.id.linear_hist);
 
-        FloatingActionButton pdfFab = view.findViewById(R.id.pdf_fab);
+        final FloatingActionButton pdfFab = view.findViewById(R.id.pdf_fab);
 
         progBar.setVisibility(View.VISIBLE);
 
@@ -91,6 +91,13 @@ public class History extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "Events: error while retrieving events", databaseError.toException());
+            }
+        });
+
+        pdfFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createPDF();
             }
         });
 
@@ -315,6 +322,7 @@ public class History extends Fragment {
     }
 
     private void createPDF() {
-
+        Log.w(TAG, "Create PDF!!!!");
+        new PdfManager();
     }
 }
