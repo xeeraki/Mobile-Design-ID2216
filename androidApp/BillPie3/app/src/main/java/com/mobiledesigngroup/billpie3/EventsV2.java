@@ -60,6 +60,15 @@ public class EventsV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
 
+        FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
+        fabAddEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddEvent.class);
+                startActivity(intent);
+            }
+        });
+
         mDatabase =  FirebaseDatabase.getInstance().getReference();
         getUsers();
 
