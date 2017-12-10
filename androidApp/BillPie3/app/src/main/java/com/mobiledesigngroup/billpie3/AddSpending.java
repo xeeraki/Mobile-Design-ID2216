@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Time;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,6 +49,7 @@ public class AddSpending extends AppCompatActivity {
     private ArrayList<String> nonPayers;
     private String title, amount, due_date;
     View generalView;
+    private NumberFormat formatter = new DecimalFormat("#0.00");
     private String date; // date of spending
     private Map<String, User> userMap;
     private LinearLayout horizontalLinearPayedBy;
@@ -198,7 +201,8 @@ public class AddSpending extends AppCompatActivity {
             index++;
         }
         for (Map.Entry<String, String> payer: payers.entrySet()) {
-            payers.put(payer.getKey(), Float.toString(Float.parseFloat(amount)/nbOfPayers));
+            Float nonFormatted = Float.parseFloat(amount)/nbOfPayers;
+            payers.put(payer.getKey(), formatter.format(nonFormatted));
         }
     }
 
@@ -222,7 +226,8 @@ public class AddSpending extends AppCompatActivity {
             for (Map.Entry<String, String> payer: payers.entrySet()) {
                 paybackId = paybackRef.push().getKey();
                 mustPay = (Float.parseFloat(payer.getValue()) - Float.parseFloat(amount)/nbMembers)/nbNonPayers;
-                Paybacks newPayback = new Paybacks(Float.toString(mustPay), eventId, false, user, payer.getKey(), idSpending, "notpaid");
+                String mustPayRightFormat = formatter.format(mustPay);
+                Paybacks newPayback = new Paybacks(mustPayRightFormat, eventId, false, user, payer.getKey(), idSpending, "notpaid");
                 paybackRef.child(paybackId).setValue(newPayback);
             }
         }
