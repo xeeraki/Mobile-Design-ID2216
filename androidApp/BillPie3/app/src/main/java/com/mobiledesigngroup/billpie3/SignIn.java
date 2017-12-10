@@ -111,8 +111,8 @@ public class SignIn extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(SignIn.this, MainActivity.class);
-                intent.putExtra("userId", retrievedId);
-                intent.putExtra("userObject", retrievedUser);
+                //intent.putExtra("userId", retrievedId);
+                //intent.putExtra("userObject", retrievedUser);
                 startActivity(intent);
                 finish();
             }
