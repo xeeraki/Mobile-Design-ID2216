@@ -17,59 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
-
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_indigo"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:srcCompat="@drawable/ic_arrow_back_white_24dp" />
-
-        <TextView
-            android:id="@+id/textEventTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="Event title here"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/titleAddEventSpending"
-            card_view:layout_constraintBottom_toBottomOf="@+id/btnBack"
-            card_view:layout_constraintStart_toEndOf="@+id/btnBack"
-            card_view:layout_constraintTop_toTopOf="@+id/btnBack" />
-
-        <TextView
-            android:id="@+id/textBillSummedAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="Summed bill amount here"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            card_view:layout_constraintStart_toStartOf="@+id/textEventTitle"
-            card_view:layout_constraintTop_toBottomOf="@+id/textEventTitle" />
-
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="You will pay to:"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/scroll_card_pay"
