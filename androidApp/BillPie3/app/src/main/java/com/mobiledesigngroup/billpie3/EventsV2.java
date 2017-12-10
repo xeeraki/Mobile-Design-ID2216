@@ -54,6 +54,7 @@ public class EventsV2 extends Fragment {
     private Map<String, Event> events;
     private Map<String, User> userMap;
     private String actualUser = "user1";
+    private Map<String, Boolean> userEvents;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class EventsV2 extends Fragment {
 
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
+        userEvents = new HashMap<>();
 
         actualUser = getActivity().getIntent().getStringExtra("userId");
 
@@ -92,7 +94,9 @@ public class EventsV2 extends Fragment {
                 events =  new HashMap<>();
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
                     Event retrievedEvent = eventSnapshot.getValue(Event.class);
-                    events.put(eventSnapshot.getKey(), retrievedEvent);
+                    if (userEvents.containsKey(eventSnapshot.getKey())) {
+                        events.put(eventSnapshot.getKey(), retrievedEvent);
+                      }
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
@@ -115,6 +119,9 @@ public class EventsV2 extends Fragment {
                 userMap = new HashMap<>();
 
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    if (eventSnapshot.getKey().equals(actualUser)) {
+                            userEvents = eventSnapshot.getValue(User.class).events;
+                        }
                     userMap.put(eventSnapshot.getKey(),
                             eventSnapshot.getValue(User.class));
                 }
