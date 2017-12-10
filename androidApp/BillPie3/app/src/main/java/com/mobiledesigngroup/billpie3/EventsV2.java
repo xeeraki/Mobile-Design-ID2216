@@ -53,7 +53,9 @@ public class EventsV2 extends Fragment {
     private LinearLayout linearEvents;
     private Map<String, Event> events;
     private Map<String, User> userMap;
-    private String actualUser;
+    private String actualUser = "user1";
+    private User userObject;
+    private Map<String, Boolean> userEvents;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,7 +67,9 @@ public class EventsV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
 
-        actualUser = getActivity().getIntent().getStringExtra("userId");
+        userEvents = new HashMap<>();
+
+        //actualUser = getActivity().getIntent().getStringExtra("userId");
 
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +96,9 @@ public class EventsV2 extends Fragment {
                 events =  new HashMap<>();
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
                     Event retrievedEvent = eventSnapshot.getValue(Event.class);
-                    events.put(eventSnapshot.getKey(), retrievedEvent);
+                    if (userEvents.containsKey(eventSnapshot.getKey())) {
+                        events.put(eventSnapshot.getKey(), retrievedEvent);
+                    }
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
@@ -115,6 +121,10 @@ public class EventsV2 extends Fragment {
                 userMap = new HashMap<>();
 
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    if (eventSnapshot.getKey().equals(actualUser)) {
+                        userObject = eventSnapshot.getValue(User.class);
+                        userEvents = userObject.events;
+                    }
                     userMap.put(eventSnapshot.getKey(),
                             eventSnapshot.getValue(User.class));
                 }

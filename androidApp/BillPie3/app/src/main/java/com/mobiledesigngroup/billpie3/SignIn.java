@@ -94,8 +94,9 @@ public class SignIn extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 String retrievedId = "notfound";
+                User retrievedUser = new User();
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    User retrievedUser = userSnapshot.getValue(User.class);
+                    retrievedUser = userSnapshot.getValue(User.class);
                     if (retrievedUser.email.equals(email)) {
                         retrievedId = userSnapshot.getKey();
                         break;
@@ -111,6 +112,7 @@ public class SignIn extends AppCompatActivity {
 
                 Intent intent = new Intent(SignIn.this, MainActivity.class);
                 intent.putExtra("userId", retrievedId);
+                intent.putExtra("userObject", retrievedUser);
                 startActivity(intent);
                 finish();
             }

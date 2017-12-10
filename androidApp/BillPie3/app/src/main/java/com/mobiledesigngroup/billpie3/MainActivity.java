@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private FirebaseAuth.AuthStateListener authListener;
-    private String userId;
+    private String userId = "user1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        userId = getIntent().getStringExtra("userId");
+        //userId = getIntent().getStringExtra("userId");
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
