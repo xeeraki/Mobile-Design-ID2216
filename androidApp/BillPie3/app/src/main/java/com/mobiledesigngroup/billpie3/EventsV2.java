@@ -289,7 +289,7 @@ public class EventsV2 extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        pbLayoutParams.setMargins(dpToPixel(24), 16, 0, 16);
+        pbLayoutParams.setMargins(dpToPixel(22), 0, 0, 8);
         paybackLayout.setLayoutParams(pbLayoutParams);
         paybackLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -334,7 +334,7 @@ public class EventsV2 extends Fragment {
                 CardView.LayoutParams.MATCH_PARENT,
                 CardView.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(dpToPixel(8) ,0,dpToPixel(8),dpToPixel(16));
+        cardParams.setMargins(dpToPixel(2) ,0,dpToPixel(2),dpToPixel(8));
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setLayoutParams(cardParams);
         cardView.setRadius(dpToPixel(2));

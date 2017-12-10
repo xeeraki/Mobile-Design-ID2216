@@ -22,34 +22,38 @@
 
         <Button
             android:id="@+id/fabButtonToCheckOut"
-            android:layout_width="153dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/rectangle_indigo"
             android:text="Check out"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="7dp" />
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
             android:text="Involved friends:"
             android:textColor="@color/colorGrey"
             android:textSize="18sp"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toBottomOf="@+id/fabButtonToCheckOut" />
 
         <HorizontalScrollView
             android:id="@+id/horizontalScroll_eventpage"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
@@ -152,12 +156,12 @@
         <ScrollView
             android:id="@+id/scroll_card_eventpage"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent">
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/horizontalScroll_eventpage">
 
             <LinearLayout
                 android:id="@+id/linear_eventpage"

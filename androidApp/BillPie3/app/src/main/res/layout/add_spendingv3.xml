@@ -9,55 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/toolbarView"
-            android:layout_width="640dp"
-            android:layout_height="130dp"
-            android:background="@drawable/rectangle_indigo"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnDiscard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_indigo"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:srcCompat="@drawable/cancel_white" />
-
         <Button
             android:id="@+id/btnSubmitSpending"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/rectangle_indigo"
             android:text="Save"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/btnSaveFont"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/dateDue" />
 
         <EditText
             android:id="@+id/textTitle"
             android:layout_width="224dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="32dp"
-            android:backgroundTint="@color/colorWhite"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/colorBlack"
             android:fontFamily="@font/roboto"
             android:hint="Edit spending title..."
             android:inputType="textPersonName"
             android:selectAllOnFocus="true"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGrey"
             android:textSize="22sp"
-            card_view:layout_constraintBottom_toBottomOf="@+id/toolbarView"
-            card_view:layout_constraintStart_toStartOf="parent" />
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -65,10 +49,10 @@
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/ic_attach_money_black_24dp"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/toolbarView" />
+            card_view:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
         <EditText
             android:id="@+id/textAmount"
