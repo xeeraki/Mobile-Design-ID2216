@@ -49,6 +49,7 @@ public class AddSpending extends AppCompatActivity {
     private ArrayList<String> nonPayers;
     private String title, amount, due_date;
     View generalView;
+    private NumberFormat formatter = new DecimalFormat("#0.00");
     private String date; // date of spending
     private Map<String, User> userMap;
     private LinearLayout horizontalLinearPayedBy;
@@ -200,7 +201,8 @@ public class AddSpending extends AppCompatActivity {
             index++;
         }
         for (Map.Entry<String, String> payer: payers.entrySet()) {
-            payers.put(payer.getKey(), Float.toString(Float.parseFloat(amount)/nbOfPayers));
+            Float nonFormatted = Float.parseFloat(amount)/nbOfPayers;
+            payers.put(payer.getKey(), formatter.format(nonFormatted));
         }
     }
 
@@ -217,7 +219,6 @@ public class AddSpending extends AppCompatActivity {
     private void addPaybacks(String idSpending) {
         DatabaseReference paybackRef = FirebaseDatabase.getInstance().getReference("paybacks");
         String paybackId;
-        NumberFormat formatter = new DecimalFormat("#0.00");
         int nbMembers = eventMembers.size();
         int nbNonPayers = nonPayers.size();
         float mustPay;
