@@ -53,7 +53,8 @@ public class EventsV2 extends Fragment {
     private LinearLayout linearEvents;
     private Map<String, Event> events;
     private Map<String, User> userMap;
-    private String actualUser = "user1";
+//    private String actualUser = "user1";
+    private String actualUser;
     private User userObject;
     private Map<String, Boolean> userEvents;
 
@@ -69,7 +70,7 @@ public class EventsV2 extends Fragment {
 
         userEvents = new HashMap<>();
 
-        //actualUser = getActivity().getIntent().getStringExtra("userId");
+        actualUser = getActivity().getIntent().getStringExtra("userId");
 
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {

@@ -39,6 +39,8 @@ public class AddFriend extends AppCompatActivity{
         setTitle("Add friend");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        userId = getIntent().getStringExtra("userID");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         email = (EditText) findViewById(R.id.emailFriendInput);
         btnSubmit = (Button) findViewById(R.id.btnSubmitFriend);
@@ -81,7 +83,7 @@ public class AddFriend extends AppCompatActivity{
                     return;
                 }
 
-                DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("users").child("user")
+                DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("users")
                         .child(userId).child("friends");
 
                 friendRef.child(retrievedId).setValue(true);

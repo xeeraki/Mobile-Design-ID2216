@@ -49,7 +49,7 @@ public class AddEvent extends AppCompatActivity{
         FloatingActionButton fabCheck = findViewById(R.id.fab_create);
         this.eventTitle = findViewById(R.id.eventTitle);
 
-        //actualUser = getIntent().getStringExtra("userId");
+        actualUser = getIntent().getStringExtra("userId");
 
         setTitle("Add Event");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,6 +90,12 @@ public class AddEvent extends AppCompatActivity{
 
         Event event = new Event(eventTitle.getText().toString(), defaultSpend, friendChosen, curFormater.format(new Date()));
         eventRef.child(eventId).setValue(event);
+
+        // add to user
+        DatabaseReference userRef = mDatabase.child("users").child(actualUser).child("events");
+        String userId = mDatabase.push().getKey();
+        userRef.child(eventId).setValue(true);
+
     }
 
     private void getFriends(){
