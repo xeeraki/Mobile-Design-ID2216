@@ -28,10 +28,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.List;
+import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.html.head.Title;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -338,10 +346,10 @@ public class History extends Fragment {
     }
 
     private void callPDF() {
-        Log.w(TAG, "Create PDF!!!!");
 
         createFolder();
         try {
+            Log.w(TAG, "Create PDF!!!!");
             createPdf();
         } catch (FileNotFoundException f) {
             Log.w(TAG, "FileNotFoundException: " + f.toString());
@@ -367,6 +375,8 @@ public class History extends Fragment {
 
         this.pdfFile = new File(this.pdfFolder + "/" + timeStamp + ".pdf");
 
+        // Create a PdfFont
+
         OutputStream output = new FileOutputStream(this.pdfFile);
 
         //Step 1
@@ -379,8 +389,15 @@ public class History extends Fragment {
         document.open();
 
         //Step 4 Add content
-        document.add(new Paragraph("SUBJECT"));
-        document.add(new Paragraph("BODY"));
+        Paragraph title = new Paragraph("History of the " + new SimpleDateFormat("dd/MM/yyyy").format(date));
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title);
+        document.add( Chunk.NEWLINE );
+        document.add( Chunk.NEWLINE );
+        document.add( Chunk.NEWLINE );
+        document.add( Chunk.NEWLINE );
+
+        document.add(createFirstTable());
 
         //Step 5: Close the document
         document.close();
@@ -394,5 +411,33 @@ public class History extends Fragment {
         intent.setDataAndType(pdfUri, "application/pdf");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(intent);
+    }
+
+    public PdfPTable createFirstTable() {
+        PdfPTable table = new PdfPTable(5);
+
+        table.addCell("Date");
+        table.addCell("Spending Titles");
+        table.addCell("Event Titles");
+        table.addCell("Name");
+        table.addCell("Amounts");
+
+        for (Map.Entry<String, Paybacks> filMap: this.paybacksFiltered.entrySet()) {
+            String spendingTitle = findSpendingTitle(filMap.getValue().getSpending(), filMap.getValue().getEvent());
+            String datee = filMap.getValue().getDate_paid();
+            String eventTitle = this.eventsMap.get(filMap.getValue().getEvent()).getTitle();
+            String name = this.userMap.get(filMap.getValue().getReceiver()).full_name;
+            String amount = "$" + filMap.getValue().getAmount();
+
+            table.addCell(datee);
+            table.addCell(spendingTitle);
+            table.addCell(eventTitle);
+            table.addCell(name);
+            table.addCell(amount);
+        }
+
+
+
+        return table;
     }
 }
