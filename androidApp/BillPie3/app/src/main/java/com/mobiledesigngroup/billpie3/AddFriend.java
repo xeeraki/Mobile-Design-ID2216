@@ -39,7 +39,7 @@ public class AddFriend extends AppCompatActivity{
         setTitle("Add friend");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        userId = getIntent().getStringExtra("userID");
+        //userId = getIntent().getStringExtra("userID");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         email = (EditText) findViewById(R.id.emailFriendInput);

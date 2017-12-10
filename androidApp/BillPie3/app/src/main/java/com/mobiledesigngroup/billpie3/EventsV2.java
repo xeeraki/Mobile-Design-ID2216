@@ -53,7 +53,7 @@ public class EventsV2 extends Fragment {
     private LinearLayout linearEvents;
     private Map<String, Event> events;
     private Map<String, User> userMap;
-    private String actualUser;
+    private String actualUser = "user1";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class EventsV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
 
-        actualUser = getActivity().getIntent().getStringExtra("userId");
+        //actualUser = getActivity().getIntent().getStringExtra("userId");
 
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +173,7 @@ public class EventsV2 extends Fragment {
             }*/
 
 //            linearHorizontal.addView(createTextDate(month_date.format(date)));
-            linearHorizontal.addView(createTextDate(event.getCreateDate()));
+            //linearHorizontal.addView(createTextDate(event.getCreateDate()));
             linearHorizontal.addView(createImage());
 
             linearVertical.addView(linearHorizontal);
