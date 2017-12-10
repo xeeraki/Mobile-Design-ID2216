@@ -64,9 +64,7 @@ public class SignUp extends AppCompatActivity {
                                     Toast.makeText(SignUp.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    createUser(email, fullName);
-                                    startActivity(new Intent(SignUp.this, MainActivity.class));
-                                    finish();
+                                    createUserAndStartApp(email, fullName);
                                 }
                             }
                         });
@@ -75,11 +73,15 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-    private void createUser(String email, String fullName) {
+    private void createUserAndStartApp(String email, String fullName) {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         String userId = mDatabase.push().getKey();
         User newUser = new User("username", "password", "phoneNumber", email, fullName);
         mDatabase.child(userId).setValue(newUser);
+        Intent intent = new Intent(SignUp.this, MainActivity.class);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
+        finish();
     }
 
     @Override

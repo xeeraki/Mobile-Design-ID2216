@@ -38,7 +38,7 @@ import static android.content.ContentValues.TAG;
 // TODO: Add later the possibility to click and view for each user per event the amount
 public class Pay extends Fragment {
 
-    private final String actualUser = "user1";
+    private String actualUser = "user1";
 
     private ProgressBar progBar;
     private ScrollView scroll;
@@ -62,6 +62,8 @@ public class Pay extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
         this.linearPay = view.findViewById(R.id.linear_pay);
+
+        actualUser = getActivity().getIntent().getStringExtra("userId");
 
         this.receivedPaybackMap = new HashMap<>();
 

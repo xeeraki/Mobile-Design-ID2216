@@ -53,6 +53,7 @@ public class EventsV2 extends Fragment {
     private LinearLayout linearEvents;
     private Map<String, Event> events;
     private Map<String, User> userMap;
+    private String actualUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,11 +65,14 @@ public class EventsV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
 
+        actualUser = getActivity().getIntent().getStringExtra("userId");
+
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AddEvent.class);
+                intent.putExtra("userId", actualUser);
                 startActivity(intent);
             }
         });
@@ -146,6 +150,7 @@ public class EventsV2 extends Fragment {
                     Intent intent = new Intent(getActivity(), EventPage.class);
                     intent.putExtra("eventID", eventEntry.getKey());
                     intent.putExtra("eventTitle", event.getTitle());
+                    intent.putExtra("userId", actualUser);
                     startActivity(intent);
                     Log.w(TAG, "LOL I JUST CLICKED ON A CARD");
                 }

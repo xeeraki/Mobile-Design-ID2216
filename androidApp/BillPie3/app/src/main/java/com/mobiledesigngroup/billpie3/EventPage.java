@@ -65,6 +65,7 @@ public class EventPage extends AppCompatActivity {
     private ArrayList<String> eventMembers;
     private HashMap<String, User> userMap;
     private String eventTitle;
+    private String actualUser;
 
 
     @Override
@@ -77,7 +78,7 @@ public class EventPage extends AppCompatActivity {
         this.linearEventPage = findViewById(R.id.linear_eventpage);
         this.linearLayoutMembers = findViewById(R.id.linearLayoutMembers);
 
-
+        actualUser = getIntent().getStringExtra("userId");
         eventId = getIntent().getStringExtra("eventID");
         eventTitle = getIntent().getStringExtra("eventTitle");
 
@@ -102,6 +103,7 @@ public class EventPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EventPage.this, CheckOutPage.class);
                 intent.putExtra("eventID", eventId);
+                intent.putExtra("userId", actualUser);
                 startActivity(intent);
             }
         });

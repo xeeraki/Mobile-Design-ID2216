@@ -46,6 +46,7 @@ public class CheckOutPage extends AppCompatActivity {
         setTitle("Check Out Information");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        actualUser = getIntent().getStringExtra("userId");
         actualEvent = getIntent().getStringExtra("eventID");
 
         this.linearPay = findViewById(R.id.linear_pay);
