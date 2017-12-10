@@ -80,7 +80,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view5"
+        android:id="@+id/toolbarShadow"
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_marginTop="60dp"
@@ -96,7 +96,7 @@
         android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarShadow"
         app:srcCompat="@drawable/eric_grey" />
 
     <EditText

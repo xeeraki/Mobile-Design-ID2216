@@ -43,7 +43,7 @@
         android:gravity="bottom|end">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/toolbarView"
             android:layout_width="640dp"
             android:layout_height="160dp"
             android:background="@drawable/rectangle_blue_grey"
@@ -63,7 +63,7 @@
             android:text="Add friends"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarView" />
 
         <EditText
             android:id="@+id/eventTitle"
@@ -78,7 +78,7 @@
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="@dimen/titleAddEventSpending"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
