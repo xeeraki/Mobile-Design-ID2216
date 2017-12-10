@@ -84,6 +84,7 @@ public class EventPage extends AppCompatActivity {
 
         setTitle(eventTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         FloatingActionButton fabAddSpending = findViewById(R.id.fabButtonToAddSpending);
         fabAddSpending.setOnClickListener(new View.OnClickListener() {
