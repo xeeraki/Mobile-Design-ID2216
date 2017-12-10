@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //userId = getIntent().getStringExtra("userId");
+        userId = getIntent().getStringExtra("userId");
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent pay in AndroidManifest.xml.
         int id = item.getItemId();
         if(id == R.id.create_bill) {
-            Intent intent = new Intent(MainActivity.this,AddFriend.class);
+            Intent intent = new Intent(MainActivity.this, AddFriend.class);
+            intent.putExtra("userID", this.userId);
             startActivity(intent);
         }
         //noinspection SimplifiableIfStatement

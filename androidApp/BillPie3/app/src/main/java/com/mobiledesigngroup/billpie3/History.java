@@ -75,7 +75,7 @@ public class History extends Fragment {
         this.progBar = view.findViewById(R.id.prog_hist);
         this.mainLinear = view.findViewById(R.id.linear_hist);
 
-        //actualUser = getActivity().getIntent().getStringExtra("userId");
+        actualUser = getActivity().getIntent().getStringExtra("userId");
 
         final FloatingActionButton pdfFab = view.findViewById(R.id.pdf_fab);
 
