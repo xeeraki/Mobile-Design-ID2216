@@ -53,10 +53,7 @@ public class EventsV2 extends Fragment {
     private LinearLayout linearEvents;
     private Map<String, Event> events;
     private Map<String, User> userMap;
-//    private String actualUser = "user1";
     private String actualUser;
-    private User userObject;
-    private Map<String, Boolean> userEvents;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,8 +64,6 @@ public class EventsV2 extends Fragment {
 
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
-
-        userEvents = new HashMap<>();
 
         actualUser = getActivity().getIntent().getStringExtra("userId");
 
@@ -97,9 +92,7 @@ public class EventsV2 extends Fragment {
                 events =  new HashMap<>();
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
                     Event retrievedEvent = eventSnapshot.getValue(Event.class);
-                    if (userEvents.containsKey(eventSnapshot.getKey())) {
-                        events.put(eventSnapshot.getKey(), retrievedEvent);
-                    }
+                    events.put(eventSnapshot.getKey(), retrievedEvent);
                 }
                 progBar.setVisibility(View.INVISIBLE);
                 scroll.setVisibility(View.VISIBLE);
@@ -122,10 +115,6 @@ public class EventsV2 extends Fragment {
                 userMap = new HashMap<>();
 
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
-                    if (eventSnapshot.getKey().equals(actualUser)) {
-                        userObject = eventSnapshot.getValue(User.class);
-                        userEvents = userObject.events;
-                    }
                     userMap.put(eventSnapshot.getKey(),
                             eventSnapshot.getValue(User.class));
                 }
@@ -232,21 +221,21 @@ public class EventsV2 extends Fragment {
     }
 
     private TextView createNameMember(String text) {
-            TextView paybackNameUser = new TextView(getActivity());
+        TextView paybackNameUser = new TextView(getActivity());
 
-            paybackNameUser.setText(text);
-            paybackNameUser.setTextColor(Color.BLACK);
-            paybackNameUser.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-            paybackNameUser.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
-            TableLayout.LayoutParams paybackNameUserParams = new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT,
-                    1.0f
-            );
-            paybackNameUser.setGravity(Gravity.CENTER_HORIZONTAL);
-            paybackNameUser.setLayoutParams(paybackNameUserParams);
+        paybackNameUser.setText(text);
+        paybackNameUser.setTextColor(Color.BLACK);
+        paybackNameUser.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        paybackNameUser.setTypeface(Typeface.create("@font/roboto", Typeface.NORMAL));
+        TableLayout.LayoutParams paybackNameUserParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                1.0f
+        );
+        paybackNameUser.setGravity(Gravity.CENTER_HORIZONTAL);
+        paybackNameUser.setLayoutParams(paybackNameUserParams);
 
-            return paybackNameUser;
+        return paybackNameUser;
     }
 
     private ImageView createImageMember() {
@@ -300,7 +289,7 @@ public class EventsV2 extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        pbLayoutParams.setMargins(dpToPixel(22), 0, 0, 0);
+        pbLayoutParams.setMargins(dpToPixel(24), 16, 0, 16);
         paybackLayout.setLayoutParams(pbLayoutParams);
         paybackLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -332,7 +321,7 @@ public class EventsV2 extends Fragment {
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 1.0f
         );
-        toPayTextParams.setMargins(dpToPixel(22), 0, 0, dpToPixel(8));
+        toPayTextParams.setMargins(dpToPixel(16), 0, 0, dpToPixel(16));
         toPayText.setLayoutParams(toPayTextParams);
 
         return toPayText;
@@ -345,7 +334,7 @@ public class EventsV2 extends Fragment {
                 CardView.LayoutParams.MATCH_PARENT,
                 CardView.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(dpToPixel(2) ,0,dpToPixel(2),dpToPixel(8));
+        cardParams.setMargins(dpToPixel(8) ,0,dpToPixel(8),dpToPixel(16));
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setLayoutParams(cardParams);
         cardView.setRadius(dpToPixel(2));
