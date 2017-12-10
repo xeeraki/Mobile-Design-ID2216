@@ -79,7 +79,7 @@ public class SignUp extends AppCompatActivity {
         User newUser = new User("username", "password", "phoneNumber", email, fullName);
         mDatabase.child(userId).setValue(newUser);
         Intent intent = new Intent(SignUp.this, MainActivity.class);
-        //intent.putExtra("userId", userId);
+        intent.putExtra("userId", userId);
         startActivity(intent);
         finish();
     }

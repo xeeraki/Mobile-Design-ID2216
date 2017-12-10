@@ -49,7 +49,7 @@ public class AddEvent extends AppCompatActivity{
         FloatingActionButton fabCheck = findViewById(R.id.fab_create);
         this.eventTitle = findViewById(R.id.eventTitle);
 
-        //actualUser = getIntent().getStringExtra("userId");
+        actualUser = getIntent().getStringExtra("userId");
 
         setTitle("Add Event");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

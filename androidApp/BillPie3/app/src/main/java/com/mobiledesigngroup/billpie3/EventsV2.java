@@ -65,7 +65,7 @@ public class EventsV2 extends Fragment {
         progBar.setVisibility(View.VISIBLE);
         scroll.setVisibility(View.INVISIBLE);
 
-        //actualUser = getActivity().getIntent().getStringExtra("userId");
+        actualUser = getActivity().getIntent().getStringExtra("userId");
 
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
