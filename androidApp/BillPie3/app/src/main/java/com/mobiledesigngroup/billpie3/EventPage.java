@@ -254,7 +254,7 @@ public class EventPage extends AppCompatActivity {
         LinearLayout linear = new LinearLayout(EventPage.this);
         LinearLayout.LayoutParams linearFirstParams = new LinearLayout.LayoutParams(
                 dpToPixel(60),
-                dpToPixel(60)
+                dpToPixel(40)
         );
         linear.setLayoutParams(linearFirstParams);
         linear.setOrientation(LinearLayout.VERTICAL);
@@ -342,7 +342,7 @@ public class EventPage extends AppCompatActivity {
                 CardView.LayoutParams.MATCH_PARENT,
                 CardView.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(dpToPixel(2) ,dpToPixel(90),dpToPixel(2),dpToPixel(8));
+        cardParams.setMargins(dpToPixel(2) ,dpToPixel(30),dpToPixel(2),dpToPixel(8));
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setLayoutParams(cardParams);
         cardView.setRadius(dpToPixel(2));

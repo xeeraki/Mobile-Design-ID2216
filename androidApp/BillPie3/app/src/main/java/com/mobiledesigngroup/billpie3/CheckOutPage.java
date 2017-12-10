@@ -164,7 +164,7 @@ public class CheckOutPage extends AppCompatActivity {
 
         // Create Card for "To pay for this event"
         if (!toPayFiltered.isEmpty()) {
-            LinearLayout linearViewPay = createBeginCard("To pay for this event");
+            LinearLayout linearViewPay = createBeginCard("You will pay to");
 
             for (Map.Entry<String, Float> payFilter: this.toPayFiltered.entrySet()) {
 
@@ -218,7 +218,7 @@ public class CheckOutPage extends AppCompatActivity {
 
         // Create Card for "To receive"
         if (!toReceiveFiltered.isEmpty()) {
-            LinearLayout linearViewPay = createBeginCard("To receive");
+            LinearLayout linearViewPay = createBeginCard("You will receive from");
 
             for (Map.Entry<String, Float> receiveFilter: this.toReceiveFiltered.entrySet()) {
 
