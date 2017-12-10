@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -95,7 +96,7 @@ public class EventPage extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fabCheckOut = findViewById(R.id.fabButtonToCheckOut);
+        Button fabCheckOut = findViewById(R.id.fabButtonToCheckOut);
         fabCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
