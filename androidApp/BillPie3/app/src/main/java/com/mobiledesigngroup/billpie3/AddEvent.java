@@ -46,7 +46,7 @@ public class AddEvent extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
 
-        Button fabCheck = findViewById(R.id.fab_create);
+        FloatingActionButton fabCheck = findViewById(R.id.fab_create);
         this.eventTitle = findViewById(R.id.eventTitle);
 
         setTitle("Add Event");
