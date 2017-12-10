@@ -84,7 +84,6 @@ public class EventPage extends AppCompatActivity {
 
         setTitle(eventTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         FloatingActionButton fabAddSpending = findViewById(R.id.fabButtonToAddSpending);
         fabAddSpending.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +182,7 @@ public class EventPage extends AppCompatActivity {
     private void getUserMapAndSpendingsAndEverything() {
         DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference();
 
-            myDbRef.child("users").addValueEventListener(new ValueEventListener() {
+        myDbRef.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userMap = new HashMap<>();
