@@ -63,7 +63,7 @@ public class Pay extends Fragment {
         scroll.setVisibility(View.INVISIBLE);
         this.linearPay = view.findViewById(R.id.linear_pay);
 
-        actualUser = getActivity().getIntent().getStringExtra("userId");
+        //actualUser = getActivity().getIntent().getStringExtra("userId");
 
         this.receivedPaybackMap = new HashMap<>();
 

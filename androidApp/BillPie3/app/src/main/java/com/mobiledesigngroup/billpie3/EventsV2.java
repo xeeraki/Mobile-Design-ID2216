@@ -67,7 +67,7 @@ public class EventsV2 extends Fragment {
         scroll.setVisibility(View.INVISIBLE);
         userEvents = new HashMap<>();
 
-        actualUser = getActivity().getIntent().getStringExtra("userId");
+        //actualUser = getActivity().getIntent().getStringExtra("userId");
 
         FloatingActionButton fabAddEvent = view.findViewById(R.id.FABevents);
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
